@@ -44,12 +44,40 @@ def current_lang() -> str:
     return v if v in LANGS else DEFAULT_LANG
 
 
+URL_PARAM = "lang"  # address parameter ?lang=ko|en (config/public.yaml fixes U2-1 C)
+URL_READ_KEY = "lang_url_read"  # session flag: the address was read once in this browser session
+
+
+def lang_from_url(value) -> str | None:
+    """?lang= value -> 'ko' / 'en' (spaces and case ignored); missing or anything else -> None."""
+    v = value[-1] if isinstance(value, (list, tuple)) and value else value
+    v = str(v).strip().lower() if isinstance(v, str) else ""
+    return v if v in LANGS else None
+
+
 def init_lang() -> None:
-    """Set the default language once per session (before the toggle widget is drawn)."""
+    """Language of a new session: ?lang= in the address on its first run (a wrong value -> Korean), else the default.
+    Runs before the toggle widget is drawn; after the first run only the toggle changes the language.
+
+    Why only on the first run: the toggle writes the current language back into the address (sync_lang_url), so later
+    runs would read their own value; reading once keeps the toggle in charge inside the session."""
     import streamlit as st
 
+    if not st.session_state.get(URL_READ_KEY):
+        st.session_state[URL_READ_KEY] = True
+        if URL_PARAM in st.query_params:
+            st.session_state[STATE_KEY] = lang_from_url(st.query_params.get_all(URL_PARAM)) or DEFAULT_LANG
     if st.session_state.get(STATE_KEY) not in LANGS:
         st.session_state[STATE_KEY] = DEFAULT_LANG
+
+
+def sync_lang_url() -> None:
+    """Write the current language into the address (?lang=), so a copied link opens in the same language. Called on every
+    run after the toggle: a page switch clears the address parameters and a language switch changes the value."""
+    import streamlit as st
+
+    if st.query_params.get(URL_PARAM) != current_lang():
+        st.query_params[URL_PARAM] = current_lang()
 
 
 def has(key: str) -> bool:

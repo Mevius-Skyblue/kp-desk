@@ -23,6 +23,10 @@ LINE_SOFT = "#DDE2E8"
 # ② chart category colours = chartCategoricalColors of docs/ci/streamlit_config.toml (same order). The chart passes them as
 # its explicit colour range so the HTML legend below it (fixes U1-2 B6) shows exactly the chart's colours.
 CHART_COLORS = ("#1F4E79", "#E07B39", "#2E8B57", "#8E5EA2", "#C9A227", "#4A9BD1", "#B5475B", "#6B7280")
+PRINCIPAL = "#9DB7D5"  # ① cash-flow chart: principal bars (coupons in ACCENT), fixes U2-1 A
+SRC_CELL = {"sec": "background-color:#EEF0F3;color:#3D4654;font-weight:700",  # ② source cells in the ③ badge colours
+            "dart": "background-color:" + ACCENT_SOFT + ";color:" + ACCENT + ";font-weight:700",
+            "news": "background-color:" + ACCENT_SOFT + ";color:" + ACCENT + ";font-weight:700"}
 
 # selector -> declarations (no spaces inside a declaration)
 CSS = {
@@ -122,6 +126,16 @@ CSS = {
     ".kpd-legend-t": ["grid-column:1/-1", "font-weight:600", "color:#14181F"],
     ".kpd-legend>span": ["display:flex", "align-items:center", "gap:6px", "min-width:0"],
     ".kpd-legend>span>i": ["width:10px", "height:10px", "border-radius:50%", "flex:none"],
+    # ① number cards (fixes U2-1 A): six columns on a wide screen, two on a phone (each card at least 150px)
+    ".kpd-grid6": ["display:grid", "grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))", "gap:12px",
+                   "margin:4px 0 16px"],
+    ".kpd-stat": ["background:#FFFFFF", "border-width:1px", "border-style:solid", "border-color:#E3E6EB",
+                  "border-radius:12px", "padding:14px", "display:flex", "flex-direction:column", "gap:8px", "min-width:0"],
+    ".kpd-stat-v": ["font-size:22px", "font-weight:700", "line-height:1.2", "color:#14181F", "overflow-wrap:anywhere",
+                    "font-variant-numeric:tabular-nums"],
+    ".kpd-stat-u": ["font-size:12.5px", "font-weight:500", "color:#5B6472", "margin-top:-4px"],  # unit on its own line
+    # ② filter box head: count on the left, reset on the right (fixes U2-1 B)
+    ".kpd-count": ["font-size:15px", "font-weight:700", "color:#14181F"],
     ".kpd-gtitle": ["display:flex", "align-items:center", "gap:8px", "font-weight:700", "font-size:15px",
                     "margin:0 0 4px"],
 }
@@ -140,6 +154,13 @@ ICONS = {
     "file": [("path", {"d": "M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"}), ("path", {"d": "M14 3v5h5"})],
     "pass": [("circle", {"cx": 12, "cy": 12, "r": 10}), ("path", {"d": "M7 12l3.5 3.5L17 9"})],
     "info": [("circle", {"cx": 12, "cy": 12, "r": 10}), ("path", {"d": "M12 11v6M12 7.5v.5"})],
+    # ① number cards (fixes U2-1 A)
+    "tag": [("path", {"d": "M3 12V4h8l10 10-8 8z"}), ("circle", {"cx": 7.5, "cy": 7.5, "r": 1.5})],
+    "pct": [("path", {"d": "M19 5L5 19"}), ("circle", {"cx": 7, "cy": 7, "r": 2.5}), ("circle", {"cx": 17, "cy": 17, "r": 2.5})],
+    "clock": [("circle", {"cx": 12, "cy": 12, "r": 9}), ("path", {"d": "M12 7v5l3 2"})],
+    "delta": [("path", {"d": "M12 4l8 16H4z"})],
+    "gap": [("path", {"d": "M4 19h16M4 5h16"}), ("path", {"d": "M12 8v8M9.5 10.5L12 8l2.5 2.5M9.5 13.5L12 16l2.5-2.5"})],
+    "curve": [("path", {"d": "M4 20C9 17 14 12 20 9"}), ("path", {"d": "M4 13C9 10 14 6 20 3", "stroke-dasharray": "2 3"})],
 }
 
 # static previews of the four home tiles, 200 x 72, no numbers and no words (fixes U1-1 spec.home)
@@ -235,6 +256,13 @@ def compare(rows) -> str:
 def badge(text: str, kind: str) -> str:
     """Small label: kind pdf / xlsx / lang."""
     return el("span", {"class": "kpd-b-" + kind}, txt(text))
+
+
+def stat(icon_name: str, label: str, value: str, unit: str) -> str:
+    """One number card of page ①: icon + label, then the value with its unit (fixes U2-1 A)."""
+    return el("div", {"class": "kpd-stat"},
+              head(icon(icon_name, size=18, width=2, box="kpd-ico-sm"), label),
+              el("div", {"class": "kpd-stat-v"}, txt(value)), el("div", {"class": "kpd-stat-u"}, txt(unit)))
 
 
 def chip(text: str) -> str:

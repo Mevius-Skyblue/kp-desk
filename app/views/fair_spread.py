@@ -95,14 +95,12 @@ else:
     parts.append(look.note(f"{t('a_fair_level')}: {lvl_txt}", cls="kpd-text"))
     st.markdown(look.card(*parts), unsafe_allow_html=True)
     if recs:  # table of the comparable deals used for this estimate (deals.csv cells only)
-        src_txt = {"sec": t("a_src_sec"), "dart": t("a_src_dart"), "news": t("a_src_news")}
         rows = []
         for x in recs:
-            kind = ui.source_kind(x["source_url"])
             mark = t("a_fair_coupon_mark") if x["rep_spread_basis"] == "coupon" else ""  # audit A11-3
             rows.append([look.txt(x[name_col]), look.txt(ui.date_col([x["issue_date"]])[0]),
                          look.txt(ui.num(x["tenor_years"], 2)), look.txt(ui.num(x["rep_spread_bp"], 1) + mark),
-                         look.source_badge(kind, src_txt.get(kind, t("a_na")), x["source_url"] if kind else None)])
+                         ui.source_badge(x["source_url"])])  # same badge rule as page ② (ui.source_kind)
         head = [(t("a_col_issuer"), False), (t("a_col_issue_date"), False), (t("a_col_tenor"), True),
                 (t("a_fair_col_spread"), True), (t("a_col_source"), False)]  # short EN header: fits 390px (A11-2)
         st.markdown(look.card(look.head(look.icon("rows", size=18, width=2, box="kpd-ico-sm"), t("a_fair_comps_title"),

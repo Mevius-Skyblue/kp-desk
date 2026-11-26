@@ -6,7 +6,7 @@ import math
 
 import streamlit as st
 
-from app.i18n import LANGS, STATE_KEY, current_lang, init_lang, t
+from app.i18n import LANGS, STATE_KEY, current_lang, init_lang, sync_lang_url, t
 from app.lib import data as D
 from app.lib import look
 
@@ -23,6 +23,7 @@ def lang_toggle() -> None:
     init_lang()
     st.radio(t("a_lang_label"), options=list(LANGS), key=STATE_KEY, horizontal=True, label_visibility="collapsed",
              width="content", format_func=labels(LANGS, lambda v: t(f"a_lang_{v}")))
+    sync_lang_url()  # ?lang= follows the switch (fixes U2-1 C)
 
 
 def top_bar() -> None:
@@ -58,6 +59,35 @@ def kept(name: str, options: list, fallback):
 def keep(name: str, value) -> None:
     """Store the widget's current selection (ids) for kept()."""
     st.session_state[KEEP_PREFIX + name] = list(value) if isinstance(value, (list, tuple)) else value
+
+
+def forget(*names: str) -> None:
+    """Drop the selections of language-scoped widgets (every language's widget value and the kept ids), so they start from
+    their defaults on the next run (② reset button, fixes U2-1 B). Call from a button callback, before the widgets exist."""
+    for name in names:
+        for lang in LANGS:
+            st.session_state.pop(f"{name}_{lang}", None)
+        st.session_state.pop(KEEP_PREFIX + name, None)
+
+
+def current(name: str, options: list, fallback: list) -> list:
+    """Selection a language-scoped multiselect will show in this run, known before the widget is drawn: its own value
+    (set by the browser before the rerun), else the kept ids, else the fallback. Used for a summary label above it."""
+    v = st.session_state.get(wkey(name))
+    return [x for x in v if x in options] if isinstance(v, list) else kept(name, options, fallback)
+
+
+def pick_summary(sel: list, options: list, fn) -> str:
+    """Short text of a multi-selection: every option -> 'All', none -> 'None selected', one -> its label,
+    more -> 'first +n' ('선순위 무보증 외 2'). The first is taken in the options' order."""
+    picked = [o for o in options if o in sel]
+    if options and len(picked) == len(options):
+        return t("a_f_all")
+    if not picked:
+        return t("a_f_none")
+    if len(picked) == 1:
+        return fn(picked[0])
+    return t("a_f_more", first=fn(picked[0]), n=len(picked) - 1)
 
 
 def labels(options, fn):
@@ -140,6 +170,21 @@ def date_col(values) -> list[str]:
         except (TypeError, ValueError):
             out.append(t("a_na"))
     return out
+
+
+SOURCE_KEYS = {"sec": "a_src_sec", "dart": "a_src_dart", "news": "a_src_news"}  # badge kind -> label key
+
+
+def source_label(url) -> str:
+    """Badge text of a deals.csv source_url: DART / SEC / press, or '–' when there is no web address (② and ③)."""
+    kind = source_kind(url)
+    return t(SOURCE_KEYS[kind]) if kind else t("a_na")
+
+
+def source_badge(url) -> str:
+    """Source of a deal as a small HTML badge link (③ table); no web address -> '–' without a link."""
+    kind = source_kind(url)
+    return look.source_badge(kind, source_label(url), url if kind else None)
 
 
 def source_kind(url) -> str | None:

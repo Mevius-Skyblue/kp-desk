@@ -541,3 +541,203 @@ def test_snapshot_numbers_are_numeric():
     for df, cols in ((fair, ("point_bp", "low_bp", "high_bp", "n_comps")), (deals, ("rep_spread_bp", "reoffer_yield_pct"))):
         for c in cols:
             assert pd.api.types.is_numeric_dtype(df[c]), c
+
+
+# ---------------------------------------------------------------- U2 (config/public.yaml fixes U2-1)
+def _cf_inputs(n: int = 20, seed: int = 20261127):
+    """Default calculator inputs + n random ones (all three conventions, off-cycle maturities, yields -1..15%)."""
+    import random
+    from datetime import timedelta
+
+    from app.lib.calc import defaults
+    from src.bond.daycount import add_months
+    from src.bond.pricing import CONVENTIONS
+
+    d = defaults(date(2026, 11, 25))
+    out = [(d["conv"], d["coupon"], d["issue"], d["maturity"], d["settle"], d["yield_pct"])]
+    rng = random.Random(seed)
+    for _ in range(n):
+        issue = date(2015, 1, 1) + timedelta(days=rng.randrange(0, 4000))
+        # off-cycle maturities give short first periods
+        maturity = add_months(issue, rng.choice([12, 24, 36, 60, 84, 120, 360])) + timedelta(days=rng.randrange(0, 40))
+        settle = issue + timedelta(days=rng.randrange(0, (maturity - issue).days))
+        out.append((rng.choice(list(CONVENTIONS)), round(rng.uniform(0, 9), 3), issue, maturity, settle,
+                    round(rng.uniform(-1, 15), 4)))
+    return out
+
+
+@pytest.mark.parametrize("case", range(21))
+def test_cash_flow_chart_matches_engine(case):
+    """① chart (fixes U2-1 A): present value of the chart's flows at the engine yield = engine dirty price (1e-8, per 100
+    face); number of payments = engine schedule after settlement; coupon + principal = total; principal 100 once."""
+    from app.lib.calc import calculate, cash_flow_rows
+    from src.bond.pricing import CONVENTIONS, Bond, schedule
+
+    conv, cpn, issue, mat, settle, y = _cf_inputs()[case]
+    r = calculate(conv, cpn, issue, mat, settle, 100.0, yield_pct=y)
+    rows = cash_flow_rows(conv, cpn, issue, mat, settle)
+    f, dc = CONVENTIONS[conv]
+    pv = sum(x["total"] / (1 + y / 100 / f) ** x["periods"] for x in rows)
+    assert abs(pv - r["dirty"]) <= 1e-8
+    assert len(rows) == len([p for _, p in schedule(Bond(cpn, issue, mat, f, dc)) if p > settle])
+    assert all(abs(x["coupon"] + x["principal"] - x["total"]) <= 1e-12 for x in rows)
+    assert [x["principal"] for x in rows].count(100.0) == 1 and rows[-1]["principal"] == 100.0 and rows[-1]["date"] == mat
+
+
+def _cards(at) -> dict[str, str]:
+    """① number cards: label -> value text, read from the card grid HTML."""
+    html = next(m.value for m in at.markdown if "kpd-grid6" in m.value)
+    labels = re.findall(r'<div class="kpd-head"><span class="kpd-ico-sm">.*?</span><span>(.*?)</span></div>', html)
+    values = re.findall(r'<div class="kpd-stat-v">(.*?)</div>', html)
+    return dict(zip(labels, values))
+
+
+@pytest.mark.parametrize("lang", ["ko", "en"])
+def test_calculator_cards_equal_table(lang, data_env):
+    """① six cards show exactly the results-table texts (fixes U2-1 A); the table row height is fixed so the page can size
+    the table to its rows (no inner scroll); non-USD -> spread cards '–'."""
+    from app.i18n import t
+
+    at = run_page("views/calculator.py", lang)
+    assert not at.exception
+    cards = _cards(at)
+    tbl = at.dataframe[0].value
+    table = dict(zip(tbl[t("a_col_item", _lang=lang)], tbl[t("a_col_value", _lang=lang)]))
+    pairs = [("a_card_clean", "a_res_clean"), ("a_card_yield", "a_res_yield"), ("a_card_mod", "a_res_mod"),
+             ("a_card_dv01", "a_res_dv01"), ("a_card_g", "a_res_g"), ("a_card_z", "a_res_z")]
+    assert len(cards) == 6
+    for card, row in pairs:
+        assert cards[t(card, _lang=lang)] == table[t(row, _lang=lang)]
+    assert at.dataframe[0].proto.row_height == 35
+    at.selectbox(key=f"calc_conv_{lang}").set_value("EUR").run()
+    c = _cards(at)
+    assert c[t("a_card_g", _lang=lang)] == t("a_na") == c[t("a_card_z", _lang=lang)]
+
+
+def test_calculator_chart_hover_fields(monkeypatch):
+    """① chart hover: payment date, coupon, principal, total (fixes U2-1 A)."""
+    import json
+
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = run_page("views/calculator.py", "en")
+    spec = json.loads(at.get("vega_lite_chart")[0].proto.spec)
+    assert [x["title"] for x in spec["encoding"]["tooltip"]] == ["Payment date", "Coupon", "Principal", "Total"]
+
+
+def _src_display(at) -> list[str]:
+    """Shown text of the ② table's source column (the Styler display values, i.e. what the browser draws)."""
+    import pyarrow as pa
+
+    from app.i18n import t
+
+    ad = at.dataframe[0].proto.arrow_data
+    disp = pa.ipc.open_stream(ad.styler.display_values).read_all().to_pandas()
+    col = list(at.dataframe[0].value.columns).index(t("a_col_source", _lang="en"))
+    return disp.iloc[:, col].tolist()
+
+
+def test_comps_filter_box_reset_columns_and_badges(monkeypatch):
+    """② (fixes U2-1 B): count line, summary labels on the filter buttons, reset to the defaults, source badge text right
+    after the issuer (same rule as ③), base columns and the 'More columns' switch, chart hover fields."""
+    import json
+
+    from app.i18n import t
+    from app.lib import ui
+
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = run_page("views/comps.py", "en")
+    pops = [p.proto.popover.label for p in at.get("popover")]
+    assert pops[:3] == ["Bond type: Senior unsecured", "Issuer type: All", "Sample tier: A +2"]
+    assert any(">4 deals match the filters<" in m.value for m in at.markdown)
+    order = list(at.dataframe[0].proto.column_order)
+    assert order == ["Issuer", "Source", "Bond type", "Type", "Issue date", "Tenor (years)", "Representative spread (bp)",
+                     "Spread basis", "Sample tier"]
+    df = at.dataframe[0].value
+    want = [t(ui.SOURCE_KEYS[k], _lang="en") if (k := ui.source_kind(u)) else t("a_na") for u in df["Source"]]
+    assert _src_display(at) == want and "Press" in want  # fixture URLs are example.com pages -> press
+    at.toggle(key="comps_more_cols").set_value(True).run()
+    assert list(at.dataframe[0].proto.column_order)[9:] == ["Currency", "Coupon (%)", "Reoffer yield (%)", "Maturity",
+                                                            "Rating bucket"]
+    at.multiselect(key="comps_tier_en").set_value(["A", "B", "S", "C"]).run()
+    at.multiselect(key="comps_nature_en").set_value(["senior", "guaranteed"]).run()
+    labels = [p.proto.popover.label for p in at.get("popover")]
+    assert labels[:3] == ["Bond type: Senior unsecured +1", "Issuer type: All", "Sample tier: All"]
+    assert len(at.dataframe[0].value) != 4
+    at.button(key="comps_reset").click().run()
+    assert len(at.dataframe[0].value) == 4
+    assert at.multiselect(key="comps_tier_en").value == ["A", "B", "S"]
+    assert [p.proto.popover.label for p in at.get("popover")][2] == "Sample tier: A +2"
+    spec = json.loads(at.get("vega_lite_chart")[0].proto.spec)
+    assert [x["title"] for x in spec["encoding"]["tooltip"]] == ["Issuer", "Issue date", "Tenor (years)",
+                                                                  "Representative spread (bp)", "Spread basis", "Sample tier"]
+
+
+def test_source_label_rule_shared_by_comps_and_fair():
+    """One badge rule for ② and ③: sec.gov -> SEC, dart.fss.or.kr -> DART, other web page -> press, else '–'."""
+    from app.i18n import t
+    from app.lib import ui
+
+    assert ui.source_label("https://www.sec.gov/Archives/x.htm") == t("a_src_sec")
+    assert ui.source_label("https://dart.fss.or.kr/dsaf001/main.do?rcpNo=1") == t("a_src_dart")
+    assert ui.source_label("https://m.thebell.co.kr/a") == t("a_src_news")
+    assert ui.source_label(None) == ui.source_label(float("nan")) == ui.source_label("") == t("a_na")
+    assert ">SEC</a>" in ui.source_badge("https://www.sec.gov/x") and ui.source_badge(None) == t("a_na")
+    src = (ROOT / "app" / "views" / "fair_spread.py").read_text(encoding="utf-8")
+    assert "ui.source_badge(" in src and "a_src_" not in src  # ③ no longer has its own label table
+
+
+@pytest.mark.parametrize("q,want", [("en", "en"), ("ko", "ko"), ("xx", "ko"), (" EN ", "en"), (None, "ko")])
+@pytest.mark.parametrize("page", PAGES)
+def test_lang_from_address(page, q, want, monkeypatch):
+    """?lang= (fixes U2-1 C): each page opens in the address language (wrong value -> Korean) and the address then holds
+    the current language.
+
+    Audit A12-1: AppTest's switch_page before the first run looks the page up by file name, and the app registers
+    views/fair_spread.py under the url path 'fair-spread', so the earlier version silently ran the home page for ③.
+    The address is read by the common entry script on the session's first run whatever the page, so the test now runs
+    once (address read), then switches to the page, and checks the page's own title in the expected language."""
+    from streamlit.testing.v1 import AppTest
+
+    from app.i18n import t
+
+    titles = dict(zip(PAGES, ("a_home_title", "a_calc_title", "a_comps_title", "a_fair_title", "a_val_title")))
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = AppTest.from_file(str(ROOT / "app" / "Home.py"), default_timeout=120)
+    if q is not None:
+        at.query_params["lang"] = q
+    at.run()
+    if page != PAGES[0]:
+        at.switch_page(page)
+        at.run()
+    assert not at.exception
+    assert [x.value for x in at.title] == [t(titles[page], _lang=want)]  # the page itself, in the expected language
+    assert at.session_state["lang"] == want
+    assert at.query_params.get("lang") == want
+    assert t("a_disclaimer", _lang=want) in visible_text(at)
+
+
+def test_lang_address_follows_switch_and_page(monkeypatch):
+    """Switching the language rewrites ?lang=; a page switch keeps the language and the address value."""
+    from streamlit.testing.v1 import AppTest
+
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = AppTest.from_file(str(ROOT / "app" / "Home.py"), default_timeout=120)
+    at.query_params["lang"] = "en"
+    at.switch_page("views/comps.py")
+    at.run()
+    at.multiselect(key="comps_tier_en").set_value(["A"]).run()
+    at.radio(key="lang").set_value("ko").run()
+    assert at.query_params.get("lang") == "ko" and at.multiselect(key="comps_tier_ko").value == ["A"]  # U1-2 C kept
+    at.switch_page("views/fair_spread.py")
+    at.run()
+    assert at.session_state["lang"] == "ko" and at.query_params.get("lang") == "ko"
+    at.radio(key="lang").set_value("en").run()
+    assert at.query_params.get("lang") == "en"
+
+
+def test_fair_intro_says_priced():
+    """U1b-D3: the ③ intro names the engine's window (priced in the 18 months), both languages."""
+    from app.i18n import t
+
+    assert "가격이 정해진" in t("a_fair_intro", _lang="ko") and "발행된" not in t("a_fair_intro", _lang="ko")
+    assert "priced in the 18 months" in t("a_fair_intro", _lang="en")

@@ -14,12 +14,15 @@ from src.bond.pricing import (
     CONVENTIONS,
     Bond,
     accrued_interest,
+    cash_flows,
     convexity,
+    coupon_amount,
     dirty_price,
     dv01,
     macaulay_duration,
     mod_duration,
     price_from_yield,
+    schedule,
     settlement_amount,
     yield_from_price,
 )
@@ -72,3 +75,22 @@ def calculate(conv: str, coupon: float, issue: date, maturity: date, settle: dat
         out["g_spread_bp"] = g_spread(y, curve_points, out["tenor_years"])
         out["z_spread_bp"] = z_spread(bond, clean, settle, bootstrap(curve_points, settle, maturity))
     return out
+
+
+def cash_flow_rows(conv: str, coupon: float, issue: date, maturity: date, settle: date) -> list[dict]:
+    """Payments after the settlement date for the ① chart, per 100 face, taken from the engine as is (fixes U2-1 A):
+    date, total and discount periods from cash_flows(); the coupon from coupon_amount() on the same schedule() period;
+    principal = the 100 that cash_flows() adds on the maturity date. No new formula: coupon + principal = total.
+
+    Call after calculate() succeeded (same inputs), which has already checked the dates."""
+    if conv not in CONVENTIONS:
+        raise CalcInputError("convention")
+    freq, dc = CONVENTIONS[conv]
+    bond = Bond(float(coupon), issue, maturity, freq, dc)
+    periods = [(start, pay) for start, pay in schedule(bond) if pay > settle]  # the periods cash_flows() keeps
+    flows = cash_flows(bond, settle)
+    if len(periods) != len(flows) or any(pay != cf.pay_date for (_, pay), cf in zip(periods, flows)):
+        raise CalcInputError("schedule")  # pragma: no cover - the engine builds both from schedule()
+    return [{"date": cf.pay_date, "coupon": coupon_amount(bond, start, pay),
+             "principal": 100.0 if pay == bond.maturity else 0.0, "total": cf.amount, "periods": cf.periods, "freq": freq}
+            for (start, pay), cf in zip(periods, flows)]

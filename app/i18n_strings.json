@@ -113,6 +113,10 @@
    "ko": "입력",
    "en": "Input"
   },
+  "a_calc_inputs": {
+   "ko": "입력",
+   "en": "Inputs"
+  },
   "a_calc_intro": {
    "ko": "고정금리 채권 한 종목의 가격과 위험 지표를 계산합니다. 계산은 검증된 채권 엔진을 그대로 부르며 새 공식은 없습니다.",
    "en": "Price and risk measures of one fixed-coupon bond. The calculation calls the validated bond engine as is; there is no new formula."
@@ -153,6 +157,10 @@
    "ko": "수익률 (%)",
    "en": "Yield (%)"
   },
+  "a_card_clean": {
+   "ko": "깨끗한 가격",
+   "en": "Clean price"
+  },
   "a_card_deals_title": {
    "ko": "공개 발행 사례",
    "en": "Published deals"
@@ -161,9 +169,61 @@
    "ko": "{n}건",
    "en": "{n} deals"
   },
+  "a_card_dv01": {
+   "ko": "DV01",
+   "en": "DV01"
+  },
+  "a_card_g": {
+   "ko": "G-스프레드",
+   "en": "G-spread"
+  },
+  "a_card_mod": {
+   "ko": "수정 듀레이션",
+   "en": "Modified duration"
+  },
   "a_card_samples_value": {
    "ko": "PDF · 엑셀",
    "en": "PDF · Excel"
+  },
+  "a_card_yield": {
+   "ko": "수익률",
+   "en": "Yield"
+  },
+  "a_card_z": {
+   "ko": "Z-스프레드",
+   "en": "Z-spread"
+  },
+  "a_cf_amount": {
+   "ko": "금액 (액면 100당)",
+   "en": "Amount (per 100 face)"
+  },
+  "a_cf_coupon": {
+   "ko": "쿠폰",
+   "en": "Coupon"
+  },
+  "a_cf_date": {
+   "ko": "지급일",
+   "en": "Payment date"
+  },
+  "a_cf_legend": {
+   "ko": "현금흐름",
+   "en": "Cash flow"
+  },
+  "a_cf_note": {
+   "ko": "결제일 뒤 지급일마다 엔진 이자 일정이 만든 쿠폰과 만기 원금입니다. 수익률로 할인해 더하면 위 더티 가격과 같습니다.",
+   "en": "Coupons and the principal at maturity from the engine's coupon schedule, for each payment date after settlement. Discounted at the yield, they add up to the dirty price above."
+  },
+  "a_cf_principal": {
+   "ko": "원금",
+   "en": "Principal"
+  },
+  "a_cf_title": {
+   "ko": "현금흐름 (결제일 이후, 액면 100당)",
+   "en": "Cash flows (after settlement, per 100 face)"
+  },
+  "a_cf_total": {
+   "ko": "합계",
+   "en": "Total"
   },
   "a_chart_note": {
    "ko": "현재 필터가 반영된 사례만 그립니다(만기 정보가 없는 사례 제외). 점 하나 = 트랜치 하나.",
@@ -240,10 +300,6 @@
   "a_col_yield": {
    "ko": "발행 수익률 (%)",
    "en": "Reoffer yield (%)"
-  },
-  "a_comps_count": {
-   "ko": "{n}건",
-   "en": "{n} deals"
   },
   "a_comps_coupon_note": {
    "ko": "쿠폰 기준 스프레드는 발행 수익률 기준보다 낮게 나오는 경향이 있습니다(알려진 한계 참고).",
@@ -325,13 +381,45 @@
    "ko": "검증 결과 상세",
    "en": "Validation details"
   },
+  "a_f_all": {
+   "ko": "전체",
+   "en": "All"
+  },
+  "a_f_count": {
+   "ko": "조건에 맞는 사례 {n}건",
+   "en": "{n} deals match the filters"
+  },
+  "a_f_more": {
+   "ko": "{first} 외 {n}",
+   "en": "{first} +{n}"
+  },
+  "a_f_more_cols": {
+   "ko": "열 더 보기",
+   "en": "More columns"
+  },
   "a_f_nature": {
    "ko": "채권 성격",
    "en": "Bond type"
   },
+  "a_f_none": {
+   "ko": "선택 없음",
+   "en": "None selected"
+  },
   "a_f_period": {
    "ko": "발행 기간",
    "en": "Issue period"
+  },
+  "a_f_period_val": {
+   "ko": "{lo} ~ {hi}",
+   "en": "{lo} to {hi}"
+  },
+  "a_f_pop": {
+   "ko": "{name}: {value}",
+   "en": "{name}: {value}"
+  },
+  "a_f_reset": {
+   "ko": "초기화",
+   "en": "Reset"
   },
   "a_f_tenor": {
    "ko": "만기 구간",
@@ -390,8 +478,8 @@
    "en": "Estimated spread"
   },
   "a_fair_intro": {
-   "ko": "공개 모드의 대표 출력(N0 기준선)만 보여 줍니다: 같은 유형·같은 등급 구간에서 기준일 전 18개월 동안 발행된 사례의 스프레드 중앙값입니다.",
-   "en": "Shows the public mode's representative output only (the N0 baseline): the median spread of deals of the same issuer type and rating bucket issued in the 18 months before the as-of date."
+   "ko": "공개 모드의 대표 출력(N0 기준선)만 보여 줍니다: 같은 유형·같은 등급 구간에서 기준일 전 18개월 안에 가격이 정해진 사례의 스프레드 중앙값입니다.",
+   "en": "Shows the public mode's representative output only (the N0 baseline): the median spread of deals of the same issuer type and rating bucket priced in the 18 months before the as-of date."
   },
   "a_fair_issuer": {
    "ko": "발행사",
@@ -701,10 +789,6 @@
    "ko": "기준선과 비슷",
    "en": "Similar to the baseline"
   },
-  "a_source_link": {
-   "ko": "원문 열기",
-   "en": "Open source"
-  },
   "a_src_dart": {
    "ko": "DART",
    "en": "DART"
@@ -804,6 +888,26 @@
   "a_type_sovereign": {
    "ko": "국가",
    "en": "Sovereign"
+  },
+  "a_unit_bp": {
+   "ko": "bp",
+   "en": "bp"
+  },
+  "a_unit_face": {
+   "ko": "액면 금액 기준",
+   "en": "for the face amount"
+  },
+  "a_unit_pct": {
+   "ko": "%",
+   "en": "%"
+  },
+  "a_unit_per100": {
+   "ko": "액면 100당",
+   "en": "per 100 face"
+  },
+  "a_unit_years": {
+   "ko": "년",
+   "en": "years"
   },
   "a_val_bond_body": {
    "ko": "QuantLib으로 다시 계산한 {total}건(관문 {gate}건 + 참고 {ref}건)이 모두 허용오차 안에 있었고 불일치는 {mismatch}건입니다. 교과서 예제 {tb}개도 공시 정답과 같았습니다.",
