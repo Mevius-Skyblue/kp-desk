@@ -326,7 +326,13 @@ def test_comps_chart_and_number_formats(lang, data_env):
     spec = json.loads(charts[0].proto.spec)
     assert "params" not in spec  # no selection / zoom-pan interaction
     assert spec["encoding"]["x"]["scale"]["domain"] == [0, 30]
-    assert spec["encoding"]["color"]["legend"]["orient"] == "bottom"
+    # legend (fixes U1-2 B6): not drawn by the chart but as an HTML list under it, with the chart's own colour range
+    assert spec["encoding"]["color"].get("legend", "absent") is None
+    rng = spec["encoding"]["color"]["scale"]
+    html = " ".join(m.value for m in at.markdown)
+    assert 'class="kpd-legend"' in html
+    for label, colour in zip(rng["domain"], rng["range"]):
+        assert colour in html and label in html
     df = at.dataframe[0].value
     assert pd.api.types.is_float_dtype(df[t("a_col_spread", _lang=lang)])
     for col, nd in (("a_col_tenor", 2), ("a_col_coupon", 3), ("a_col_yield", 3)):
@@ -359,3 +365,162 @@ def test_calculator_display_decimals(monkeypatch):
     assert re.fullmatch(r"-?\d+\.\d{1}", rows["G-spread (bp)"]) and re.fullmatch(r"-?\d+\.\d{1}", rows["Z-spread (bp)"])
     assert re.fullmatch(r"[\d,]+\.\d{2}", rows["Settlement amount (for the face amount)"]) and "," in rows[
         "Settlement amount (for the face amount)"]
+
+
+# ---------------------------------------------------------------- U1b (config/public.yaml fixes U1-2)
+
+def test_fair_comps_dots_and_table(monkeypatch):
+    """③ comparable deals (fixes U1-2 A): one hollow dot and one table row per listed deal, values from deals.csv, blank issue
+    date shown as '–', axis end covers the comparable spreads; EN screen uses English issuer names."""
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    from app.i18n import t
+
+    for lang in ("ko", "en"):
+        at = run_page("views/fair_spread.py", lang)  # default: first issuer by name = zz_fake_a, tenor 3 (3 listed deals)
+        assert not at.exception
+        html = " ".join(m.value for m in at.markdown)
+        assert html.count('class="kpd-dot"') == 3
+        assert t("a_fair_comps_title", _lang=lang) in html and html.count("<tr>") == 1 + 3
+        name = "Fake Issuer F" if lang == "en" else "가상발행사 F"
+        assert t("a_fair_dot_tip", _lang=lang, issuer=name, date="–", v="66.6") in html  # hover text of the dot
+        for v in ("99.9", "111.1", "66.6"):
+            assert ">" + v + "<" in html
+        assert t("a_bp", _lang=lang, v="250") in html  # axis end: highest high_bp / comparable spread of the files, up to 50bp
+        assert html.count('href="https://example.com/fake/') == 3  # source badges link to deals.csv source_url
+        if lang == "en":
+            assert not HANGUL.search(re.sub(r"<[^>]+>", " ", html))
+
+
+def test_fair_comps_file_missing_hides_dots(monkeypatch, tmp_path):
+    """Without fair_spread_comps.csv the page still runs: range bar without dots, no table, the old legend line."""
+    import shutil
+
+    d = tmp_path / "data"
+    shutil.copytree(FIX / "data", d)
+    (d / "fair_spread_comps.csv").unlink()
+    monkeypatch.setenv("KPD_APP_DATA", str(d))
+    from app.i18n import t
+
+    at = run_page("views/fair_spread.py", "en")
+    assert not at.exception
+    html = " ".join(m.value for m in at.markdown)
+    assert "kpd-dot" not in html and t("a_fair_comps_title", _lang="en") not in html
+    assert t("a_fair_bar_legend", _lang="en") in html
+
+
+def test_fair_comps_snapshot_rules():
+    """The four pre-registered tests of the published list (fixes U1-2 A), on the real snapshot (public bundle / CI):
+    every key is a deals.csv row, median of the listed spreads = point, count = n_comps (the chip), key columns only."""
+    import statistics
+
+    if not all((SNAP / f).is_file() for f in SNAP_FILES + ("fair_spread_comps.csv",)):
+        pytest.skip("real snapshot not present (private repository)")
+    comps = pd.read_csv(SNAP / "fair_spread_comps.csv", dtype=str)
+    deals = pd.read_csv(SNAP / "deals.csv", dtype={"deal_key": str})
+    fair = pd.read_csv(SNAP / "fair_spread.csv")
+    assert list(comps.columns) == ["issuer_id", "tenor_years", "deal_key"]
+    spread = dict(zip(deals["deal_key"], deals["rep_spread_bp"].astype(float)))
+    groups = {(i, int(tn)): g["deal_key"].tolist() for (i, tn), g in comps.groupby(["issuer_id", "tenor_years"])}
+    assert set(groups) <= set(zip(fair["issuer_id"], fair["tenor_years"].astype(int)))
+    for r in fair.to_dict("records"):
+        keys = groups.get((r["issuer_id"], int(r["tenor_years"])), [])
+        assert keys and all(k in spread for k in keys), r["issuer_id"]
+        assert len(keys) == int(r["n_comps"])
+        assert abs(statistics.median(spread[k] for k in keys) - float(r["point_bp"])) <= 0.01 + 1e-9
+
+
+def test_source_kind_and_dot_lanes():
+    from app.lib import look, ui
+
+    assert ui.source_kind("https://www.sec.gov/Archives/x") == "sec"
+    assert ui.source_kind("https://dart.fss.or.kr/dsaf001/main.do?rcpNo=1") == "dart"
+    assert ui.source_kind("https://news.example.com/a") == "news"
+    assert ui.source_kind(None) is None and ui.source_kind(float("nan")) is None and ui.source_kind(pd.NA) is None
+    assert ui.source_kind("") is None
+    # overlapping dots take other lanes; distant dots stay on the axis lane; the order of the input is kept
+    assert look.dot_lanes([50.0, 50.5, 51.0, 90.0]) == [0, -1, 1, 0]
+    assert look.dot_lanes([10.0, 10.0, 10.0, 10.0, 10.0, 10.0]) == [0, -1, 1, -2, 2, 0]
+    assert look.dot_lanes([]) == []
+
+
+def test_language_switch_keeps_selection(monkeypatch):
+    """A9-R17 / fixes U1-2 C: switching KO <-> EN keeps ③ issuer and tenor, ② filters and ① choices (as ids)."""
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = run_page("views/fair_spread.py", "ko")
+    at.selectbox(key="fair_issuer_ko").set_value("zz_fake_b").run()
+    at.selectbox(key="fair_tenor").set_value(7.0).run()
+    html_ko = " ".join(m.value for m in at.markdown)
+    at.radio(key="lang").set_value("en").run()
+    assert at.selectbox(key="fair_issuer_en").value == "zz_fake_b" and at.selectbox(key="fair_tenor").value == 7.0
+    html_en = " ".join(m.value for m in at.markdown)
+    assert ">222.2 bp<" in html_ko and ">222.2 bp<" in html_en
+    at.radio(key="lang").set_value("ko").run()
+    assert at.selectbox(key="fair_issuer_ko").value == "zz_fake_b"
+
+    at = run_page("views/comps.py", "en")
+    at.multiselect(key="comps_tier_en").set_value(["A"]).run()
+    at.multiselect(key="comps_nature_en").set_value(["senior", "guaranteed"]).run()
+    n_en = len(at.dataframe[0].value)
+    at.radio(key="lang").set_value("ko").run()
+    assert at.multiselect(key="comps_tier_ko").value == ["A"]
+    assert at.multiselect(key="comps_nature_ko").value == ["senior", "guaranteed"]
+    assert len(at.dataframe[0].value) == n_en == 2
+
+    at = run_page("views/calculator.py", "ko")
+    at.radio(key="calc_mode_ko").set_value("price").run()
+    at.radio(key="lang").set_value("en").run()
+    assert at.radio(key="calc_mode_en").value == "price"
+
+
+def _scorecard_copy(tmp_path, changes: dict):
+    import json
+    import shutil
+
+    d = tmp_path / "data"
+    shutil.copytree(FIX / "data", d)
+    p = d / "scorecard.json"
+    sc = json.loads(p.read_text(encoding="utf-8"))
+    for k, v in changes.items():
+        sc["items"][k]["value"] = v
+    p.write_text(json.dumps(sc, ensure_ascii=False), encoding="utf-8")
+    return d
+
+
+@pytest.mark.parametrize("bad", [False, True])
+def test_validation_status_follows_values(bad, monkeypatch, tmp_path):
+    """fixes U1-2 B5 (A10-R3): the three check cards show the green check + green bar only when nothing mismatched;
+    with a mismatch (synthetic scorecard) the grey info icon + grey bar. The fair-spread card is always the info icon."""
+    changes = {"a1_mismatch": "1", "a3_hand": "10/11", "r3_mismatch": "1"} if bad else {}
+    monkeypatch.setenv("KPD_APP_DATA", str(_scorecard_copy(tmp_path, changes)))
+    from app.i18n import t
+
+    at = run_page("views/validation.py", "en")
+    assert not at.exception
+    html = " ".join(m.value for m in at.markdown)
+    n_pass = html.count('aria-label="' + t("a_ico_pass", _lang="en") + '"')
+    n_info = html.count('aria-label="' + t("a_ico_info", _lang="en") + '"')
+    assert (n_pass, n_info) == ((0, 4) if bad else (3, 1))
+    assert html.count("kpd-fill-pass") == (0 if bad else 3)
+    assert html.count("kpd-fill-base") == (3 if bad else 0) + 1  # + the baseline bar of the fair-spread card
+
+
+def test_validation_layout_links_and_notes(monkeypatch):
+    """fixes U1-2 B1-B3: four cards in the two-column grid, one 'details' link per card (none under the title), the
+    public-mode sentence with its 95% interval below the cards as a grey note (not inside the card)."""
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    from app.i18n import t
+
+    at = run_page("views/validation.py", "ko")
+    html = " ".join(m.value for m in at.markdown)
+    assert html.count(">" + t("a_more", _lang="ko") + "<") == 4
+    assert 'class="kpd-grid2"' in html
+    assert "95%" not in html  # the interval sentence is no longer inside a card
+    assert any("95%" in c.value and "N0" in c.value for c in at.caption)
+
+
+def test_grid2_never_three_columns():
+    """B1: the two-column grid's minimum column width is at least 40% of the row, so a third column cannot fit."""
+    from app.lib import look
+
+    rule = ";".join(look.CSS[".kpd-grid2"])
+    assert "minmax(max(min(100%,340px),40%),1fr)" in rule

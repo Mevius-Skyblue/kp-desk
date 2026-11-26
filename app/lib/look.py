@@ -20,6 +20,9 @@ BASELINE = "#9AA3AF"
 INFO = "#5B6472"
 LINE = "#CBD2DC"
 LINE_SOFT = "#DDE2E8"
+# ② chart category colours = chartCategoricalColors of docs/ci/streamlit_config.toml (same order). The chart passes them as
+# its explicit colour range so the HTML legend below it (fixes U1-2 B6) shows exactly the chart's colours.
+CHART_COLORS = ("#1F4E79", "#E07B39", "#2E8B57", "#8E5EA2", "#C9A227", "#4A9BD1", "#B5475B", "#6B7280")
 
 # selector -> declarations (no spaces inside a declaration)
 CSS = {
@@ -28,7 +31,10 @@ CSS = {
     "[class*=st-key-kpd_card]": ["background:#FFFFFF", "border-width:1px", "border-style:solid", "border-color:#E3E6EB",
                                  "border-radius:12px", "padding:18px"],
     ".kpd-grid": ["display:grid", "grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))", "gap:16px", "margin:4px 0 16px"],
-    ".kpd-grid2": ["display:grid", "grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))", "gap:16px", "margin:4px 0 8px"],
+    # two columns at most (fixes U1-2 B1): each column is at least 40% of the row, so a third never fits (the old
+    # minmax(340px) gave 3 + 1 cards on a wide screen); below about 700px it is one column (min(100%,340px) wins)
+    ".kpd-grid2": ["display:grid", "grid-template-columns:repeat(auto-fit,minmax(max(min(100%,340px),40%),1fr))", "gap:16px",
+                   "margin:4px 0 8px"],
     ".kpd-card": ["background:#FFFFFF", "border-width:1px", "border-style:solid", "border-color:#E3E6EB",
                   "border-radius:12px", "padding:18px", "display:flex", "flex-direction:column", "gap:10px", "min-width:0"],
     ".kpd-sub": ["border-width:1px", "border-style:solid", "border-color:#E3E6EB", "border-radius:10px", "padding:16px",
@@ -76,6 +82,43 @@ CSS = {
     ".kpd-foot>span>a": ["color:" + ACCENT],
     ".kpd-link": ["font-size:13px", "color:" + ACCENT],
     "[class*=st-key-kpd_card] [data-testid=stPageLink] p": ["color:" + ACCENT, "font-weight:600", "font-size:14px"],
+    # ③ comparable-deal dots on the range bar and the table under it (fixes U1-2 A)
+    ".kpd-range-dots": ["position:relative", "height:86px", "margin:0 10px"],
+    ".kpd-range-dots>.kpd-r-axis": ["top:40px"],
+    ".kpd-range-dots>.kpd-r-band": ["top:34px"],
+    ".kpd-range-dots>.kpd-r-point": ["top:22px", "height:40px"],
+    ".kpd-range-dots>.kpd-r-tick,.kpd-range-dots>.kpd-r-tick-end": ["top:70px"],
+    ".kpd-dot": ["position:absolute", "width:12px", "height:12px", "box-sizing:border-box", "margin-left:-6px", "margin-top:-6px",
+                 "border-radius:50%", "background:#FFFFFF", "border-width:2px", "border-style:solid",
+                 "border-color:" + ACCENT, "cursor:default", "z-index:2"],
+    ".kpd-dot:hover": ["background:" + ACCENT],
+    ".kpd-tbl-wrap": ["overflow-x:auto", "max-height:460px", "overflow-y:auto"],
+    ".kpd-tbl": ["width:100%", "border-collapse:collapse", "font-size:13.5px"],  # no min width: compresses on a phone
+    ".kpd-tbl>thead>tr>th": ["text-align:left", "font-weight:500", "color:#4A5361", "padding:8px",
+                             "border-bottom-width:1px", "border-bottom-style:solid", "border-bottom-color:#E3E6EB",
+                             "position:sticky", "top:0", "background:#FFFFFF"],
+    ".kpd-tbl>tbody>tr>td": ["padding:8px", "border-bottom-width:1px", "border-bottom-style:solid",
+                             "border-bottom-color:#EEF0F3"],
+    ".kpd-tbl>thead>tr>th.kpd-num,.kpd-tbl>tbody>tr>td.kpd-num": ["text-align:right", "white-space:nowrap"],
+    ".kpd-b-src": ["font-size:12px", "font-weight:700", "padding:3px 8px", "border-radius:6px", "white-space:nowrap",
+                   "background:" + ACCENT_SOFT, "color:" + ACCENT, "text-decoration:none!important"],  # Streamlit underlines links
+    ".kpd-b-src-sec": ["background:#EEF0F3", "color:#3D4654"],
+    # home tiles (fixes U1-2 B4): the four columns stretch to the tallest tile and 'Open' sits at the bottom, flush left
+    "[data-testid=stHorizontalBlock]:has([class*=st-key-kpd_card_tile])": ["align-items:stretch"],
+    # column > vertical block > layout wrapper > tile container: each level grows to the column height (Streamlit 1.5x DOM)
+    "[data-testid=stColumn]:has([class*=st-key-kpd_card_tile])": ["display:flex", "flex-direction:column"],
+    "[data-testid=stColumn]:has([class*=st-key-kpd_card_tile])>[data-testid=stVerticalBlock]": ["flex:1"],
+    "[data-testid=stLayoutWrapper]:has(>[class*=st-key-kpd_card_tile])": ["flex:1"],
+    "[data-testid=stLayoutWrapper]>[class*=st-key-kpd_card_tile]": ["flex:1"],
+    "[class*=st-key-kpd_card_tile]>[data-testid=stElementContainer]:last-child": ["margin-top:auto"],
+    "[class*=st-key-kpd_card_tile] [data-testid=stPageLink] a": ["padding-left:0", "margin-left:0"],
+    # ② chart legend as HTML (fixes U1-2 B6): two columns like the old chart legend, a long label wraps inside its column on
+    # a phone instead of running off the screen
+    ".kpd-legend": ["display:grid", "grid-template-columns:repeat(2,minmax(0,max-content))", "column-gap:28px", "row-gap:4px",
+                    "font-size:12.5px", "color:#3D4654", "margin:0 0 6px"],
+    ".kpd-legend-t": ["grid-column:1/-1", "font-weight:600", "color:#14181F"],
+    ".kpd-legend>span": ["display:flex", "align-items:center", "gap:6px", "min-width:0"],
+    ".kpd-legend>span>i": ["width:10px", "height:10px", "border-radius:50%", "flex:none"],
     ".kpd-gtitle": ["display:flex", "align-items:center", "gap:8px", "font-weight:700", "font-size:15px",
                     "margin:0 0 4px"],
 }
@@ -213,19 +256,72 @@ def link(text: str, url: str, cls: str = "kpd-link") -> str:
     return el("a", {"class": cls, "href": url, "target": "_blank", "rel": "noopener"}, txt(text))
 
 
-def range_bar(low: float, high: float, point: float, lo_axis: float, hi_axis: float, end_label: str) -> str:
+DOT_GAP_PCT = 1.6  # two dots closer than this (in % of the axis width, about one dot on a phone) are put on different lanes
+LANE_STEP_PX = 9  # vertical offset between dot lanes
+LANES = (0, -1, 1, -2, 2)  # lane order: on the axis, above, below, two above, two below
+
+
+def dot_lanes(xs: list[float], gap: float = DOT_GAP_PCT) -> list[int]:
+    """Lane of each dot (same order as xs, positions in % of the axis) so that dots closer than `gap` do not overlap:
+    in value order, a dot takes the first lane of LANES whose last dot is at least `gap` to the left; when every lane is
+    taken it goes back to the middle lane (fixes U1-2 A, 'slightly above / below')."""
+    order = sorted(range(len(xs)), key=lambda i: (xs[i], i))
+    last: dict[int, float] = {}
+    out = [0] * len(xs)
+    for i in order:
+        lane = next((ln for ln in LANES if ln not in last or xs[i] - last[ln] >= gap), 0)
+        last[lane] = xs[i]
+        out[i] = lane
+    return out
+
+
+def range_bar(low: float, high: float, point: float, lo_axis: float, hi_axis: float, end_label: str,
+              dots: list[tuple[float, str]] | None = None) -> str:
     """Range band (low..high) with the point estimate as a vertical line on a fixed axis lo_axis..hi_axis.
-    Ticks: the axis start, middle and end (end_label carries the unit)."""
+    Ticks: the axis start, middle and end (end_label carries the unit). dots = [(value, hover text)]: comparable deals as
+    hollow dots on the axis (fixes U1-2 A); the hover text is the title (tooltip) and the accessible name of the dot."""
     span = (hi_axis - lo_axis) or 1.0
 
     def pos(v: float) -> float:
         return max(0.0, min(100.0, (float(v) - lo_axis) / span * 100.0))
 
     mid = (lo_axis + hi_axis) / 2.0
-    return el("div", {"class": "kpd-range"},
+    dot_html = []
+    if dots:
+        xs = [pos(v) for v, _ in dots]
+        for (v, tip), x, lane in zip(dots, xs, dot_lanes(xs)):
+            dot_html.append(el("span", {"class": "kpd-dot", "title": tip, "role": "img", "aria-label": tip,
+                                        "style": f"left:{x:.2f}%;top:{40 + 2 + lane * LANE_STEP_PX}px"}))
+    return el("div", {"class": "kpd-range-dots" if dots else "kpd-range"},
               el("div", {"class": "kpd-r-axis"}),
               el("div", {"class": "kpd-r-band", "style": f"left:{pos(low):.2f}%;width:{max(pos(high) - pos(low), 0.5):.2f}%"}),
               el("div", {"class": "kpd-r-point", "style": f"left:{pos(point):.2f}%"}),
               el("span", {"class": "kpd-r-tick", "style": "left:0%;transform:none"}, txt(f"{lo_axis:g}")),
               el("span", {"class": "kpd-r-tick", "style": "left:50%"}, txt(f"{mid:g}")),
-              el("span", {"class": "kpd-r-tick-end", "style": "transform:none"}, txt(end_label)))
+              el("span", {"class": "kpd-r-tick-end", "style": "transform:none"}, txt(end_label)),
+              *dot_html)
+
+
+def source_badge(kind: str | None, text: str, url: str | None) -> str:
+    """Source of a deal as a small badge link (kind sec / dart / news); no url -> the text alone (e.g. '–')."""
+    if not kind or not url:
+        return txt(text)
+    cls = " ".join(["kpd-b-src", "kpd-b-src-sec"]) if kind == "sec" else "kpd-b-src"  # (lint: no spaced literals)
+    return el("a", {"class": cls, "href": url, "target": "_blank", "rel": "noopener"}, txt(text))
+
+
+def table(head: list[tuple[str, bool]], rows: list[list[str]]) -> str:
+    """Plain HTML table: head = [(label, numeric)], rows = cells as HTML (numeric columns right-aligned)."""
+    num = [n for _, n in head]
+    th = "".join(el("th", {"class": "kpd-num"} if n else None, txt(h)) for h, n in head)
+    body = "".join(el("tr", None, *(el("td", {"class": "kpd-num"} if num[i] else None, c) for i, c in enumerate(r)))
+                   for r in rows)
+    return el("div", {"class": "kpd-tbl-wrap"},
+              el("table", {"class": "kpd-tbl"}, el("thead", None, el("tr", None, th)), el("tbody", None, body)))
+
+
+def legend(title: str, items: list[tuple[str, str]]) -> str:
+    """Chart legend: title + (label, colour) entries in two columns (fixes U1-2 B6)."""
+    cells = [el("span", {"class": "kpd-legend-t"}, txt(title))]
+    cells += [el("span", None, el("i", {"style": "background:" + c}), el("span", None, txt(lab))) for lab, c in items]
+    return el("div", {"class": "kpd-legend", "role": "list"}, *cells)

@@ -38,6 +38,28 @@ def wkey(name: str) -> str:
     return f"{name}_{current_lang()}"
 
 
+KEEP_PREFIX = "keep_"  # session keys holding a widget's selection as language-free ids (config/public.yaml fixes U1-2 C)
+
+
+def kept(name: str, options: list, fallback):
+    """Selection to start a language-scoped widget with: the ids kept from the last run (any language) that are still
+    options, else `fallback`. A list for a multiselect (kept ids filtered to the options), one id for a selectbox / radio.
+
+    Why: wkey() gives each language its own widget, so the new language's widget is created fresh after a switch; it then
+    starts from these kept ids instead of the defaults (A9-R17). The kept value is an id or code, never a translated label."""
+    v = st.session_state.get(KEEP_PREFIX + name)
+    if v is None:
+        return fallback
+    if isinstance(fallback, list):
+        return [x for x in v if x in options]
+    return v if v in options else fallback
+
+
+def keep(name: str, value) -> None:
+    """Store the widget's current selection (ids) for kept()."""
+    st.session_state[KEEP_PREFIX + name] = list(value) if isinstance(value, (list, tuple)) else value
+
+
 def labels(options, fn):
     """format_func for a widget: labels are computed now (in the script run, current language) and looked up later.
     A plain lambda would be called later outside the run by AppTest and then see the default language."""
@@ -118,3 +140,12 @@ def date_col(values) -> list[str]:
         except (TypeError, ValueError):
             out.append(t("a_na"))
     return out
+
+
+def source_kind(url) -> str | None:
+    """deals.csv source_url -> source badge kind (fixes U1-2 A): SEC filing (sec.gov), DART viewer (dart.fss.or.kr), any
+    other web page = press; empty or not a web address -> None (shown as '–', no link)."""
+    u = url if isinstance(url, str) else ""  # None / NaN / pd.NA -> ''
+    if not u.startswith("http"):
+        return None
+    return "sec" if "sec.gov" in u else "dart" if "dart.fss.or.kr" in u else "news"

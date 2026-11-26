@@ -8,7 +8,7 @@ import streamlit as st
 
 from app.i18n import current_lang, t, t_or
 from app.lib import data as D
-from app.lib import ui
+from app.lib import look, ui
 from app.lib.keys import BUCKETS, NATURE_DEFAULT, NATURES, TIER_DEFAULT, TIER_ORDER
 
 
@@ -53,21 +53,28 @@ d_min, d_max = (min(dates), max(dates)) if dates else (date(2000, 1, 1), date.to
 
 f0, f1, f2, f3, f4 = st.columns(5)
 with f0:
-    sel_nature = st.multiselect(t("a_f_nature"), options=natures, default=nature_default, key=ui.wkey("comps_nature"),
+    sel_nature = st.multiselect(t("a_f_nature"), options=natures, default=ui.kept("comps_nature", natures, nature_default),
+                                key=ui.wkey("comps_nature"),
                                 format_func=ui.labels(natures, lambda v: t_or(f"a_nature_{v}", v)))
 with f1:
-    sel_type = st.multiselect(t("a_f_type"), options=types, default=types, key=ui.wkey("comps_type"),
+    sel_type = st.multiselect(t("a_f_type"), options=types, default=ui.kept("comps_type", types, types), key=ui.wkey("comps_type"),
                               format_func=ui.labels(types, lambda v: t_or(f"a_type_{v}", v)))
 with f2:
     tier_default = [x for x in TIER_DEFAULT if x in tiers] or tiers  # fixes R3-10: C (estimated currency) is off by default
-    sel_tier = st.multiselect(t("a_f_tier"), options=tiers, default=tier_default, key=ui.wkey("comps_tier"),
+    sel_tier = st.multiselect(t("a_f_tier"), options=tiers, default=ui.kept("comps_tier", tiers, tier_default),
+                              key=ui.wkey("comps_tier"),
                               format_func=ui.labels(tiers, lambda v: t_or(f"a_tier_{v}", v)))
 with f3:
-    sel_bucket = st.multiselect(t("a_f_tenor"), options=buckets, default=buckets, key=ui.wkey("comps_bucket"),
+    sel_bucket = st.multiselect(t("a_f_tenor"), options=buckets, default=ui.kept("comps_bucket", buckets, buckets),
+                                key=ui.wkey("comps_bucket"),
                                 format_func=ui.labels(buckets, t))
 with f4:
     period = st.date_input(t("a_f_period"), value=(d_min, d_max), min_value=d_min, max_value=d_max, key="comps_period")
 
+# filters kept as codes across a language switch (fixes U1-2 C: each language has its own widget, see ui.wkey / ui.kept)
+for _name, _sel in (("comps_nature", sel_nature), ("comps_type", sel_type), ("comps_tier", sel_tier),
+                    ("comps_bucket", sel_bucket)):
+    ui.keep(_name, _sel)
 lo, hi = (period[0], period[-1]) if isinstance(period, (tuple, list)) and period else (d_min, d_max)
 m = (deals["bond_nature"].isin(sel_nature) & deals["issuer_type"].isin(sel_type) & deals["sample_tier"].isin(sel_tier) & deals["bucket"].isin(sel_bucket)
      & deals["issue_date"].map(lambda d: d is None or pd.isna(d) or lo <= d <= hi))  # no issue date: kept (audit A9-3)
@@ -83,18 +90,22 @@ else:
     type_lbl = view["issuer_type"].map(lambda v: t_or(f"a_type_{v}", str(v)))
     # ---------------- chart (fixes R3-9, R3-10): tenor x representative spread, colour = issuer type, current filters.
     # altair without .interactive(): no wheel zoom / pan, so the page scroll is not captured by the chart. x fixed 0-30 years
-    # (points outside are clipped), legend below the plot so a narrow screen does not cut it.
+    # (points outside are clipped). Legend (fixes U1-2 B6): drawn as HTML under the chart, because the chart's own two-column
+    # legend ran off a 390px screen in English; the colours are given explicitly (present types in sorted order -> the theme
+    # palette, as the chart did by default) so the HTML legend matches.
     st.subheader(t("a_chart_title"))
     chart = pd.DataFrame({"x": view["tenor_years"].astype(float), "y": view["rep_spread_bp"].astype(float),
                           "kind": type_lbl, "who": view[name_col]}).dropna(subset=["x", "y"])
+    kinds = sorted(chart["kind"].dropna().unique().tolist())
+    colors = {k: look.CHART_COLORS[i % len(look.CHART_COLORS)] for i, k in enumerate(kinds)}
     fig = (
         alt.Chart(chart)
         .mark_circle(size=56, opacity=0.8, clip=True)
         .encode(
             x=alt.X("x:Q", title=t("a_col_tenor"), scale=alt.Scale(domain=[0, 30], nice=False)),
             y=alt.Y("y:Q", title=t("a_col_spread")),
-            color=alt.Color("kind:N", title=t("a_col_type"),
-                            legend=alt.Legend(orient="bottom", direction="horizontal", columns=2, labelLimit=220)),
+            color=alt.Color("kind:N", title=t("a_col_type"), legend=None,
+                            scale=alt.Scale(domain=kinds, range=[colors[k] for k in kinds])),
             tooltip=[alt.Tooltip("who:N", title=t("a_col_issuer")), alt.Tooltip("kind:N", title=t("a_col_type")),
                      alt.Tooltip("x:Q", title=t("a_col_tenor"), format=".2f"),
                      alt.Tooltip("y:Q", title=t("a_col_spread"), format=".1f")],
@@ -102,6 +113,7 @@ else:
         .properties(height=360)
     )
     st.altair_chart(fig, width="stretch")
+    st.markdown(look.legend(t("a_col_type"), [(k, colors[k]) for k in kinds]), unsafe_allow_html=True)
     st.caption(t("a_chart_note"))
     # ---------------- table: important columns first; fixed decimals, empty = '–' (fixes R3-9, R3-10)
     st.subheader(t("a_comps_table"))

@@ -76,31 +76,32 @@ def count_pair(text: str) -> tuple[int, int]:
 
 
 st.title(t("a_val_title"))
-st.markdown(look.note(t("a_val_intro"), cls="kpd-text") + look.link(t("a_more"), ui.doc_url("a_doc_valid")),
-            unsafe_allow_html=True)
+st.markdown(look.note(t("a_val_intro"), cls="kpd-text"), unsafe_allow_html=True)  # links: one per card (fixes U1-2 B2)
 try:
     sc = D.read_scorecard()
     total, bad = int(v(sc, "a1_total")), int(v(sc, "a1_mismatch"))
     hand_ok, hand_n = count_pair(v(sc, "a3_hand"))
     cells, cell_bad = int(v(sc, "r3_mi_cells")), int(v(sc, "r3_mismatch"))
     n0, pm = float(v(sc, "ho_n0_mae")), float(v(sc, "ho_p_mae"))
-    # green check only when the report cell says everything matched (audit A10 note), else the grey info icon
+    # icon and bar colour follow the report cell (audit A10-R3, fixes U1-2 B5): no mismatch -> green check + green bar,
+    # otherwise the grey info icon + grey bar
     status = lambda ok: (look.icon("pass", look.PASS, box=None, width=2.2, label=t("a_ico_pass")) if ok  # noqa: E731
                          else look.icon("info", look.INFO, box=None, width=2.2, label=t("a_ico_info")))
+    bar_kind = lambda ok: "pass" if ok else "base"  # noqa: E731
     more = lambda anchor: look.link(t("a_more"), ui.doc_url("a_doc_valid", anchor))  # noqa: E731
     cards = [
         look.card(look.head(status(bad == 0), t("a_vc_bond"), strong=True),
-                  look.big(t("a_g_match", n=f"{total - bad:,}", total=f"{total:,}")), look.bar((total - bad) / total, "pass" if bad == 0 else "accent"),
+                  look.big(t("a_g_match", n=f"{total - bad:,}", total=f"{total:,}")), look.bar((total - bad) / total, bar_kind(bad == 0)),
                   look.note(t("a_val_bond_body", total=v(sc, "a1_total"), gate=v(sc, "a1_gate_n"), ref=v(sc, "a1_ref_n"),
                               mismatch=v(sc, "a1_mismatch"), tb=v(sc, "a1_textbook")), cls="kpd-text"),
                   more("a_anchor_bond")),
         look.card(look.head(status(hand_ok == hand_n), t("a_vc_mtm"), strong=True),
-                  look.big(t("a_g_match", n=f"{hand_ok:,}", total=f"{hand_n:,}")), look.bar(hand_ok / hand_n, "pass" if hand_ok == hand_n else "accent"),
+                  look.big(t("a_g_match", n=f"{hand_ok:,}", total=f"{hand_n:,}")), look.bar(hand_ok / hand_n, bar_kind(hand_ok == hand_n)),
                   look.note(t("a_val_mtm_body", hand=v(sc, "a3_hand"), engine=v(sc, "a3_engine_diff")), cls="kpd-text"),
                   look.note(t("a_val_demo_label")), more("a_anchor_mtm")),
         look.card(look.head(status(cell_bad == 0), t("a_vc_out"), strong=True),
                   look.big(t("a_g_match", n=f"{cells - cell_bad:,}", total=f"{cells:,}")),
-                  look.bar((cells - cell_bad) / cells, "pass" if cell_bad == 0 else "accent"),
+                  look.bar((cells - cell_bad) / cells, bar_kind(cell_bad == 0)),
                   look.note(t("a_val_out_body", files=v(sc, "r3_mc_files"), cells=v(sc, "r3_mi_cells"),
                               mismatch=v(sc, "r3_mismatch"), pdf=v(sc, "r3_pdf_1p")), cls="kpd-text"),
                   more("a_anchor_out")),
@@ -109,12 +110,13 @@ try:
                   look.big(t("a_similar")),
                   look.compare([(t("a_bar_base"), t("a_bp", v=v(sc, "ho_n0_mae")), n0 / max(n0, pm), "base"),
                                 (t("a_bar_model"), t("a_bp", v=v(sc, "ho_p_mae")), pm / max(n0, pm), "accent")]),
-                  look.note(t("a_val_ho_scope", n=v(sc, "ho_n")) + " " + t(
-                      "a_val_ho_public", rule=v(sc, "ho_p_mae"), n0=v(sc, "ho_n0_mae"), diff=v(sc, "ho_p_diff"),
-                      ci=v(sc, "ho_p_ci")), cls="kpd-text"),
+                  look.note(t("a_val_ho_scope", n=v(sc, "ho_n")), cls="kpd-text"),  # 2-3 lines (fixes U1-2 B3)
                   more("a_anchor_model")),
     ]
     st.markdown(look.grid(*cards, cls="kpd-grid2"), unsafe_allow_html=True)
+    # grey notes under the cards: public-mode sentence with its 95% interval (moved out of the card, numbers unchanged)
+    st.caption(t("a_val_ho_public", rule=v(sc, "ho_p_mae"), n0=v(sc, "ho_n0_mae"), diff=v(sc, "ho_p_diff"),
+                 ci=v(sc, "ho_p_ci")))
     st.caption(t("a_val_ho_internal", i4=v(sc, "ho_i4_mae"), n0=v(sc, "ho_n0_mae"), diff=v(sc, "ho_i4_diff"),
                  ci=v(sc, "ho_i4_ci"), ci_c=v(sc, "ho_i4_ci_c")))
     st.caption(t("a_val_out_prev", files=v(sc, "a8_files"), cells=v(sc, "a8_cells"), mismatch=v(sc, "a8_mismatch")))

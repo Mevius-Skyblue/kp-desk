@@ -89,19 +89,17 @@ def test_lint_catches_planted_literals(tmp_path):
 
 @pytest.mark.skipif(not (ROOT / "scripts" / "gen_i18n.py").exists(), reason="private repository only")
 def test_merge_draft_into_glossary_copy(tmp_path):
-    """Phase-2 merge on copies: the app block lands in the glossary once, unchanged; a second merge does nothing."""
-    import shutil
-
-    from scripts.gen_i18n import DRAFT, GLOSSARY, load_app_block, merge_draft
-
-    g, d = tmp_path / "glossary.yaml", tmp_path / "draft.yaml"
-    shutil.copy2(GLOSSARY, g)
-    shutil.copy2(DRAFT, d)
+    """Phase-2 merge on synthetic files: the app block lands in the glossary once, unchanged; a second merge does nothing.
+    (The real draft config/glossary_app_draft.yaml was deleted in U1b after its merge was confirmed, fixes U1-2 F.)"""
     import yaml
 
+    from scripts.gen_i18n import load_app_block, merge_draft
+
+    g, d = tmp_path / "glossary.yaml", tmp_path / "draft.yaml"
+    g.write_text("version: 1\nlabels:\n  x: {ko: a, en: b}\n", encoding="utf-8")
+    d.write_text('# draft\napp:\n  a_one: {ko: "하나", en: "one"}\n  a_two: {ko: "둘 {n}", en: "two {n}"}\n',
+                 encoding="utf-8")
     before = yaml.safe_load(g.read_text(encoding="utf-8"))
-    if "app" in before:
-        pytest.skip("glossary already merged")
     assert merge_draft(g, d) is True
     after = yaml.safe_load(g.read_text(encoding="utf-8"))
     assert after["app"] == yaml.safe_load(d.read_text(encoding="utf-8"))["app"]

@@ -27,8 +27,11 @@ except D.DataError:
 
 c1, c2, c3 = st.columns(3)
 with c1:
-    conv = st.selectbox(t("a_calc_conv"), options=list(CONVENTIONS), key=ui.wkey("calc_conv"),
+    convs = list(CONVENTIONS)
+    conv = st.selectbox(t("a_calc_conv"), options=convs, key=ui.wkey("calc_conv"),
+                        index=convs.index(ui.kept("calc_conv", convs, convs[0])),
                         format_func=ui.labels(CONVENTIONS, lambda v: t(f"a_conv_{v}")))
+    ui.keep("calc_conv", conv)  # kept as the convention code across a language switch (fixes U1-2 C)
     coupon = st.number_input(t("a_calc_coupon"), min_value=0.0, max_value=30.0, value=dflt["coupon"], step=0.125,
                              format="%.3f", key="calc_coupon")
     face = st.number_input(t("a_calc_face"), min_value=1.0, value=dflt["face"], step=100_000.0, format="%.0f", key="calc_face")
@@ -37,9 +40,11 @@ with c2:
     maturity = st.date_input(t("a_calc_maturity"), value=dflt["maturity"], min_value=MIN_D, max_value=MAX_D, key="calc_maturity")
     settle = st.date_input(t("a_calc_settle"), value=dflt["settle"], min_value=MIN_D, max_value=MAX_D, key="calc_settle")
 with c3:
-    mode = st.radio(t("a_calc_input_mode"), options=["yield", "price"], key=ui.wkey("calc_mode"),
-                    format_func=ui.labels(["yield", "price"],
-                                          lambda v: t("a_calc_by_yield") if v == "yield" else t("a_calc_by_price")))
+    modes = ["yield", "price"]
+    mode = st.radio(t("a_calc_input_mode"), options=modes, key=ui.wkey("calc_mode"),
+                    index=modes.index(ui.kept("calc_mode", modes, modes[0])),
+                    format_func=ui.labels(modes, lambda v: t("a_calc_by_yield") if v == "yield" else t("a_calc_by_price")))
+    ui.keep("calc_mode", mode)
     if mode == "yield":
         y_in = st.number_input(t("a_calc_yield"), min_value=-5.0, max_value=50.0, value=dflt["yield_pct"], step=0.01,
                                format="%.4f", key="calc_yield")

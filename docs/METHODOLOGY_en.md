@@ -53,6 +53,8 @@ Only the **public mode's representative output, the N0 baseline,** is published.
 
 The app table (`app/data/fair_spread.csv`) is the engine function called as is on the as-of date, not a new calculation.
 
+The comparable-deal list (`app/data/fair_spread_comps.csv`) is the set of comparable deals the same engine call returned, written as `deal_key`s. In every row the median of the listed deals' representative spreads (`deals.csv`) equals the point estimate (within 0.01bp), and the count equals the number of comparable deals shown on the page. The 18-month window is counted from the pricing date, which is not a public column (some press deals have no issue date), so the same list cannot be picked again from the columns of `deals.csv`.
+
 ## 4. Rule selection and validation
 
 - **Pre-registration**: rules, samples and decision criteria were committed in configuration files before results were produced; anything changed after seeing results is appended to the same file with the reason

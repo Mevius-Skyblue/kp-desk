@@ -29,6 +29,7 @@ IS_BUNDLE = not (ROOT / "config" / "public.yaml").exists()  # the private reposi
 ALLOW = [
     "app/*.py", "app/i18n_strings.json", "app/lib/*.py", "app/views/*.py",
     "app/data/deals.csv", "app/data/curve.csv", "app/data/fair_spread.csv", "app/data/scorecard.json",
+    "app/data/fair_spread_comps.csv",  # comparison deals per fair_spread row (config/public.yaml fixes U1-2)
     "src/__init__.py", "src/bond/__init__.py", "src/bond/pricing.py", "src/bond/curve.py", "src/bond/daycount.py",
     "src/bond/interp.py",
     "tests/test_app_*.py", "tests/test_bond_textbook.py", "tests/test_b4_bond_edges.py",

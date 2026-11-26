@@ -35,6 +35,12 @@ family = "Pretendard"
 url = "app/static/Pretendard-SemiBold.subset.woff"
 weight = 600
 
+# U1b (config/public.yaml fixes U1-2 D): Bold made on this PC from the installed Pretendard 1.309 Bold, same subset method
+[[theme.fontFaces]]
+family = "Pretendard"
+url = "app/static/Pretendard-Bold.subset.woff"
+weight = 700
+
 [client]
 toolbarMode = "minimal"
 showErrorDetails = "none"

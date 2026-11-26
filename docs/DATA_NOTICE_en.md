@@ -12,6 +12,8 @@
 | Bank of Korea ECOS | Industry statistics (industry comparison in the sample credit memos) | Aggregated numbers inside the sample files |
 | Press reports | **Numeric facts** such as size, coupon, final spread | Numbers and article URLs only. **No article text is stored or reproduced.** Copyright of the articles stays with their publishers |
 
+The comparable-deal list of app page ③, `app/data/fair_spread_comps.csv`, holds only the keys of the comparable deals the engine used for each estimate (issuer id and tenor + the `deal_key` of `deals.csv`). It has no number column; the page takes spread, issue date and source from `deals.csv`. The 18-month window before the as-of date is counted from the pricing date, which is not a public column, so the same list cannot be picked again from the public columns; that is why the list itself is published.
+
 ## Data not used
 
 - **ICE BofA indices (via FRED)**: **not** in this repository, the app or the samples. No index value, level or change is published. They were used only in private internal analysis (internal mode); public documents show only that mode's error statistics

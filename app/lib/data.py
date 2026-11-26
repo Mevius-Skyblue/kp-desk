@@ -29,7 +29,7 @@ CURVE_COLUMNS = ["tenor", "tenor_years", "yield_pct"]
 FAIR_COLUMNS = ["issuer_id", "issuer_name_ko", "issuer_name_en", "tenor_years", "point_bp", "low_bp", "high_bp", "level",
                 "n_comps", "rule", "range_n"]
 FAIR_REQUIRED = ["issuer_id", "issuer_name_ko", "tenor_years", "point_bp", "low_bp", "high_bp"]
-NUMERIC = {"tenor_years", "coupon_pct", "reoffer_yield_pct", "rep_spread_bp", "yield_pct", "point_bp", "low_bp", "high_bp",
+NUMERIC = {"tenor_years", "coupon_pct",  # tenor_years is numeric in every file, so comps keys match fair_spread rows "reoffer_yield_pct", "rep_spread_bp", "yield_pct", "point_bp", "low_bp", "high_bp",
            "level", "n_comps", "range_n"}
 
 
@@ -98,6 +98,20 @@ def read_fair(folder: Path | None = None) -> pd.DataFrame:
         df = df[df["rule"].fillna("N0") == "N0"]
     df["issuer_name_en"] = df["issuer_name_en"].fillna(df["issuer_name_ko"])
     return df.reset_index(drop=True)
+
+
+COMPS_FILE = "fair_spread_comps.csv"  # config/public.yaml fixes U1-2: comparison deals the engine used per fair_spread row
+COMPS_COLUMNS = ["issuer_id", "tenor_years", "deal_key"]
+
+
+def read_comps(folder: Path | None = None) -> pd.DataFrame | None:
+    """fair_spread_comps.csv: (issuer_id, tenor_years) of a fair_spread row -> deal_key of each comparison deal.
+    Optional file: None when it is missing or unreadable (the page then draws no dots and no table)."""
+    try:
+        df = _csv(COMPS_FILE, COMPS_COLUMNS, COMPS_COLUMNS, folder)
+    except DataError:
+        return None
+    return df.dropna(subset=COMPS_COLUMNS).reset_index(drop=True)
 
 
 def read_scorecard(folder: Path | None = None) -> dict:

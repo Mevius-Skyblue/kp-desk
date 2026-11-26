@@ -1,0 +1,5 @@
+issuer_id,tenor_years,deal_key
+zz_fake_a,3,zz_fake_a|USD|2030-01-10|2033-01-10
+zz_fake_a,3,zz_fake_a|USD|2030-01-10|2035-01-10
+zz_fake_a,3,zz_fake_f|USD|na|na
+zz_fake_b,3,zz_fake_b|USD|2029-06-01|2039-06-01
