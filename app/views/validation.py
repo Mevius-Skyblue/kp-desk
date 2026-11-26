@@ -84,22 +84,23 @@ try:
     hand_ok, hand_n = count_pair(v(sc, "a3_hand"))
     cells, cell_bad = int(v(sc, "r3_mi_cells")), int(v(sc, "r3_mismatch"))
     n0, pm = float(v(sc, "ho_n0_mae")), float(v(sc, "ho_p_mae"))
-    pass_icon = look.icon("pass", look.PASS, box=None, width=2.2, label=t("a_ico_pass"))
+    # green check only when the report cell says everything matched (audit A10 note), else the grey info icon
+    status = lambda ok: (look.icon("pass", look.PASS, box=None, width=2.2, label=t("a_ico_pass")) if ok  # noqa: E731
+                         else look.icon("info", look.INFO, box=None, width=2.2, label=t("a_ico_info")))
     more = lambda anchor: look.link(t("a_more"), ui.doc_url("a_doc_valid", anchor))  # noqa: E731
     cards = [
-        look.card(look.head(pass_icon if bad == 0 else look.icon("info", look.INFO, box=None, width=2.2,
-                                                                  label=t("a_ico_info")), t("a_vc_bond"), strong=True),
-                  look.big(t("a_g_match", n=f"{total - bad:,}", total=f"{total:,}")), look.bar((total - bad) / total, "pass"),
+        look.card(look.head(status(bad == 0), t("a_vc_bond"), strong=True),
+                  look.big(t("a_g_match", n=f"{total - bad:,}", total=f"{total:,}")), look.bar((total - bad) / total, "pass" if bad == 0 else "accent"),
                   look.note(t("a_val_bond_body", total=v(sc, "a1_total"), gate=v(sc, "a1_gate_n"), ref=v(sc, "a1_ref_n"),
                               mismatch=v(sc, "a1_mismatch"), tb=v(sc, "a1_textbook")), cls="kpd-text"),
                   more("a_anchor_bond")),
-        look.card(look.head(pass_icon, t("a_vc_mtm"), strong=True),
-                  look.big(t("a_g_match", n=f"{hand_ok:,}", total=f"{hand_n:,}")), look.bar(hand_ok / hand_n, "pass"),
+        look.card(look.head(status(hand_ok == hand_n), t("a_vc_mtm"), strong=True),
+                  look.big(t("a_g_match", n=f"{hand_ok:,}", total=f"{hand_n:,}")), look.bar(hand_ok / hand_n, "pass" if hand_ok == hand_n else "accent"),
                   look.note(t("a_val_mtm_body", hand=v(sc, "a3_hand"), engine=v(sc, "a3_engine_diff")), cls="kpd-text"),
                   look.note(t("a_val_demo_label")), more("a_anchor_mtm")),
-        look.card(look.head(pass_icon, t("a_vc_out"), strong=True),
+        look.card(look.head(status(cell_bad == 0), t("a_vc_out"), strong=True),
                   look.big(t("a_g_match", n=f"{cells - cell_bad:,}", total=f"{cells:,}")),
-                  look.bar((cells - cell_bad) / cells, "pass"),
+                  look.bar((cells - cell_bad) / cells, "pass" if cell_bad == 0 else "accent"),
                   look.note(t("a_val_out_body", files=v(sc, "r3_mc_files"), cells=v(sc, "r3_mi_cells"),
                               mismatch=v(sc, "r3_mismatch"), pdf=v(sc, "r3_pdf_1p")), cls="kpd-text"),
                   more("a_anchor_out")),

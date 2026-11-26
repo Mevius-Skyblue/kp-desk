@@ -50,10 +50,9 @@ CSS = {
     ".kpd-fill-pass": ["height:100%", "background:" + PASS, "border-radius:4px"],
     ".kpd-fill-base": ["height:100%", "background:" + BASELINE, "border-radius:4px"],
     ".kpd-fill-accent": ["height:100%", "background:" + ACCENT, "border-radius:4px"],
-    ".kpd-cmp": ["display:grid", "grid-template-columns:minmax(64px,auto) 1fr 52px", "align-items:center", "gap:8px",
-                 "font-size:12.5px", "color:#3D4654"],
-    ".kpd-cmp>span:last-child": ["text-align:right", "white-space:nowrap"],
-    ".kpd-cmps": ["display:flex", "flex-direction:column", "gap:6px"],
+    ".kpd-cmps": ["display:grid", "grid-template-columns:fit-content(50%) 1fr 56px", "align-items:center", "gap:6px 8px",
+                  "font-size:12.5px", "color:#3D4654"],
+    ".kpd-cmp-v": ["text-align:right", "white-space:nowrap"],
     ".kpd-badges": ["display:flex", "gap:6px", "flex-wrap:wrap", "align-items:center"],
     ".kpd-b-pdf,.kpd-b-xlsx,.kpd-b-lang,.kpd-chip": ["font-size:12px", "font-weight:700", "padding:3px 8px",
                                                      "border-radius:6px", "white-space:nowrap"],
@@ -179,10 +178,12 @@ def bar(frac: float, kind: str = "pass") -> str:
 
 
 def compare(rows) -> str:
-    """Rows of (label, value text, frac, kind): label | bar | value."""
-    return el("div", {"class": "kpd-cmps"}, *(
-        el("div", {"class": "kpd-cmp"}, el("span", None, txt(lab)), bar(frac, kind), el("span", None, txt(val)))
-        for lab, val, frac, kind in rows))
+    """Rows of (label, value text, frac, kind): label | bar | value, all rows in ONE grid so every bar starts and ends at
+    the same x (audit A10-1: one grid per row made the English label column differ and the bar lengths off-ratio)."""
+    cells = []
+    for lab, val, frac, kind in rows:
+        cells += [el("span", None, txt(lab)), bar(frac, kind), el("span", {"class": "kpd-cmp-v"}, txt(val))]
+    return el("div", {"class": "kpd-cmps"}, *cells)
 
 
 def badge(text: str, kind: str) -> str:

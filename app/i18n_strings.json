@@ -355,11 +355,11 @@
   },
   "a_fair_chip": {
    "ko": "비교 사례 {n}건",
-   "en": "{n} comparable deals"
+   "en": "Comparable deals: {n}"
   },
   "a_fair_chip_small": {
    "ko": "비교 사례 {n}건 · 표본 적음",
-   "en": "{n} comparable deals · small sample"
+   "en": "Comparable deals: {n} · small sample"
   },
   "a_fair_est": {
    "ko": "추정 스프레드",
