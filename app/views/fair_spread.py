@@ -99,14 +99,17 @@ else:
         rows = []
         for x in recs:
             kind = ui.source_kind(x["source_url"])
+            mark = t("a_fair_coupon_mark") if x["rep_spread_basis"] == "coupon" else ""  # audit A11-3
             rows.append([look.txt(x[name_col]), look.txt(ui.date_col([x["issue_date"]])[0]),
-                         look.txt(ui.num(x["tenor_years"], 2)), look.txt(ui.num(x["rep_spread_bp"], 1)),
+                         look.txt(ui.num(x["tenor_years"], 2)), look.txt(ui.num(x["rep_spread_bp"], 1) + mark),
                          look.source_badge(kind, src_txt.get(kind, t("a_na")), x["source_url"] if kind else None)])
         head = [(t("a_col_issuer"), False), (t("a_col_issue_date"), False), (t("a_col_tenor"), True),
-                (t("a_col_spread"), True), (t("a_col_source"), False)]
+                (t("a_fair_col_spread"), True), (t("a_col_source"), False)]  # short EN header: fits 390px (A11-2)
         st.markdown(look.card(look.head(look.icon("rows", size=18, width=2, box="kpd-ico-sm"), t("a_fair_comps_title"),
                                         strong=True),
-                              look.note(t("a_fair_comps_note", level=lvl_txt)), look.table(head, rows)),
+                              look.note(t("a_fair_comps_note", level=lvl_txt)), look.table(head, rows),
+                              *([look.note(t("a_fair_coupon_note"))] if any(x["rep_spread_basis"] == "coupon" for x in recs)
+                                else [])),
                     unsafe_allow_html=True)
 st.caption(t("a_fair_tenor_note"))
 st.caption(t("a_fair_range_note"))

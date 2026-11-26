@@ -88,18 +88,21 @@ CSS = {
     ".kpd-range-dots>.kpd-r-band": ["top:34px"],
     ".kpd-range-dots>.kpd-r-point": ["top:22px", "height:40px"],
     ".kpd-range-dots>.kpd-r-tick,.kpd-range-dots>.kpd-r-tick-end": ["top:70px"],
-    ".kpd-dot": ["position:absolute", "width:12px", "height:12px", "box-sizing:border-box", "margin-left:-6px", "margin-top:-6px",
+    ".kpd-dot": ["position:absolute", "width:10px", "height:10px", "box-sizing:border-box", "margin-left:-5px", "margin-top:-5px",
                  "border-radius:50%", "background:#FFFFFF", "border-width:2px", "border-style:solid",
                  "border-color:" + ACCENT, "cursor:default", "z-index:2"],
     ".kpd-dot:hover": ["background:" + ACCENT],
     ".kpd-tbl-wrap": ["overflow-x:auto", "max-height:460px", "overflow-y:auto"],
     ".kpd-tbl": ["width:100%", "border-collapse:collapse", "font-size:13.5px"],  # no min width: compresses on a phone
-    ".kpd-tbl>thead>tr>th": ["text-align:left", "font-weight:500", "color:#4A5361", "padding:8px",
+    ".kpd-tbl>thead>tr>th": ["text-align:left", "font-weight:500", "color:#4A5361", "padding:8px 6px",
                              "border-bottom-width:1px", "border-bottom-style:solid", "border-bottom-color:#E3E6EB",
                              "position:sticky", "top:0", "background:#FFFFFF"],
-    ".kpd-tbl>tbody>tr>td": ["padding:8px", "border-bottom-width:1px", "border-bottom-style:solid",
+    ".kpd-tbl>tbody>tr>td": ["word-break:keep-all", "overflow-wrap:break-word", "padding:8px 6px", "border-bottom-width:1px", "border-bottom-style:solid",
                              "border-bottom-color:#EEF0F3"],
-    ".kpd-tbl>thead>tr>th.kpd-num,.kpd-tbl>tbody>tr>td.kpd-num": ["text-align:right", "white-space:nowrap"],
+    # phone (audit A11-2): headers may wrap, numbers stay on one line, Korean names break between words only
+    ".kpd-tbl>thead>tr>th.kpd-num": ["text-align:right"],
+    ".kpd-tbl>tbody>tr>td.kpd-num": ["text-align:right", "white-space:nowrap"],
+    ".kpd-tbl>tbody>tr>td:nth-child(2)": ["white-space:nowrap"],  # issue date (YYYY-MM-DD) on one line
     ".kpd-b-src": ["font-size:12px", "font-weight:700", "padding:3px 8px", "border-radius:6px", "white-space:nowrap",
                    "background:" + ACCENT_SOFT, "color:" + ACCENT, "text-decoration:none!important"],  # Streamlit underlines links
     ".kpd-b-src-sec": ["background:#EEF0F3", "color:#3D4654"],
@@ -256,7 +259,8 @@ def link(text: str, url: str, cls: str = "kpd-link") -> str:
     return el("a", {"class": cls, "href": url, "target": "_blank", "rel": "noopener"}, txt(text))
 
 
-DOT_GAP_PCT = 1.6  # two dots closer than this (in % of the axis width, about one dot on a phone) are put on different lanes
+DOT_GAP_PCT = 4.0  # dots closer than this (% of the axis width; about one 10px dot on a 300px phone axis, audit A11-R1)
+#                   are put on different lanes; on a wide screen this only moves dots that are already close
 LANE_STEP_PX = 9  # vertical offset between dot lanes
 LANES = (0, -1, 1, -2, 2)  # lane order: on the axis, above, below, two above, two below
 

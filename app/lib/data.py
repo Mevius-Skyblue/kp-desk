@@ -29,7 +29,8 @@ CURVE_COLUMNS = ["tenor", "tenor_years", "yield_pct"]
 FAIR_COLUMNS = ["issuer_id", "issuer_name_ko", "issuer_name_en", "tenor_years", "point_bp", "low_bp", "high_bp", "level",
                 "n_comps", "rule", "range_n"]
 FAIR_REQUIRED = ["issuer_id", "issuer_name_ko", "tenor_years", "point_bp", "low_bp", "high_bp"]
-NUMERIC = {"tenor_years", "coupon_pct",  # tenor_years is numeric in every file, so comps keys match fair_spread rows "reoffer_yield_pct", "rep_spread_bp", "yield_pct", "point_bp", "low_bp", "high_bp",
+# tenor_years is numeric in every file, so the comps keys match the fair_spread rows (audit A11-1: keep comments off this set)
+NUMERIC = {"tenor_years", "coupon_pct", "reoffer_yield_pct", "rep_spread_bp", "yield_pct", "point_bp", "low_bp", "high_bp",
            "level", "n_comps", "range_n"}
 
 

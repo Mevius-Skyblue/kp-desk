@@ -361,6 +361,10 @@
    "ko": "비교 사례 {n}건 · 표본 적음",
    "en": "Comparable deals: {n} · small sample"
   },
+  "a_fair_col_spread": {
+   "ko": "대표 스프레드 (bp)",
+   "en": "Spread (bp)"
+  },
   "a_fair_comps_note": {
    "ko": "비교 묶음: {level}. 기준일 전 18개월은 가격결정일 기준이라, 발행일이 비었거나 기간 경계에 있는 사례도 들어갈 수 있습니다.",
    "en": "Comparison group: {level}. The 18 months before the as-of date are counted from the pricing date, so deals with a blank issue date or near the window edge can be included."
@@ -368,6 +372,14 @@
   "a_fair_comps_title": {
    "ko": "이 추정에 쓰인 비교 사례",
    "en": "Comparable deals used for this estimate"
+  },
+  "a_fair_coupon_mark": {
+   "ko": " *",
+   "en": " *"
+  },
+  "a_fair_coupon_note": {
+   "ko": "* 쿠폰 기준 스프레드(발행 수익률이 없는 사례). 점과 표는 공개 표의 값을 보이고, 추정 계산에는 쿠폰 기준 보정 상수를 뺀 값이 쓰입니다(방법론 1절).",
+   "en": "* Coupon-based spread (no reoffer yield published). The dot and the table show the published value; the estimate uses it minus the coupon-basis correction constant (methodology, section 1)."
   },
   "a_fair_dot_tip": {
    "ko": "{issuer} · 발행일 {date} · {v} bp",

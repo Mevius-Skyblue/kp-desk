@@ -383,8 +383,10 @@ def test_fair_comps_dots_and_table(monkeypatch):
         assert t("a_fair_comps_title", _lang=lang) in html and html.count("<tr>") == 1 + 3
         name = "Fake Issuer F" if lang == "en" else "가상발행사 F"
         assert t("a_fair_dot_tip", _lang=lang, issuer=name, date="–", v="66.6") in html  # hover text of the dot
-        for v in ("99.9", "111.1", "66.6"):
+        for v in ("111.1", "66.6"):
             assert ">" + v + "<" in html
+        # coupon-based spread (fixture deal a2) carries the mark and the note (audit A11-3)
+        assert ">99.9" + t("a_fair_coupon_mark", _lang=lang) + "<" in html and t("a_fair_coupon_note", _lang=lang) in html
         assert t("a_bp", _lang=lang, v="250") in html  # axis end: highest high_bp / comparable spread of the files, up to 50bp
         assert html.count('href="https://example.com/fake/') == 3  # source badges link to deals.csv source_url
         if lang == "en":
@@ -524,3 +526,18 @@ def test_grid2_never_three_columns():
 
     rule = ";".join(look.CSS[".kpd-grid2"])
     assert "minmax(max(min(100%,340px),40%),1fr)" in rule
+
+
+def test_snapshot_numbers_are_numeric():
+    """Audit A11-1: spreads, ranges and yields are read as numbers (a comment inside the NUMERIC set once turned six
+    columns into text, which moved the ③ axis end when the comps file is missing)."""
+    from app.lib import data as D
+
+    for name in ("tenor_years", "coupon_pct", "reoffer_yield_pct", "rep_spread_bp", "yield_pct", "point_bp", "low_bp",
+                 "high_bp", "level", "n_comps", "range_n"):
+        assert name in D.NUMERIC
+    fair = D.read_fair(FIX / "data")
+    deals = D.read_deals(FIX / "data")
+    for df, cols in ((fair, ("point_bp", "low_bp", "high_bp", "n_comps")), (deals, ("rep_spread_bp", "reoffer_yield_pct"))):
+        for c in cols:
+            assert pd.api.types.is_numeric_dtype(df[c]), c
