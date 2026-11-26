@@ -157,6 +157,10 @@
    "ko": "만기일",
    "en": "Maturity"
   },
+  "a_col_nature": {
+   "ko": "채권 성격",
+   "en": "Bond type"
+  },
   "a_col_rating": {
    "ko": "등급 구간",
    "en": "Rating bucket"
@@ -204,6 +208,10 @@
   "a_comps_intro": {
    "ko": "1행 = 1 트랜치. 대표 스프레드는 미국채 대비 bp이며 발행 수익률, 보도 최종 스프레드, 쿠폰 순으로 고릅니다. 출처는 공시 원문 또는 보도 URL입니다(기사 문장은 싣지 않음).",
    "en": "One row = one tranche. The representative spread is in bp over US Treasuries, taken from the reoffer yield, else the press-reported final spread, else the coupon. Sources are filings or press URLs (no article text)."
+  },
+  "a_comps_nature_note": {
+   "ko": "기본 화면은 선순위 무보증 채권만 보여 줍니다. 후순위·신종자본, 보증, 커버드본드는 '채권 성격' 필터에서 켤 수 있습니다(분류: 공시·보도의 채권 조건).",
+   "en": "By default only senior unsecured bonds are shown. Subordinated / hybrid, guaranteed and covered bonds can be switched on in the 'Bond type' filter (classified from the bond terms in filings and press reports)."
   },
   "a_comps_title": {
    "ko": "② 발행 사례 비교표",
@@ -264,6 +272,10 @@
   "a_doc_valid": {
    "ko": "검증 결과 상세",
    "en": "Validation details"
+  },
+  "a_f_nature": {
+   "ko": "채권 성격",
+   "en": "Bond type"
   },
   "a_f_period": {
    "ko": "발행 기간",
@@ -408,6 +420,22 @@
   "a_na": {
    "ko": "–",
    "en": "–"
+  },
+  "a_nature_covered": {
+   "ko": "커버드본드",
+   "en": "Covered bond"
+  },
+  "a_nature_guaranteed": {
+   "ko": "보증",
+   "en": "Guaranteed"
+  },
+  "a_nature_senior": {
+   "ko": "선순위 무보증",
+   "en": "Senior unsecured"
+  },
+  "a_nature_sub_hybrid": {
+   "ko": "후순위·신종자본",
+   "en": "Subordinated / hybrid"
   },
   "a_nav_calc": {
    "ko": "① 채권 계산기",

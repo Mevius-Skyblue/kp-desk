@@ -1,6 +1,6 @@
 **KP Desk** — a public-data toolkit for foreign-currency bonds issued abroad by Korean issuers (KP): bond calculator, comparable deals, a model fair-spread range and its validation results, in Korean and English.
 Every number is a one-date snapshot built only from public sources (DART, SEC EDGAR, US Treasury, press-reported numbers with URLs); it is not a price indication and not investment advice.
-Built with Claude Code; results independently verified. English README: [README_en.md](README_en.md) · App: `<APP_URL>` (link added after deployment)
+Built with Claude Code; results independently verified. English README: [README_en.md](README_en.md) · App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
 
 ---
 
@@ -14,10 +14,12 @@ Built with Claude Code; results independently verified. English README: [README_
 
 ## 앱 (4쪽 + 처음 화면, 한/영 전환)
 
+앱 주소: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
+
 | 화면 | 내용 |
 |---|---|
 | ① 채권 계산기 | 쿠폰·만기·결제일과 수익률 또는 가격 → 가격·수익률·경과이자·결제 금액·듀레이션·볼록성·DV01, 기준일 미국채 커브 대비 G-스프레드·Z-스프레드 |
-| ② 발행 사례 비교표 | 트랜치별 조건과 대표 스프레드, 공시·보도 출처 링크. 유형·표본 등급·만기·발행 기간 필터 |
+| ② 발행 사례 비교표 | 트랜치별 조건·채권 성격과 대표 스프레드, 공시·보도 출처 링크. 채권 성격(기본 선순위 무보증)·유형·표본 등급·만기·발행 기간 필터 |
 | ③ 적정 스프레드 범위 | 공개 모드 대표 출력(N0 기준선)의 점 추정·범위와 같은 화면의 성적표 |
 | ④ 검증 결과 | 채권 엔진 독립 대조, 가상 장부 평가 감사, 홀드아웃 1회 평가, 출력 감사, 견본 내려받기 |
 

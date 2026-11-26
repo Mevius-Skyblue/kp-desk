@@ -1,8 +1,8 @@
-deal_key,issuer_name_ko,issuer_name_en,issuer_type,issue_date,maturity,tenor_years,currency,coupon_pct,reoffer_yield_pct,rep_spread_bp,rep_spread_basis,sample_tier,rating_bucket,source_url
-zz_fake_a|USD|2030-01-10|2035-01-10,가상발행사 A,Fake Issuer A,policy,2030-01-10,2035-01-10,5.0,USD,4.125,4.250,111.1,reoffer,A,AA,https://example.com/fake/a1
-zz_fake_a|USD|2030-01-10|2033-01-10,가상발행사 A,Fake Issuer A,policy,2030-01-10,2033-01-10,3.0,USD,4.000,,99.9,coupon,B,AA,https://example.com/fake/a2
-zz_fake_b|USD|2029-06-01|2039-06-01,가상발행사 B,Fake Issuer B,bank,2029-06-01,2039-06-01,10.0,USD,,,222.2,news_final,S,check_source,https://example.com/fake/b1
-zz_fake_c|USD|2029-11-20|2036-11-20,가상발행사 C,Fake Issuer C,nonfin,2029-11-20,2036-11-20,7.0,USD,5.5,5.75,333.3,reoffer,C,,
-zz_fake_d|USD|2030-03-03|2031-09-03,가상발행사 D,Fake Issuer D,zz_new_type,2030-03-03,2031-09-03,1.5,USD,3.9,3.95,44.4,reoffer,A,none,https://example.com/fake/d1
-zz_fake_e|USD|2030-04-04|2060-04-04,가상발행사 E,Fake Issuer E,soe,2030-04-04,2060-04-04,30.0,USD,6.0,6.1,155.5,reoffer,B,A,https://example.com/fake/e1
-zz_fake_f|USD|na|na,가상발행사 F,Fake Issuer F,guaranteed,,,5.0,USD,,,66.6,news_final,S,none,https://example.com/fake/f1
+deal_key,issuer_name_ko,issuer_name_en,issuer_type,issue_date,maturity,tenor_years,currency,coupon_pct,reoffer_yield_pct,rep_spread_bp,rep_spread_basis,sample_tier,rating_bucket,source_url,bond_nature
+zz_fake_a|USD|2030-01-10|2035-01-10,가상발행사 A,Fake Issuer A,policy,2030-01-10,2035-01-10,5.0,USD,4.125,4.250,111.1,reoffer,A,AA,https://example.com/fake/a1,senior
+zz_fake_a|USD|2030-01-10|2033-01-10,가상발행사 A,Fake Issuer A,policy,2030-01-10,2033-01-10,3.0,USD,4.000,,99.9,coupon,B,AA,https://example.com/fake/a2,senior
+zz_fake_b|USD|2029-06-01|2039-06-01,가상발행사 B,Fake Issuer B,bank,2029-06-01,2039-06-01,10.0,USD,,,222.2,news_final,S,check_source,https://example.com/fake/b1,senior
+zz_fake_c|USD|2029-11-20|2036-11-20,가상발행사 C,Fake Issuer C,nonfin,2029-11-20,2036-11-20,7.0,USD,5.5,5.75,333.3,reoffer,C,,,senior
+zz_fake_d|USD|2030-03-03|2031-09-03,가상발행사 D,Fake Issuer D,zz_new_type,2030-03-03,2031-09-03,1.5,USD,3.9,3.95,44.4,reoffer,A,none,https://example.com/fake/d1,senior
+zz_fake_e|USD|2030-04-04|2060-04-04,가상발행사 E,Fake Issuer E,soe,2030-04-04,2060-04-04,30.0,USD,6.0,6.1,155.5,reoffer,B,A,https://example.com/fake/e1,sub_hybrid
+zz_fake_f|USD|na|na,가상발행사 F,Fake Issuer F,guaranteed,,,5.0,USD,,,66.6,news_final,S,none,https://example.com/fake/f1,guaranteed

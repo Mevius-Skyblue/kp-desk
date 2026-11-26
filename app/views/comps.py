@@ -8,7 +8,7 @@ import streamlit as st
 from app.i18n import current_lang, t, t_or
 from app.lib import data as D
 from app.lib import ui
-from app.lib.keys import BUCKETS, TIER_ORDER
+from app.lib.keys import BUCKETS, NATURE_DEFAULT, NATURES, TIER_ORDER
 
 
 def tenor_bucket(x) -> str:
@@ -43,10 +43,17 @@ tiers = [x for x in TIER_ORDER if x in set(deals["sample_tier"].dropna())] + sor
     set(deals["sample_tier"].dropna()) - set(TIER_ORDER))
 buckets = [k for k, _, _ in BUCKETS] + ["a_tb_na"]
 buckets = [k for k in buckets if k in set(deals["bucket"])]
+# bond nature (fixes R3-8): known codes in fixed order, default = senior unsecured only (other natures can be switched on)
+natures = [x for x in NATURES if x in set(deals["bond_nature"].dropna())] + sorted(
+    set(deals["bond_nature"].dropna()) - set(NATURES))
+nature_default = [x for x in NATURE_DEFAULT if x in natures] or natures
 dates = [d for d in deals["issue_date"].dropna()]
 d_min, d_max = (min(dates), max(dates)) if dates else (date(2000, 1, 1), date.today())
 
-f1, f2, f3, f4 = st.columns(4)
+f0, f1, f2, f3, f4 = st.columns(5)
+with f0:
+    sel_nature = st.multiselect(t("a_f_nature"), options=natures, default=nature_default, key=ui.wkey("comps_nature"),
+                                format_func=ui.labels(natures, lambda v: t_or(f"a_nature_{v}", v)))
 with f1:
     sel_type = st.multiselect(t("a_f_type"), options=types, default=types, key=ui.wkey("comps_type"),
                               format_func=ui.labels(types, lambda v: t_or(f"a_type_{v}", v)))
@@ -60,11 +67,12 @@ with f4:
     period = st.date_input(t("a_f_period"), value=(d_min, d_max), min_value=d_min, max_value=d_max, key="comps_period")
 
 lo, hi = (period[0], period[-1]) if isinstance(period, (tuple, list)) and period else (d_min, d_max)
-m = (deals["issuer_type"].isin(sel_type) & deals["sample_tier"].isin(sel_tier) & deals["bucket"].isin(sel_bucket)
+m = (deals["bond_nature"].isin(sel_nature) & deals["issuer_type"].isin(sel_type) & deals["sample_tier"].isin(sel_tier) & deals["bucket"].isin(sel_bucket)
      & deals["issue_date"].map(lambda d: d is None or pd.isna(d) or lo <= d <= hi))  # no issue date: kept (audit A9-3)
 view = deals[m].sort_values(["issue_date", "deal_key"], ascending=[False, True])
 
 st.caption(t("a_comps_count", n=len(view)))
+st.caption(t("a_comps_nature_note"))
 if view.empty:
     st.info(t("a_comps_empty"))
 else:
@@ -72,6 +80,7 @@ else:
     out = pd.DataFrame({
         t("a_col_issuer"): view[name_col],
         t("a_col_type"): view["issuer_type"].map(lambda v: t_or(f"a_type_{v}", str(v))),
+        t("a_col_nature"): view["bond_nature"].map(lambda v: t_or(f"a_nature_{v}", "" if pd.isna(v) else str(v))),
         t("a_col_issue_date"): view["issue_date"],
         t("a_col_maturity"): view["maturity"],
         t("a_col_tenor"): view["tenor_years"].round(2),

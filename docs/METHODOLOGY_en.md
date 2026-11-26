@@ -21,6 +21,9 @@
 | C | Currency inferred from DART amounts (passed a consistency check) | Reference and sensitivity only |
 | D | Excluded: kimchi and digital bonds, equity-linked, non-USD, floating rate, under 1 year, no spread, etc. | Not in the comparison table |
 
+### Bond type (comparable deals)
+Classified from the bond terms in filings and press reports only (seniority, guarantee): covered bond, then subordinated / hybrid (subordinated, hybrid, Tier), then guaranteed, else senior unsecured — the first that applies. The comparable-deals table shows senior unsecured bonds by default; the other types can be switched on in the filter. No calculation changes (a label only).
+
 ### Representative spread
 In bp over US Treasuries. From the reoffer yield when available (minus the interpolated Treasury par yield at the same tenor), else the press-reported final spread, else the coupon. Coupon-based spreads tend to be lower than reoffer-based ones, so the model evaluation corrected coupon-based values by a constant fixed in the development period (−7.59bp, median of 35 development deals). The comparison table shows the representative spread before that correction.
 

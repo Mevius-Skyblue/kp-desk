@@ -22,8 +22,9 @@ SAMPLES_ENV = "KPD_APP_SAMPLES"
 # column whitelists = config/public.yaml bundle.snapshot (deals_columns) and the export script
 DEALS_COLUMNS = ["deal_key", "issuer_name_ko", "issuer_name_en", "issuer_type", "issue_date", "maturity", "tenor_years",
                  "currency", "coupon_pct", "reoffer_yield_pct", "rep_spread_bp", "rep_spread_basis", "sample_tier",
-                 "rating_bucket", "source_url"]
-DEALS_REQUIRED = ["deal_key", "issuer_name_ko", "issuer_type", "issue_date", "tenor_years", "rep_spread_bp", "sample_tier"]
+                 "rating_bucket", "source_url", "bond_nature"]  # bond_nature: config/public.yaml fixes R3-8
+DEALS_REQUIRED = ["deal_key", "issuer_name_ko", "issuer_type", "issue_date", "tenor_years", "rep_spread_bp", "sample_tier",
+                  "bond_nature"]
 CURVE_COLUMNS = ["tenor", "tenor_years", "yield_pct"]
 FAIR_COLUMNS = ["issuer_id", "issuer_name_ko", "issuer_name_en", "tenor_years", "point_bp", "low_bp", "high_bp", "level",
                 "n_comps", "rule", "range_n"]

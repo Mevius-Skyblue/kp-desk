@@ -159,7 +159,12 @@ def test_comps_filters_and_labels(monkeypatch):
     monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
     at = run_page("views/comps.py", "en")
     df = at.dataframe[0].value
+    assert len(df) == 5  # default bond type filter = senior unsecured only (fixes R3-8)
+    assert set(df["Bond type"]) == {"Senior unsecured"}
+    at.multiselect(key="comps_nature_en").set_value(["senior", "sub_hybrid", "guaranteed"]).run()
+    df = at.dataframe[0].value
     assert len(df) == 7
+    assert {"Subordinated / hybrid", "Guaranteed"} <= set(df["Bond type"])
     assert "Rating source to be confirmed" in df["Rating bucket"].tolist()  # check_source code is translated
     assert "zz_new_type" in df["Type"].tolist()  # unknown type falls back to its code
     assert "Guaranteed issuer" in df["Type"].tolist()  # audit A9-2
@@ -168,12 +173,16 @@ def test_comps_filters_and_labels(monkeypatch):
 
 
 @pytest.mark.parametrize("lang", ["ko", "en"])
-def test_comps_default_shows_every_snapshot_row(lang, data_env):
-    """Audit A9-3: with the default filters every snapshot row is shown (rows without an issue date included)."""
+def test_comps_default_shows_every_senior_row(lang, data_env):
+    """Audit A9-3 + fixes R3-8: the default filters show every senior unsecured row (rows without an issue date included);
+    with every bond type switched on, every snapshot row."""
     from app.lib import data as D
 
+    deals = D.read_deals()
     at = run_page("views/comps.py", lang)
-    assert len(at.dataframe[0].value) == len(D.read_deals())
+    assert len(at.dataframe[0].value) == int((deals["bond_nature"] == "senior").sum())
+    at.multiselect(key=f"comps_nature_{lang}").set_value(sorted(set(deals["bond_nature"]))).run()
+    assert len(at.dataframe[0].value) == len(deals)
 
 
 def _hangul_cells(at) -> list[str]:

@@ -4,16 +4,18 @@ A toolkit that compiles foreign-currency bonds issued abroad by Korean issuers (
 
 > Model results built from public data; not a price indication and not investment advice. The book in the samples is a demo book - not actual holdings.
 
-Built with Claude Code; results independently verified. Korean README: [README.md](README.md) · App: `<APP_URL>` (link added after deployment)
+Built with Claude Code; results independently verified. Korean README: [README.md](README.md) · App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
 
 ![③ Fair spread range page (as-of snapshot)](docs/screenshot_en.png)
 
 ## App (4 pages + home, Korean / English)
 
+App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
+
 | Page | Content |
 |---|---|
 | ① Bond calculator | Coupon, maturity, settlement and a yield or a price → price, yield, accrued interest, settlement amount, durations, convexity, DV01, and G-spread and Z-spread over the as-of Treasury curve |
-| ② Comparable deals | Terms and representative spread of each tranche with its filing or press source link; filters by issuer type, sample tier, tenor and issue period |
+| ② Comparable deals | Terms, bond type and representative spread of each tranche with its filing or press source link; filters by bond type (default: senior unsecured), issuer type, sample tier, tenor and issue period |
 | ③ Fair spread range | Point estimate and range of the public mode's representative output (the N0 baseline), with its scorecard on the same page |
 | ④ Validation | Independent bond-engine check, demo-book valuation audit, one-time holdout evaluation, output audit, sample downloads |
 
