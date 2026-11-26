@@ -41,4 +41,11 @@ jobs:
       - name: tests (app pages KO / EN, i18n, bond engine, bundle checks 5 and 6)
         env:
           PYTHONIOENCODING: utf-8
-        run: python -m pytest -q tests
+        shell: bash
+        # Failed test ids are also written as ::error annotations so they can be read from the public check-run API.
+        run: |
+          set -o pipefail
+          python -m pytest -q -rfE tests 2>&1 | tee pytest_out.txt || {
+            grep -E '^(FAILED|ERROR) ' pytest_out.txt | head -20 | sed 's/^/::error title=pytest::/'
+            exit 1
+          }

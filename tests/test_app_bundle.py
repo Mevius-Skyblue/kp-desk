@@ -48,9 +48,22 @@ LITERAL_ALLOW: list[str] = []  # exact app string constants that may hold a phra
 PAIRED_DOCS = ["docs/METHODOLOGY", "docs/VALIDATION", "docs/KNOWN_ISSUES", "docs/DATA_NOTICE"]
 
 
+RUNTIME_DIRS = {".git", "__pycache__", ".pytest_cache"}  # created by git / Python / pytest while the checks run, never published
+
+
 def bundle_files(root: Path) -> list[str]:
-    """Every file of the bundle as a posix path (the .git folder skipped)."""
-    return sorted(p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file() and ".git" not in p.relative_to(root).parts)
+    """Files of the bundle as posix paths.
+
+    In a git checkout (the bundle repository, CI) = the files git tracks, i.e. exactly what is published; runtime files
+    that CI steps or pytest create in the work tree are not part of the bundle. Without git = every file except runtime dirs.
+    (R3 CI fix: the first staging CI failed because .pytest_cache and other run-time files were counted.)
+    """
+    if (root / ".git").exists():
+        r = subprocess.run(["git", "ls-files", "-z"], cwd=root, capture_output=True, text=True, encoding="utf-8")
+        if r.returncode == 0:
+            return sorted(x for x in r.stdout.split("\0") if x)
+    return sorted(p.relative_to(root).as_posix() for p in root.rglob("*")
+                  if p.is_file() and not (RUNTIME_DIRS & set(p.relative_to(root).parts)))
 
 
 def _m(rel: str, pats: list[str]) -> bool:
