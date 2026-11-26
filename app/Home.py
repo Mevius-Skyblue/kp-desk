@@ -1,6 +1,6 @@
 """KP Desk public app entry (config/public.yaml 5. app). Run: streamlit run app/Home.py  (Python 3.13)
 
-Four pages + home, Korean / English toggle at the top (default Korean). Menu titles come from i18n through
+Four pages + home, Korean / English toggle at the top right next to the as-of date (default Korean). Menu titles come from i18n through
 st.navigation + st.Page(title=t(...)), so file names never show in the menu. Works from the bundle layout
 (app/, src/bond/, app/data/, samples/) without any database.
 """
@@ -15,12 +15,12 @@ if str(ROOT) not in sys.path:
 import streamlit as st  # noqa: E402
 
 from app.i18n import init_lang, t  # noqa: E402
-from app.lib import ui  # noqa: E402
+from app.lib import look, ui  # noqa: E402
 
 init_lang()
 st.set_page_config(page_title=t("a_app_title"), layout="wide")
-ui.lang_toggle()
-ui.asof_line()
+st.html(look.css())  # U1 style sheet (config/public.yaml fixes U1-1), once per run for every page
+ui.top_bar()  # as-of date + language switch, top right
 
 PAGES = [  # (file, title key, url path)
     ("views/home.py", "a_nav_home", "home"),

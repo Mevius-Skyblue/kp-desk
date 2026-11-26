@@ -29,5 +29,7 @@ def dynamic_keys() -> list[str]:
     ks = [f"a_conv_{c}" for c in CONVENTIONS] + [f"a_lang_{x}" for x in LANGS]
     ks += [f"a_type_{x}" for x in ISSUER_TYPES] + [f"a_tier_{x}" for x in TIER_ORDER] + [f"a_nature_{x}" for x in NATURES] + [b[0] for b in BUCKETS] + ["a_tb_na"]
     ks += [f"a_basis_{x}" for x in BASES] + [f"a_level_{x}" for x in LEVELS]
-    ks += [f"a_sample_{x}" for x in SAMPLE_KINDS] + [f"a_sample_lang_{x}" for x in LANGS] + [f"a_iss_{x}" for x in SAMPLE_ISSUERS]
+    ks += [f"a_sample_lang_{x}" for x in LANGS] + [f"a_iss_{x}" for x in SAMPLE_ISSUERS]
+    ks += ["a_sg_memo", "a_sg_memo1p", "a_sg_pitchbook", "a_sg_book", "a_sb_mtm", "a_sb_mi"]  # sample groups (fixes U1-1)
+    ks += ["a_anchor_bond", "a_anchor_mtm", "a_anchor_model", "a_anchor_out"]  # VALIDATION section anchors
     return ks + list(DOC_KEYS)

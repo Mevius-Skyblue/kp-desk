@@ -8,6 +8,7 @@ import streamlit as st
 
 from app.i18n import LANGS, STATE_KEY, current_lang, init_lang, t
 from app.lib import data as D
+from app.lib import look
 
 REPO_URL = "https://github.com/Mevius-Skyblue/kp-desk"
 DOCS = {"a_doc_readme": ("README.md", "README_en.md"), "a_doc_method": ("docs/METHODOLOGY_ko.md", "docs/METHODOLOGY_en.md"),
@@ -17,10 +18,18 @@ DOCS = {"a_doc_readme": ("README.md", "README_en.md"), "a_doc_method": ("docs/ME
 
 
 def lang_toggle() -> None:
-    """Korean / English switch at the top of every page (default Korean, kept in st.session_state)."""
+    """Korean / English switch at the top of every page (default Korean, kept in st.session_state). The label stays for
+    screen readers but is not drawn (fixes U1-1: the switch sits at the top right next to the as-of date)."""
     init_lang()
-    st.radio(t("a_lang_label"), options=list(LANGS), key=STATE_KEY, horizontal=True,
-             format_func=labels(LANGS, lambda v: t(f"a_lang_{v}")))
+    st.radio(t("a_lang_label"), options=list(LANGS), key=STATE_KEY, horizontal=True, label_visibility="collapsed",
+             width="content", format_func=labels(LANGS, lambda v: t(f"a_lang_{v}")))
+
+
+def top_bar() -> None:
+    """As-of date + language switch, right-aligned at the top of the page body (the sidebar keeps the page menu)."""
+    with st.container(horizontal=True, horizontal_alignment="right", vertical_alignment="center", key="kpd_top"):
+        asof_line()
+        lang_toggle()
 
 
 def wkey(name: str) -> str:
@@ -39,7 +48,7 @@ def labels(options, fn):
 def asof_line() -> None:
     """'기준일 YYYY-MM-DD' / 'As of YYYY-MM-DD' from the snapshot."""
     a = D.asof()
-    st.caption(t("a_asof", asof=a) if a else t("a_asof_unknown"))
+    st.caption(t("a_asof", asof=a) if a else t("a_asof_unknown"), width="content")
 
 
 def data_error(e: D.DataError) -> None:
@@ -50,16 +59,20 @@ def data_error(e: D.DataError) -> None:
 
 
 def footer() -> None:
-    """Disclaimer + 'built with' line at the end of every page."""
+    """End of every page: the disclaimer once (small grey text), 'built with' and the public documents (fixes U1-1)."""
     st.divider()
-    st.caption(t("a_disclaimer"))
-    st.caption(t("a_built_with"))
+    docs = [look.link(t(k), doc_url(k), cls="") for k in DOCS]
+    right = look.el("span", None, look.txt(t("a_built_with")), *(" · " + d for d in docs))
+    st.markdown(look.el("div", {"class": "kpd-foot"}, look.el("span", None, look.txt(t("a_disclaimer"))), right),
+                unsafe_allow_html=True)
 
 
-def doc_url(key: str) -> str:
-    """GitHub link of a public document in the current language."""
+def doc_url(key: str, anchor_key: str | None = None) -> str:
+    """GitHub link of a public document in the current language; anchor_key = i18n key of a section anchor
+    (e.g. a_anchor_bond: the heading id GitHub gives that section of docs/VALIDATION_ko.md / _en.md)."""
     ko, en = DOCS[key]
-    return f"{REPO_URL}/blob/main/{ko if current_lang() == 'ko' else en}"
+    url = f"{REPO_URL}/blob/main/{ko if current_lang() == 'ko' else en}"
+    return url + "#" + t(anchor_key) if anchor_key else url
 
 
 def num(v, nd: int = 2, sep: bool = False) -> str:

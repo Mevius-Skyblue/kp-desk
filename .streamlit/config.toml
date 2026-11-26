@@ -1,13 +1,14 @@
 # KP Desk public app theme (config/public.yaml fixes R3-9). Copied to .streamlit/config.toml of the public bundle by
 # scripts/build_public_bundle_r3.py. Structure follows KVI .streamlit/config.toml (docs/provenance.md); colours are KPD's.
+# U1 (fixes U1-1a): accent #1D4E89 and border #E3E6EB of the Cowork reference.
 [theme]
 base = "light"
-primaryColor = "#1F4E79"
+primaryColor = "#1D4E89"
 backgroundColor = "#F6F7F9"
 secondaryBackgroundColor = "#FFFFFF"
 textColor = "#14181F"
-linkColor = "#1F4E79"
-borderColor = "#D9DEE5"
+linkColor = "#1D4E89"
+borderColor = "#E3E6EB"
 showWidgetBorder = true
 baseRadius = "0.5rem"
 font = "Pretendard"

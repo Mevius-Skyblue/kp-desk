@@ -218,7 +218,8 @@ def test_fair_spread_none_and_value(monkeypatch):
 
     assert t("a_fair_none", _lang="en") in [i.value for i in at.info]
     at.selectbox(key="fair_tenor").set_value(3.0).run()
-    assert [m.value for m in at.metric][0] == "222.2 bp"
+    html = " ".join(m.value for m in at.markdown)
+    assert ">222.2 bp<" in html  # point estimate in the U1 result card (fixes U1-1)
 
 
 def test_validation_samples(monkeypatch):
@@ -226,7 +227,10 @@ def test_validation_samples(monkeypatch):
     monkeypatch.setenv("KPD_APP_SAMPLES", str(FIX / "samples"))
     at = run_page("views/validation.py", "ko")
     labels = [b.label for b in at.get("download_button")]
-    assert len(labels) == 10 and any("영문판" in x for x in labels)
+    assert len(labels) == 10
+    # U1 (fixes U1-1): the current language's edition is open, the other edition (5 files) is folded in one expander
+    assert len(at.expander) == 1 and "영문판" in at.expander[0].label
+    assert len(at.expander[0].get("download_button")) == 5
 
 
 def test_missing_data_message(monkeypatch, tmp_path):
@@ -267,20 +271,44 @@ def test_option_labels_follow_language_switch(monkeypatch):
 
 @pytest.mark.parametrize("lang", ["ko", "en"])
 def test_home_glance_cards(lang, data_env):
-    """Four cards; numbers only from scorecard.json, the deals.csv row count and the as-of date."""
+    """U1 evidence cards (fixes U1-1): numbers only from scorecard.json and the deals.csv row count; four tiles with links."""
     from app.i18n import t
     from app.lib import data as D
 
     at = run_page(PAGES[0], lang)
     assert not at.exception
     sc = D.read_scorecard()
-    vals = [m.value for m in at.metric]
-    assert len(at.metric) == 4
-    assert vals[0] == t("a_card_deals_value", _lang=lang, n=f"{len(D.read_deals()):,}")
-    assert vals[1] == t("a_card_bond_value", _lang=lang, total=D.item(sc, "a1_total")["value"])
-    assert vals[2] == t("a_card_ho_value", _lang=lang, mae=D.item(sc, "ho_n0_mae")["value"])
-    caps = " ".join(c.value for c in at.caption)
-    assert sc["asof"] in caps and D.item(sc, "ho_p_ci")["value"] in caps
+    html = " ".join(m.value for m in at.markdown)
+    it = lambda k: D.item(sc, k)["value"]  # noqa: E731
+    total = int(it("a1_total"))
+    assert t("a_card_deals_value", _lang=lang, n=f"{len(D.read_deals()):,}") in html
+    assert t("a_g_match", _lang=lang, n=f"{total - int(it('a1_mismatch')):,}", total=f"{total:,}") in html
+    assert t("a_g_ho_title", _lang=lang, n=it("ho_n")) in html
+    for k in ("ho_n0_mae", "ho_p_mae"):
+        assert ">" + t("a_bp", _lang=lang, v=it(k)) + "<" in html
+    assert len(at.get("page_link")) == 4
+
+
+@pytest.mark.parametrize("lang", ["ko", "en"])
+@pytest.mark.parametrize("page", PAGES)
+def test_no_private_paths_on_screen(page, lang, data_env):
+    """U1 (fixes U1-1): no private report paths or commit hashes on screen; links go to the public VALIDATION document."""
+    at = run_page(page, lang)
+    html = " ".join(m.value for m in at.markdown) + " ".join(c.value for c in at.caption)
+    assert "reports/" not in html and ".md (" not in html
+
+
+def test_validation_cards_and_links(monkeypatch):
+    """④ cards: n / total from the report cells; detail links point to VALIDATION section anchors in the current language."""
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    from app.i18n import t
+
+    for lang, doc in (("ko", "docs/VALIDATION_ko.md#"), ("en", "docs/VALIDATION_en.md#")):
+        at = run_page("views/validation.py", lang)
+        html = " ".join(m.value for m in at.markdown)
+        for anchor in ("a_anchor_bond", "a_anchor_mtm", "a_anchor_model", "a_anchor_out"):
+            assert doc + t(anchor, _lang=lang) in html
+        assert html.count('class="kpd-card"') == 4
 
 
 @pytest.mark.parametrize("lang", ["ko", "en"])
