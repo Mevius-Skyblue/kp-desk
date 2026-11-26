@@ -79,6 +79,18 @@ def num(v, nd: int = 2, sep: bool = False) -> str:
 DEC = {"price": 4, "pct": 3, "bp": 1, "years": 2, "dur": 3}
 
 
+def sortable_text_col(values, nd: int) -> list[str]:
+    """Numbers as equal-width, right-aligned display text with nd decimals; empty -> '–' (fixes R3-10).
+
+    Why text and not a number column: Streamlit's table always draws an empty number cell as 'None' (the Styler's na_rep
+    is not used for empty cells), so '–' needs text. A click on a text column header sorts with the browser's string
+    comparison (localeCompare); padding every value with leading spaces to the same width makes that comparison follow
+    the numeric order (checked in en / ko / de / ja collation; empty cells come first). Values are non-negative here."""
+    texts = [t("a_na") if v is None or v != v else f"{float(v):.{nd}f}" for v in values]
+    width = max((len(x) for x in texts), default=0)
+    return [x.rjust(width) for x in texts]
+
+
 def text_col(values, nd: int, sep: bool = True) -> list[str]:
     """A column of numbers as display text with nd decimals and thousands separators; empty -> '–' (never None / nan)."""
     return [num(v, nd, sep) for v in values]

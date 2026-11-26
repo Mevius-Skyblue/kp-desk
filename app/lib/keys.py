@@ -14,6 +14,7 @@ ISSUER_TYPES = ("sovereign", "policy", "soe", "bank", "card_capital", "fin_other
 NATURES = ("senior", "sub_hybrid", "guaranteed", "covered")  # bond_nature codes (config/public.yaml fixes R3-8)
 NATURE_DEFAULT = ("senior",)  # comps table default: senior unsecured only; the user can switch the others on
 TIER_ORDER = ("A", "B", "S", "C")  # public sample tiers (config/public.yaml deals.csv)
+TIER_DEFAULT = ("A", "B", "S")  # comps table default (fixes R3-10): C = estimated currency, switched on by the user
 BUCKETS = (("a_tb_0_3", 0.0, 3.0), ("a_tb_3_5", 3.0, 5.0), ("a_tb_5_7", 5.0, 7.0), ("a_tb_7_10", 7.0, 10.0),
            ("a_tb_10p", 10.0, float("inf")))
 BASES = ("reoffer", "news_final", "coupon")  # rep_spread_basis values (config/p1d.yaml)

@@ -2,13 +2,14 @@
 
 from datetime import date
 
+import altair as alt
 import pandas as pd
 import streamlit as st
 
 from app.i18n import current_lang, t, t_or
 from app.lib import data as D
 from app.lib import ui
-from app.lib.keys import BUCKETS, NATURE_DEFAULT, NATURES, TIER_ORDER
+from app.lib.keys import BUCKETS, NATURE_DEFAULT, NATURES, TIER_DEFAULT, TIER_ORDER
 
 
 def tenor_bucket(x) -> str:
@@ -58,7 +59,8 @@ with f1:
     sel_type = st.multiselect(t("a_f_type"), options=types, default=types, key=ui.wkey("comps_type"),
                               format_func=ui.labels(types, lambda v: t_or(f"a_type_{v}", v)))
 with f2:
-    sel_tier = st.multiselect(t("a_f_tier"), options=tiers, default=tiers, key=ui.wkey("comps_tier"),
+    tier_default = [x for x in TIER_DEFAULT if x in tiers] or tiers  # fixes R3-10: C (estimated currency) is off by default
+    sel_tier = st.multiselect(t("a_f_tier"), options=tiers, default=tier_default, key=ui.wkey("comps_tier"),
                               format_func=ui.labels(tiers, lambda v: t_or(f"a_tier_{v}", v)))
 with f3:
     sel_bucket = st.multiselect(t("a_f_tenor"), options=buckets, default=buckets, key=ui.wkey("comps_bucket"),
@@ -73,31 +75,47 @@ view = deals[m].sort_values(["issue_date", "deal_key"], ascending=[False, True])
 
 st.caption(t("a_comps_count", n=len(view)))
 st.caption(t("a_comps_nature_note"))
+st.caption(t("a_comps_tier_note"))
 if view.empty:
     st.info(t("a_comps_empty"))
 else:
     name_col = "issuer_name_ko" if current_lang() == "ko" else "issuer_name_en"
     type_lbl = view["issuer_type"].map(lambda v: t_or(f"a_type_{v}", str(v)))
-    # ---------------- chart (fixes R3-9): tenor x representative spread, colour = issuer type, current filters
+    # ---------------- chart (fixes R3-9, R3-10): tenor x representative spread, colour = issuer type, current filters.
+    # altair without .interactive(): no wheel zoom / pan, so the page scroll is not captured by the chart. x fixed 0-30 years
+    # (points outside are clipped), legend below the plot so a narrow screen does not cut it.
     st.subheader(t("a_chart_title"))
-    chart = pd.DataFrame({t("a_col_tenor"): view["tenor_years"].astype(float), t("a_col_spread"): view["rep_spread_bp"].astype(float),
-                          t("a_col_type"): type_lbl}).dropna(subset=[t("a_col_tenor"), t("a_col_spread")])
-    st.scatter_chart(chart, x=t("a_col_tenor"), y=t("a_col_spread"), color=t("a_col_type"),
-                     x_label=t("a_col_tenor"), y_label=t("a_col_spread"), height=360)
+    chart = pd.DataFrame({"x": view["tenor_years"].astype(float), "y": view["rep_spread_bp"].astype(float),
+                          "kind": type_lbl, "who": view[name_col]}).dropna(subset=["x", "y"])
+    fig = (
+        alt.Chart(chart)
+        .mark_circle(size=56, opacity=0.8, clip=True)
+        .encode(
+            x=alt.X("x:Q", title=t("a_col_tenor"), scale=alt.Scale(domain=[0, 30], nice=False)),
+            y=alt.Y("y:Q", title=t("a_col_spread")),
+            color=alt.Color("kind:N", title=t("a_col_type"),
+                            legend=alt.Legend(orient="bottom", direction="horizontal", columns=2, labelLimit=220)),
+            tooltip=[alt.Tooltip("who:N", title=t("a_col_issuer")), alt.Tooltip("kind:N", title=t("a_col_type")),
+                     alt.Tooltip("x:Q", title=t("a_col_tenor"), format=".2f"),
+                     alt.Tooltip("y:Q", title=t("a_col_spread"), format=".1f")],
+        )
+        .properties(height=360)
+    )
+    st.altair_chart(fig, width="stretch")
     st.caption(t("a_chart_note"))
-    # ---------------- table: important columns first; numbers as display text with fixed decimals, empty = '–'
+    # ---------------- table: important columns first; fixed decimals, empty = '–' (fixes R3-9, R3-10)
     st.subheader(t("a_comps_table"))
     out = pd.DataFrame({
         t("a_col_issuer"): view[name_col].tolist(),
         t("a_col_nature"): view["bond_nature"].map(lambda v: t_or(f"a_nature_{v}", "" if pd.isna(v) else str(v))).tolist(),
         t("a_col_type"): type_lbl.tolist(),
         t("a_col_issue_date"): ui.date_col(view["issue_date"]),
-        t("a_col_tenor"): ui.text_col(view["tenor_years"], ui.DEC["years"]),
+        t("a_col_tenor"): ui.sortable_text_col(view["tenor_years"], ui.DEC["years"]),
         t("a_col_spread"): view["rep_spread_bp"].astype(float).round(ui.DEC["bp"]).tolist(),
         t("a_col_basis"): view["rep_spread_basis"].map(lambda v: t_or(f"a_basis_{v}", "" if pd.isna(v) else str(v))).tolist(),
         t("a_col_ccy"): view["currency"].fillna(t("a_na")).tolist(),
-        t("a_col_coupon"): ui.text_col(view["coupon_pct"], ui.DEC["pct"]),
-        t("a_col_yield"): ui.text_col(view["reoffer_yield_pct"], ui.DEC["pct"]),
+        t("a_col_coupon"): ui.sortable_text_col(view["coupon_pct"], ui.DEC["pct"]),
+        t("a_col_yield"): ui.sortable_text_col(view["reoffer_yield_pct"], ui.DEC["pct"]),
         t("a_col_maturity"): ui.date_col(view["maturity"]),
         t("a_col_tier"): view["sample_tier"].tolist(),
         t("a_col_rating"): view["rating_bucket"].map(rating_label).tolist(),
@@ -105,11 +123,13 @@ else:
         t("a_col_key"): view["deal_key"].tolist(),
     })
     shown = [c for c in out.columns if c != t("a_col_key")]  # the stable key stays in the CSV, not on screen
+    # tenor / coupon / yield: equal-width text so '–' shows and a header click still sorts in numeric order (ui.sortable_
+    # text_col); the spread has no empty cell and stays a number column
     num_right = {t(k): st.column_config.TextColumn(alignment="right") for k in ("a_col_tenor", "a_col_coupon", "a_col_yield")}
     st.dataframe(out, hide_index=True, width="stretch", column_order=shown, column_config={
         **num_right,
-        t("a_col_issuer"): st.column_config.TextColumn(width="medium", pinned=True),
         t("a_col_spread"): st.column_config.NumberColumn(format="%.1f"),
+        t("a_col_issuer"): st.column_config.TextColumn(width="medium", pinned=True),
         t("a_col_ccy"): st.column_config.TextColumn(width="small"),
         t("a_col_tier"): st.column_config.TextColumn(width="small"),
         t("a_col_source"): st.column_config.LinkColumn(t("a_col_source"), display_text=t("a_source_link"), width="small"),

@@ -17,7 +17,7 @@ App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
 | Page | Content |
 |---|---|
 | ① Bond calculator | Coupon, maturity, settlement and a yield or a price → price, yield, accrued interest, settlement amount, durations, convexity, DV01, and G-spread and Z-spread over the as-of Treasury curve |
-| ② Comparable deals | Terms, bond type and representative spread of each tranche with its filing or press source link; filters by bond type (default: senior unsecured), issuer type, sample tier, tenor and issue period |
+| ② Comparable deals | Terms, bond type and representative spread of each tranche with its filing or press source link; filters by bond type (default: senior unsecured), issuer type, sample tier (default: A, B, S), tenor and issue period, with a tenor × representative spread scatter |
 | ③ Fair spread range | Point estimate and range of the public mode's representative output (the N0 baseline), with its scorecard on the same page |
 | ④ Validation | Independent bond-engine check, demo-book valuation audit, one-time holdout evaluation, output audit, sample downloads |
 

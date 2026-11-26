@@ -13,6 +13,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
+import pandas as pd
 import pytest
 
 ROOT = next(p for p in Path(__file__).resolve().parents if (p / "app" / "Home.py").exists())
@@ -159,8 +160,10 @@ def test_comps_filters_and_labels(monkeypatch):
     monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
     at = run_page("views/comps.py", "en")
     df = at.dataframe[0].value
-    assert len(df) == 5  # default bond type filter = senior unsecured only (fixes R3-8)
-    assert set(df["Bond type"]) == {"Senior unsecured"}
+    assert len(df) == 4  # defaults: senior unsecured only (fixes R3-8) and sample tiers A, B, S (fixes R3-10)
+    assert set(df["Bond type"]) == {"Senior unsecured"} and "C" not in set(df["Sample tier"])
+    at.multiselect(key="comps_tier_en").set_value(["A", "B", "S", "C"]).run()
+    assert len(at.dataframe[0].value) == 5
     at.multiselect(key="comps_nature_en").set_value(["senior", "sub_hybrid", "guaranteed"]).run()
     df = at.dataframe[0].value
     assert len(df) == 7
@@ -180,8 +183,10 @@ def test_comps_default_shows_every_senior_row(lang, data_env):
 
     deals = D.read_deals()
     at = run_page("views/comps.py", lang)
-    assert len(at.dataframe[0].value) == int((deals["bond_nature"] == "senior").sum())
+    default = (deals["bond_nature"] == "senior") & deals["sample_tier"].isin(["A", "B", "S"])  # fixes R3-8, R3-10
+    assert len(at.dataframe[0].value) == int(default.sum())
     at.multiselect(key=f"comps_nature_{lang}").set_value(sorted(set(deals["bond_nature"]))).run()
+    at.multiselect(key=f"comps_tier_{lang}").set_value(sorted(set(deals["sample_tier"]))).run()
     assert len(at.dataframe[0].value) == len(deals)
 
 
@@ -280,26 +285,41 @@ def test_home_glance_cards(lang, data_env):
 
 @pytest.mark.parametrize("lang", ["ko", "en"])
 def test_comps_chart_and_number_formats(lang, data_env):
-    """② has one scatter chart; numbers are display text with fixed decimals and '–' for empty (never None / nan)."""
+    """② has one chart (altair, no wheel zoom, x fixed 0-30, legend below); tenor / coupon / yield / spread stay numeric
+    (header sort by value, fixes R3-10); no 'None' / 'nan' text anywhere."""
+    import json
+
     from app.i18n import t
 
     at = run_page("views/comps.py", lang)
     assert not at.exception
-    assert len(at.get("vega_lite_chart")) == 1
+    charts = at.get("vega_lite_chart")
+    assert len(charts) == 1
+    spec = json.loads(charts[0].proto.spec)
+    assert "params" not in spec  # no selection / zoom-pan interaction
+    assert spec["encoding"]["x"]["scale"]["domain"] == [0, 30]
+    assert spec["encoding"]["color"]["legend"]["orient"] == "bottom"
     df = at.dataframe[0].value
-    shown = df.drop(columns=[t("a_col_source", _lang=lang)])  # link column: an empty link stays empty
-    cells = shown.map(str).to_numpy().ravel().tolist()
-    assert not any(c in ("None", "nan", "NaN", "<NA>", "NaT") for c in cells)
-    for col, nd in (("a_col_coupon", 3), ("a_col_yield", 3), ("a_col_tenor", 2)):
-        for v in df[t(col, _lang=lang)]:
-            assert v == "–" or re.fullmatch(rf"-?[\d,]+\.\d{{{nd}}}", v), (col, v)
+    assert pd.api.types.is_float_dtype(df[t("a_col_spread", _lang=lang)])
+    for col, nd in (("a_col_tenor", 2), ("a_col_coupon", 3), ("a_col_yield", 3)):
+        vals = df[t(col, _lang=lang)].tolist()
+        assert len({len(v) for v in vals}) <= 1, col  # equal width -> string sort = numeric sort
+        for v in vals:
+            assert v.strip() == "–" or re.fullmatch(rf"\d+\.\d{{{nd}}}", v.strip()), (col, v)
+    text = df.drop(columns=[t("a_col_source", _lang=lang)])
+    assert not any(c.strip() in ("None", "nan", "NaN", "<NA>", "NaT") for c in text.map(str).to_numpy().ravel().tolist())
 
 
-def test_comps_empty_value_shown_as_dash(monkeypatch):
-    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
-    at = run_page("views/comps.py", "en")
-    df = at.dataframe[0].value
-    assert "–" in df["Coupon (%)"].tolist() and "–" in df["Reoffer yield (%)"].tolist()
+def test_sortable_text_col_dash_and_numeric_order():
+    """Empty -> '–'; equal-width text sorts like the numbers (ASCII space < digits; the browser collation was checked for
+    en / ko / de / ja in R3-10)."""
+    from app.lib import ui
+
+    col = ui.sortable_text_col([4.125, None, 12.0, 0.5, 10.25], 3)
+    assert [c.strip() for c in col] == ["4.125", "–", "12.000", "0.500", "10.250"]
+    assert len({len(c) for c in col}) == 1
+    nums = [c for c in col if c.strip() != "–"]
+    assert sorted(nums) == sorted(nums, key=float)
 
 
 def test_calculator_display_decimals(monkeypatch):
