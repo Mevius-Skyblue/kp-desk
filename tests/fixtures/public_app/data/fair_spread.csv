@@ -1,0 +1,9 @@
+issuer_id,issuer_name_ko,issuer_name_en,tenor_years,point_bp,low_bp,high_bp,level,n_comps,rule,range_n
+zz_fake_a,가상발행사 A,Fake Issuer A,3,111.1,99.9,122.2,1,7,N0,56
+zz_fake_a,가상발행사 A,Fake Issuer A,5,111.1,99.9,122.2,1,7,N0,56
+zz_fake_a,가상발행사 A,Fake Issuer A,7,111.1,99.9,122.2,1,7,N0,56
+zz_fake_a,가상발행사 A,Fake Issuer A,10,111.1,99.9,122.2,1,7,N0,56
+zz_fake_b,가상발행사 B,Fake Issuer B,3,222.2,211.1,233.3,3,2,N0,56
+zz_fake_b,가상발행사 B,Fake Issuer B,5,,,,,0,N0,56
+zz_fake_b,가상발행사 B,Fake Issuer B,7,222.2,211.1,233.3,2,2,N0,56
+zz_fake_b,가상발행사 B,Fake Issuer B,10,222.2,211.1,233.3,2,2,N0,56

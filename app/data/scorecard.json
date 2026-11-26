@@ -1,0 +1,190 @@
+{
+ "asof": "2026-11-25",
+ "source": "config/public_scorecard_r3.yaml (numbers = report cells)",
+ "items": {
+  "a1_gate_n": {
+   "value": "55",
+   "path": "reports/audit_a1_bond.md",
+   "commit": "3f84725"
+  },
+  "a1_ref_n": {
+   "value": "201",
+   "path": "reports/audit_a1_bond.md",
+   "commit": "3f84725"
+  },
+  "a1_mismatch": {
+   "value": "0",
+   "path": "reports/audit_a1_bond.md",
+   "commit": "3f84725"
+  },
+  "a1_textbook": {
+   "value": "5",
+   "path": "reports/audit_a1_bond.md",
+   "commit": "3f84725"
+  },
+  "a1_price_max": {
+   "value": "2.4e-13",
+   "path": "reports/audit_a1_bond.md",
+   "commit": "3f84725"
+  },
+  "a1_z_max": {
+   "value": "3.9e-11",
+   "path": "reports/audit_a1_bond.md",
+   "commit": "3f84725"
+  },
+  "a3_hand": {
+   "value": "90/90",
+   "path": "reports/audit_a3_mtm.md",
+   "commit": "633bc23"
+  },
+  "a3_engine_diff": {
+   "value": "0",
+   "path": "reports/audit_a3_mtm.md",
+   "commit": "633bc23"
+  },
+  "ho_n": {
+   "value": "53",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_i4_mae": {
+   "value": "15.9",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_n0_mae": {
+   "value": "19.7",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_i4_diff": {
+   "value": "−3.81",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_i4_ci": {
+   "value": "[−7.44, −0.09]",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_p_mae": {
+   "value": "20.9",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_p_diff": {
+   "value": "+1.19",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_p_ci": {
+   "value": "[−4.16, +6.54]",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_n0_median": {
+   "value": "+10.5",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_i4_ci_c": {
+   "value": "[−4.40, +0.66]",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_i4_diff_c": {
+   "value": "−1.82",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_n_c": {
+   "value": "102",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "ho_boot": {
+   "value": "2,000",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "dev_n": {
+   "value": "56",
+   "path": "reports/r1_p3_revision.md",
+   "commit": "905d06e"
+  },
+  "dev_n0_mae": {
+   "value": "25.2",
+   "path": "reports/r1_p3_revision.md",
+   "commit": "905d06e"
+  },
+  "dev_p_mae": {
+   "value": "24.4",
+   "path": "reports/r1_p3_revision.md",
+   "commit": "905d06e"
+  },
+  "dev_p_diff": {
+   "value": "−0.75",
+   "path": "reports/r1_p3_revision.md",
+   "commit": "905d06e"
+  },
+  "dev_p_ci": {
+   "value": "[−5.59, +4.42]",
+   "path": "reports/r1_p3_revision.md",
+   "commit": "905d06e"
+  },
+  "a8_files": {
+   "value": "10",
+   "path": "reports/audit_a8_credit.md",
+   "commit": "f3782df"
+  },
+  "a8_cells": {
+   "value": "586",
+   "path": "reports/audit_a8_credit.md",
+   "commit": "f3782df"
+  },
+  "a8_mismatch": {
+   "value": "0",
+   "path": "reports/audit_a8_credit.md",
+   "commit": "f3782df"
+  },
+  "a8_raw": {
+   "value": "7/7",
+   "path": "reports/audit_a8_credit.md",
+   "commit": "f3782df"
+  },
+  "ho_seed": {
+   "value": "20261113",
+   "path": "reports/p3_holdout.md",
+   "commit": "9c119da"
+  },
+  "r3_mc_files": {
+   "value": "10",
+   "path": "reports/r3_outputs_asof.md",
+   "commit": "4504348"
+  },
+  "r3_mi_cells": {
+   "value": "207",
+   "path": "reports/r3_outputs_asof.md",
+   "commit": "4504348"
+  },
+  "r3_mismatch": {
+   "value": "0",
+   "path": "reports/r3_outputs_asof.md",
+   "commit": "4504348"
+  },
+  "r3_pdf_1p": {
+   "value": "6/6",
+   "path": "reports/r3_outputs_asof.md",
+   "commit": "4504348"
+  },
+  "a1_total": {
+   "value": "256",
+   "path": "reports/audit_a1_bond.md + reports/audit_a1_bond.md",
+   "commit": "3f84725 + 3f84725",
+   "derived_from": [
+    "a1_gate_n",
+    "a1_ref_n"
+   ]
+  }
+ }
+}

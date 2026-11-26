@@ -1,0 +1,44 @@
+# GitHub Actions of the public repository kp-desk (config/public.yaml bundle_checks ci). Source: docs/ci/public-ci.yml of
+# the private repository; scripts/build_public_bundle_r3.py copies it to .github/workflows/ci.yml.
+# Runs without secrets, DB or API keys: app AppTest (KO / EN), i18n, bond engine tests, and the in-bundle checks
+# 5 (files) and 6 (i18n) through tests/test_app_bundle.py. Structure adapted from KVI docs/ci/public-ci.yml (docs/provenance.md).
+name: ci
+
+on:
+  push:
+    branches: [main, staging]   # staging first (scripts/deploy_public_r3.py); main only after CI passes
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0     # gitleaks reads the whole history
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest==9.2.0
+      - name: secret scan (gitleaks, whole history)
+        if: runner.os == 'Linux'
+        uses: gitleaks/gitleaks-action@v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: tests (app pages KO / EN, i18n, bond engine, bundle checks 5 and 6)
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python -m pytest -q tests

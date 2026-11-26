@@ -1,0 +1,12 @@
+# Binary sample files: never convert line endings (byte-identical samples)
+*.pdf binary
+*.xlsx binary
+*.docx binary
+*.png binary
+# Text files keep LF in the repository
+*.py text eol=lf
+*.md text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.txt text eol=lf

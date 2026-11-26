@@ -1,0 +1,733 @@
+{
+ "source": "config/glossary.yaml",
+ "langs": [
+  "ko",
+  "en"
+ ],
+ "strings": {
+  "a_app_tagline": {
+   "ko": "이 발행사는 지금 미국채 대비 몇 bp가 적정한가? 공개 자료로 만든 모델 추정과 그 검증 결과를 보여 줍니다.",
+   "en": "What spread over US Treasuries fits this issuer today? Model estimates built from public data, shown with their validation results."
+  },
+  "a_app_title": {
+   "ko": "KP Desk — 한국 발행사 외화채(KP) 공개 자료 도구",
+   "en": "KP Desk — public-data toolkit for Korean issuers' foreign-currency bonds (KP)"
+  },
+  "a_asof": {
+   "ko": "기준일 {asof}",
+   "en": "As of {asof}"
+  },
+  "a_asof_unknown": {
+   "ko": "기준일 정보 없음",
+   "en": "As-of date not available"
+  },
+  "a_basis_coupon": {
+   "ko": "쿠폰",
+   "en": "Coupon"
+  },
+  "a_basis_news_final": {
+   "ko": "보도 최종 스프레드",
+   "en": "Press final spread"
+  },
+  "a_basis_reoffer": {
+   "ko": "발행 수익률",
+   "en": "Reoffer yield"
+  },
+  "a_bp": {
+   "ko": "{v} bp",
+   "en": "{v} bp"
+  },
+  "a_built_with": {
+   "ko": "Claude Code로 만들었고, 결과는 별도 감사로 독립 검증했습니다.",
+   "en": "Built with Claude Code; results independently verified."
+  },
+  "a_calc_by_price": {
+   "ko": "가격을 넣고 수익률 계산",
+   "en": "Enter a price, get the yield"
+  },
+  "a_calc_by_yield": {
+   "ko": "수익률을 넣고 가격 계산",
+   "en": "Enter a yield, get the price"
+  },
+  "a_calc_conv": {
+   "ko": "관행",
+   "en": "Convention"
+  },
+  "a_calc_coupon": {
+   "ko": "쿠폰 (%)",
+   "en": "Coupon (%)"
+  },
+  "a_calc_curve_note": {
+   "ko": "커브: 미국 재무부 par 수익률 (기준일 스냅샷). 만기 사이는 선형 보간, 제로 커브는 6개월 격자 부트스트랩, 결제일을 커브 기준점으로 씁니다.",
+   "en": "Curve: US Treasury par yields (as-of snapshot). Linear interpolation between tenors, zero curve bootstrapped on a 6-month grid, anchored at the settlement date."
+  },
+  "a_calc_curve_show": {
+   "ko": "기준일 커브 보기",
+   "en": "Show the as-of curve"
+  },
+  "a_calc_engine_note": {
+   "ko": "이자 일정은 만기에서 거꾸로 만들며 영업일·공휴일 조정과 월말 규칙은 없습니다(알려진 한계 참고).",
+   "en": "The coupon schedule is built backwards from maturity, with no business-day or holiday adjustment and no end-of-month rule (see Known issues)."
+  },
+  "a_calc_err_dates": {
+   "ko": "결제일은 발행일 이후, 만기일 이전이어야 합니다.",
+   "en": "The settlement date must be on or after the issue date and before the maturity date."
+  },
+  "a_calc_err_generic": {
+   "ko": "이 입력으로는 계산할 수 없습니다.",
+   "en": "These inputs cannot be calculated."
+  },
+  "a_calc_face": {
+   "ko": "액면 금액",
+   "en": "Face amount"
+  },
+  "a_calc_input_mode": {
+   "ko": "입력",
+   "en": "Input"
+  },
+  "a_calc_intro": {
+   "ko": "고정금리 채권 한 종목의 가격과 위험 지표를 계산합니다. 계산은 검증된 채권 엔진을 그대로 부르며 새 공식은 없습니다.",
+   "en": "Price and risk measures of one fixed-coupon bond. The calculation calls the validated bond engine as is; there is no new formula."
+  },
+  "a_calc_issue": {
+   "ko": "발행일",
+   "en": "Issue date"
+  },
+  "a_calc_maturity": {
+   "ko": "만기일",
+   "en": "Maturity date"
+  },
+  "a_calc_no_curve": {
+   "ko": "기준일 커브가 없어 스프레드를 계산하지 않았습니다.",
+   "en": "No as-of curve, so no spread was calculated."
+  },
+  "a_calc_price": {
+   "ko": "깨끗한 가격 (액면 100당)",
+   "en": "Clean price (per 100 face)"
+  },
+  "a_calc_results": {
+   "ko": "결과",
+   "en": "Results"
+  },
+  "a_calc_settle": {
+   "ko": "결제일",
+   "en": "Settlement date"
+  },
+  "a_calc_spread_usd_only": {
+   "ko": "미국채 대비 스프레드는 USD 관행 채권에만 표시합니다.",
+   "en": "Spreads over US Treasuries are shown for USD-convention bonds only."
+  },
+  "a_calc_title": {
+   "ko": "① 채권 계산기",
+   "en": "① Bond calculator"
+  },
+  "a_calc_yield": {
+   "ko": "수익률 (%)",
+   "en": "Yield (%)"
+  },
+  "a_col_basis": {
+   "ko": "스프레드 기준",
+   "en": "Spread basis"
+  },
+  "a_col_ccy": {
+   "ko": "통화",
+   "en": "Currency"
+  },
+  "a_col_coupon": {
+   "ko": "쿠폰 (%)",
+   "en": "Coupon (%)"
+  },
+  "a_col_issue_date": {
+   "ko": "발행일",
+   "en": "Issue date"
+  },
+  "a_col_issuer": {
+   "ko": "발행사",
+   "en": "Issuer"
+  },
+  "a_col_item": {
+   "ko": "항목",
+   "en": "Item"
+  },
+  "a_col_key": {
+   "ko": "발행 키",
+   "en": "Deal key"
+  },
+  "a_col_maturity": {
+   "ko": "만기일",
+   "en": "Maturity"
+  },
+  "a_col_rating": {
+   "ko": "등급 구간",
+   "en": "Rating bucket"
+  },
+  "a_col_source": {
+   "ko": "출처",
+   "en": "Source"
+  },
+  "a_col_spread": {
+   "ko": "대표 스프레드 (bp)",
+   "en": "Representative spread (bp)"
+  },
+  "a_col_tenor": {
+   "ko": "만기 (년)",
+   "en": "Tenor (years)"
+  },
+  "a_col_tier": {
+   "ko": "표본 등급",
+   "en": "Sample tier"
+  },
+  "a_col_type": {
+   "ko": "유형",
+   "en": "Type"
+  },
+  "a_col_value": {
+   "ko": "값",
+   "en": "Value"
+  },
+  "a_col_yield": {
+   "ko": "발행 수익률 (%)",
+   "en": "Reoffer yield (%)"
+  },
+  "a_comps_count": {
+   "ko": "{n}건",
+   "en": "{n} deals"
+  },
+  "a_comps_coupon_note": {
+   "ko": "쿠폰 기준 스프레드는 발행 수익률 기준보다 낮게 나오는 경향이 있습니다(알려진 한계 참고).",
+   "en": "Coupon-based spreads tend to be lower than reoffer-based ones (see Known issues)."
+  },
+  "a_comps_empty": {
+   "ko": "조건에 맞는 발행 사례가 없습니다.",
+   "en": "No deal matches the filters."
+  },
+  "a_comps_intro": {
+   "ko": "1행 = 1 트랜치. 대표 스프레드는 미국채 대비 bp이며 발행 수익률, 보도 최종 스프레드, 쿠폰 순으로 고릅니다. 출처는 공시 원문 또는 보도 URL입니다(기사 문장은 싣지 않음).",
+   "en": "One row = one tranche. The representative spread is in bp over US Treasuries, taken from the reoffer yield, else the press-reported final spread, else the coupon. Sources are filings or press URLs (no article text)."
+  },
+  "a_comps_title": {
+   "ko": "② 발행 사례 비교표",
+   "en": "② Comparable deals"
+  },
+  "a_conv_EUR": {
+   "ko": "EUR (Act/Act ICMA, 연 1회 이자)",
+   "en": "EUR (Act/Act ICMA, annual coupon)"
+  },
+  "a_conv_USD": {
+   "ko": "USD (30/360, 연 2회 이자)",
+   "en": "USD (30/360, semi-annual coupon)"
+  },
+  "a_conv_UST": {
+   "ko": "미국채 방식 (Act/Act ICMA, 연 2회 이자)",
+   "en": "US Treasury style (Act/Act ICMA, semi-annual coupon)"
+  },
+  "a_curve_tenor": {
+   "ko": "만기 구분",
+   "en": "Tenor"
+  },
+  "a_curve_years": {
+   "ko": "만기 (년)",
+   "en": "Tenor (years)"
+  },
+  "a_curve_yield": {
+   "ko": "par 수익률 (%)",
+   "en": "Par yield (%)"
+  },
+  "a_data_bad": {
+   "ko": "데이터 파일을 읽을 수 없습니다: {name}",
+   "en": "Data file could not be read: {name}"
+  },
+  "a_data_missing": {
+   "ko": "데이터 파일을 찾을 수 없습니다: {name}",
+   "en": "Data file not found: {name}"
+  },
+  "a_disclaimer": {
+   "ko": "공개 자료로 만든 모델 결과이며 가격 제시·투자 권유가 아닙니다. 가상 장부는 실제 보유가 아닙니다.",
+   "en": "Model results built from public data; not a price indication and not investment advice. The demo book is not actual holdings."
+  },
+  "a_doc_data": {
+   "ko": "데이터 고지",
+   "en": "Data notice"
+  },
+  "a_doc_known": {
+   "ko": "알려진 한계",
+   "en": "Known issues"
+  },
+  "a_doc_method": {
+   "ko": "방법론",
+   "en": "Methodology"
+  },
+  "a_doc_readme": {
+   "ko": "소개 (README)",
+   "en": "Overview (README)"
+  },
+  "a_doc_valid": {
+   "ko": "검증 결과 상세",
+   "en": "Validation details"
+  },
+  "a_f_period": {
+   "ko": "발행 기간",
+   "en": "Issue period"
+  },
+  "a_f_tenor": {
+   "ko": "만기 구간",
+   "en": "Tenor bucket"
+  },
+  "a_f_tier": {
+   "ko": "표본 등급",
+   "en": "Sample tier"
+  },
+  "a_f_type": {
+   "ko": "발행사 유형",
+   "en": "Issuer type"
+  },
+  "a_fair_high": {
+   "ko": "범위 상단",
+   "en": "Range high"
+  },
+  "a_fair_intro": {
+   "ko": "공개 모드의 대표 출력(N0 기준선)만 보여 줍니다: 같은 유형·같은 등급 구간에서 기준일 전 18개월 동안 발행된 사례의 스프레드 중앙값입니다.",
+   "en": "Shows the public mode's representative output only (the N0 baseline): the median spread of deals of the same issuer type and rating bucket issued in the 18 months before the as-of date."
+  },
+  "a_fair_issuer": {
+   "ko": "발행사",
+   "en": "Issuer"
+  },
+  "a_fair_level": {
+   "ko": "비교 묶음",
+   "en": "Comparison group"
+  },
+  "a_fair_low": {
+   "ko": "범위 하단",
+   "en": "Range low"
+  },
+  "a_fair_ncomps": {
+   "ko": "비교 사례 수",
+   "en": "Number of comparable deals"
+  },
+  "a_fair_none": {
+   "ko": "이 발행사·만기에는 모델 값이 없습니다.",
+   "en": "The model gives no value for this issuer and tenor."
+  },
+  "a_fair_point": {
+   "ko": "점 추정",
+   "en": "Point estimate"
+  },
+  "a_fair_range_note": {
+   "ko": "범위는 개발 기간 N0 오차의 1·3사분위로 정하므로 모든 발행사에서 폭이 같습니다.",
+   "en": "The range comes from the first and third quartiles of the development-period N0 errors, so its width is the same for every issuer."
+  },
+  "a_fair_tenor": {
+   "ko": "만기 (년)",
+   "en": "Tenor (years)"
+  },
+  "a_fair_tenor_note": {
+   "ko": "N0 기준선은 만기를 쓰지 않으므로 같은 발행사의 만기별 값이 같습니다.",
+   "en": "The N0 baseline does not use the tenor, so one issuer gets the same value at every tenor."
+  },
+  "a_fair_title": {
+   "ko": "③ 적정 스프레드 범위",
+   "en": "③ Fair spread range"
+  },
+  "a_fair_wording": {
+   "ko": "공개 자료로 만든 모델 추정 범위이며 가격 제시·투자 권유가 아님",
+   "en": "A model estimate range built from public data; not a price indication and not investment advice"
+  },
+  "a_home_calc": {
+   "ko": "① 채권 계산기: 쿠폰·만기·결제일과 수익률 또는 가격을 넣으면 가격·경과이자·듀레이션·DV01과 기준일 미국채 커브 대비 G-스프레드·Z-스프레드를 계산합니다.",
+   "en": "① Bond calculator: enter coupon, maturity, settlement and a yield or a price to get price, accrued interest, duration, DV01 and the G-spread and Z-spread over the as-of Treasury curve."
+  },
+  "a_home_comps": {
+   "ko": "② 발행 사례 비교표: 발행 건별 조건과 대표 스프레드, 공시·보도 출처 링크를 유형·표본 등급·만기·발행 기간으로 걸러 봅니다.",
+   "en": "② Comparable deals: issue terms, representative spread and the filing or press source link of each deal, filtered by issuer type, sample tier, tenor and issue period."
+  },
+  "a_home_docs": {
+   "ko": "문서",
+   "en": "Documents"
+  },
+  "a_home_fair": {
+   "ko": "③ 적정 스프레드 범위: 발행사와 만기를 고르면 공개 모드 모델의 점 추정과 범위를, 같은 화면에서 그 모델의 성적표와 함께 보여 줍니다.",
+   "en": "③ Fair spread range: pick an issuer and a tenor to see the public-mode model's point estimate and range, next to that model's scorecard."
+  },
+  "a_home_intro": {
+   "ko": "한국 발행사가 해외에서 발행한 외화 채권(KP)의 발행 조건과 미국채 대비 스프레드를 공개 자료(DART, SEC EDGAR, 미국 재무부, 보도 숫자와 출처 URL)로 정리했습니다.",
+   "en": "Issue terms and spreads over US Treasuries of foreign-currency bonds issued abroad by Korean issuers (KP), compiled from public data (DART, SEC EDGAR, US Treasury, and press-reported numbers with their URLs)."
+  },
+  "a_home_pages": {
+   "ko": "화면 안내",
+   "en": "Pages"
+  },
+  "a_home_scope": {
+   "ko": "이 앱에 없는 것: ICE 지수를 쓰는 내부 모드 값, 일별 갱신, 문서 생성, 대출 화면. 숫자는 모두 기준일 한 날짜의 스냅샷입니다.",
+   "en": "Not in this app: internal-mode values that use ICE indices, daily updates, document generation, loan pages. All numbers are a snapshot on one as-of date."
+  },
+  "a_home_title": {
+   "ko": "KP Desk",
+   "en": "KP Desk"
+  },
+  "a_home_valid": {
+   "ko": "④ 검증 결과: 채권 엔진 독립 대조, 가상 장부 평가 감사, 홀드아웃 1회 평가, 출력 감사 결과와 견본 내려받기.",
+   "en": "④ Validation: independent bond-engine check, demo-book valuation audit, the one-time holdout evaluation, output audit, and sample downloads."
+  },
+  "a_iss_kb_bank": {
+   "ko": "KB국민은행",
+   "en": "KB Kookmin Bank"
+  },
+  "a_iss_kexim": {
+   "ko": "한국수출입은행",
+   "en": "Export-Import Bank of Korea"
+  },
+  "a_iss_posco_holdings": {
+   "ko": "포스코홀딩스",
+   "en": "POSCO Holdings"
+  },
+  "a_lang_en": {
+   "ko": "English",
+   "en": "English"
+  },
+  "a_lang_ko": {
+   "ko": "한국어",
+   "en": "한국어"
+  },
+  "a_lang_label": {
+   "ko": "언어",
+   "en": "Language"
+  },
+  "a_level_1": {
+   "ko": "같은 유형 · 같은 등급 구간",
+   "en": "Same type and rating bucket"
+  },
+  "a_level_2": {
+   "ko": "같은 유형 (등급 무관)",
+   "en": "Same type, any rating"
+  },
+  "a_level_3": {
+   "ko": "전체 표본",
+   "en": "Whole sample"
+  },
+  "a_na": {
+   "ko": "–",
+   "en": "–"
+  },
+  "a_nav_calc": {
+   "ko": "① 채권 계산기",
+   "en": "① Bond calculator"
+  },
+  "a_nav_comps": {
+   "ko": "② 발행 사례 비교표",
+   "en": "② Comparable deals"
+  },
+  "a_nav_fair": {
+   "ko": "③ 적정 스프레드 범위",
+   "en": "③ Fair spread range"
+  },
+  "a_nav_home": {
+   "ko": "처음",
+   "en": "Home"
+  },
+  "a_nav_valid": {
+   "ko": "④ 검증 결과",
+   "en": "④ Validation"
+  },
+  "a_rating_check_source": {
+   "ko": "등급 출처 확인 필요",
+   "en": "Rating source to be confirmed"
+  },
+  "a_rating_none": {
+   "ko": "등급 없음",
+   "en": "No rating"
+  },
+  "a_res_accrued": {
+   "ko": "경과이자 (액면 100당)",
+   "en": "Accrued interest (per 100 face)"
+  },
+  "a_res_clean": {
+   "ko": "깨끗한 가격 (액면 100당)",
+   "en": "Clean price (per 100 face)"
+  },
+  "a_res_convexity": {
+   "ko": "볼록성",
+   "en": "Convexity"
+  },
+  "a_res_dirty": {
+   "ko": "더티 가격 (액면 100당)",
+   "en": "Dirty price (per 100 face)"
+  },
+  "a_res_dv01": {
+   "ko": "DV01 (액면 금액 기준, 수익률 1bp 상승 시 가격 하락액)",
+   "en": "DV01 (for the face amount, price fall for a 1bp yield rise)"
+  },
+  "a_res_g": {
+   "ko": "G-스프레드 (bp)",
+   "en": "G-spread (bp)"
+  },
+  "a_res_mac": {
+   "ko": "매콜리 듀레이션 (년)",
+   "en": "Macaulay duration (years)"
+  },
+  "a_res_mod": {
+   "ko": "수정 듀레이션",
+   "en": "Modified duration"
+  },
+  "a_res_settle_amt": {
+   "ko": "결제 금액 (액면 금액 기준)",
+   "en": "Settlement amount (for the face amount)"
+  },
+  "a_res_tenor": {
+   "ko": "남은 만기 (년)",
+   "en": "Remaining tenor (years)"
+  },
+  "a_res_ust_par": {
+   "ko": "같은 만기 미국채 par 수익률 (%)",
+   "en": "US Treasury par yield at the same tenor (%)"
+  },
+  "a_res_yield": {
+   "ko": "수익률 (%)",
+   "en": "Yield (%)"
+  },
+  "a_res_z": {
+   "ko": "Z-스프레드 (bp)",
+   "en": "Z-spread (bp)"
+  },
+  "a_sample_lang_en": {
+   "ko": "영문판",
+   "en": "English edition"
+  },
+  "a_sample_lang_ko": {
+   "ko": "한국어판",
+   "en": "Korean edition"
+  },
+  "a_sample_memo": {
+   "ko": "여신 품의서 (PDF) · {issuer} · {lang}",
+   "en": "Credit memo (PDF) · {issuer} · {lang}"
+  },
+  "a_sample_memo1p": {
+   "ko": "1쪽 요약 (PDF) · {issuer} · {lang}",
+   "en": "One-page summary (PDF) · {issuer} · {lang}"
+  },
+  "a_sample_mi": {
+   "ko": "MI 대시보드 (엑셀) · {lang}",
+   "en": "MI dashboard (Excel) · {lang}"
+  },
+  "a_sample_mtm": {
+   "ko": "가상 장부 평가 (엑셀) · {lang}",
+   "en": "Demo-book valuation (Excel) · {lang}"
+  },
+  "a_sample_pitchbook": {
+   "ko": "피치북 (엑셀) · {issuer} · {lang}",
+   "en": "Pitch book (Excel) · {issuer} · {lang}"
+  },
+  "a_sc_ci": {
+   "ko": "95% 구간",
+   "en": "95% interval"
+  },
+  "a_sc_dev": {
+   "ko": "개발 기간",
+   "en": "Development"
+  },
+  "a_sc_diff": {
+   "ko": "차이: 규칙 − N0 (bp)",
+   "en": "Difference: rule − N0 (bp)"
+  },
+  "a_sc_holdout": {
+   "ko": "홀드아웃 (1회)",
+   "en": "Holdout (one run)"
+  },
+  "a_sc_mae_n0": {
+   "ko": "N0 평균 절대 오차 (bp)",
+   "en": "N0 mean absolute error (bp)"
+  },
+  "a_sc_mae_rule": {
+   "ko": "공개 규칙 평균 절대 오차 (bp)",
+   "en": "Public rule mean absolute error (bp)"
+  },
+  "a_sc_median": {
+   "ko": "홀드아웃 기간 N0 오차 중앙값은 {v}bp였습니다: 이 기간에는 예측이 실제보다 높은 쪽이었습니다(오차 = 예측 − 실제).",
+   "en": "The median N0 error in the holdout period was {v}bp: predictions were above the actual spreads in that period (error = prediction − actual)."
+  },
+  "a_sc_method": {
+   "ko": "판정 기준: 평균 절대 오차가 더 작고, 짝지은 부트스트랩 95% 구간의 상단이 0보다 작을 때만 기준선보다 낫다고 봅니다.",
+   "en": "Rule: a rule beats the baseline only if its mean absolute error is lower and the upper end of the paired-bootstrap 95% interval is below 0."
+  },
+  "a_sc_n": {
+   "ko": "평가 건수",
+   "en": "Deals evaluated"
+  },
+  "a_sc_not_better": {
+   "ko": "N0보다 낫다고 할 수 없음",
+   "en": "Not shown to beat N0"
+  },
+  "a_sc_period": {
+   "ko": "기간",
+   "en": "Period"
+  },
+  "a_sc_source": {
+   "ko": "출처: {path} (커밋 {commit})",
+   "en": "Source: {path} (commit {commit})"
+  },
+  "a_sc_summary": {
+   "ko": "개발 기간에 고른 공개 규칙은 개발 기간에도, 홀드아웃 1회 평가에서도 기준선 N0보다 낫다고 할 수 없었습니다. 그래서 이 화면은 N0를 보여 줍니다.",
+   "en": "The public rule chosen in development could not be shown to beat the N0 baseline, neither in development nor in the one-time holdout evaluation. This page therefore shows N0."
+  },
+  "a_sc_title": {
+   "ko": "성적표 (공개 모드)",
+   "en": "Scorecard (public mode)"
+  },
+  "a_sc_verdict": {
+   "ko": "판정",
+   "en": "Verdict"
+  },
+  "a_source_link": {
+   "ko": "원문 열기",
+   "en": "Open source"
+  },
+  "a_tb_0_3": {
+   "ko": "3년 이하",
+   "en": "Up to 3 years"
+  },
+  "a_tb_10p": {
+   "ko": "10년 초과",
+   "en": "Over 10 years"
+  },
+  "a_tb_3_5": {
+   "ko": "3년 초과 ~ 5년",
+   "en": "Over 3 to 5 years"
+  },
+  "a_tb_5_7": {
+   "ko": "5년 초과 ~ 7년",
+   "en": "Over 5 to 7 years"
+  },
+  "a_tb_7_10": {
+   "ko": "7년 초과 ~ 10년",
+   "en": "Over 7 to 10 years"
+  },
+  "a_tb_na": {
+   "ko": "만기 정보 없음",
+   "en": "No tenor"
+  },
+  "a_tier_A": {
+   "ko": "A: 통화 확인 + 발행 수익률",
+   "en": "A: confirmed currency + reoffer yield"
+  },
+  "a_tier_B": {
+   "ko": "B: 통화 확인 + 쿠폰만",
+   "en": "B: confirmed currency + coupon only"
+  },
+  "a_tier_C": {
+   "ko": "C: 추정 통화 (참고·민감도용)",
+   "en": "C: inferred currency (reference and sensitivity only)"
+  },
+  "a_tier_S": {
+   "ko": "S: 통화 확인 + 보도 최종 스프레드",
+   "en": "S: confirmed currency + press final spread"
+  },
+  "a_type_bank": {
+   "ko": "은행",
+   "en": "Bank"
+  },
+  "a_type_card_capital": {
+   "ko": "카드·캐피탈",
+   "en": "Card and capital company"
+  },
+  "a_type_fin_other": {
+   "ko": "기타 금융",
+   "en": "Other financial"
+  },
+  "a_type_guaranteed": {
+   "ko": "보증채 발행사",
+   "en": "Guaranteed issuer"
+  },
+  "a_type_nonfin": {
+   "ko": "비금융 기업",
+   "en": "Non-financial corporate"
+  },
+  "a_type_policy": {
+   "ko": "정책금융기관",
+   "en": "Policy institution"
+  },
+  "a_type_soe": {
+   "ko": "공기업",
+   "en": "State-owned enterprise"
+  },
+  "a_type_sovereign": {
+   "ko": "국가",
+   "en": "Sovereign"
+  },
+  "a_val_bond_body": {
+   "ko": "QuantLib으로 다시 계산한 {total}건(관문 {gate}건 + 참고 {ref}건)이 모두 허용오차 안에 있었고 불일치는 {mismatch}건입니다. 교과서 예제 {tb}개도 공시 정답과 같았습니다.",
+   "en": "All {total} bonds recalculated with QuantLib ({gate} gate + {ref} reference) were within tolerance; mismatches: {mismatch}. The {tb} textbook examples matched their published answers too."
+  },
+  "a_val_bond_title": {
+   "ko": "채권 엔진 독립 대조 (QuantLib)",
+   "en": "Bond engine independent check (QuantLib)"
+  },
+  "a_val_demo_label": {
+   "ko": "가상 장부(실제 보유 아님)",
+   "en": "Demo book - not actual holdings"
+  },
+  "a_val_ho_internal": {
+   "ko": "내부 모드(ICE 지수 사용, 예측값은 공개하지 않고 오차 통계만): 평균 절대 오차 I4 {i4}bp vs N0 {n0}bp, 차이 {diff}bp, 95% 구간 {ci}. 기준은 넘었지만 경계선이며, C 등급을 포함하면 구간이 {ci_c}로 0을 포함합니다.",
+   "en": "Internal mode (uses ICE indices; predictions are not published, only error statistics): mean absolute error I4 {i4}bp vs N0 {n0}bp, difference {diff}bp, 95% interval {ci}. It passes the rule but is borderline; with tier C included the interval is {ci_c} and contains 0."
+  },
+  "a_val_ho_public": {
+   "ko": "공개 모드: 대표 출력은 N0 기준선입니다. 개발 기간에 고른 공개 규칙의 평균 절대 오차는 {rule}bp(N0 {n0}bp), 차이 {diff}bp, 95% 구간 {ci} → N0보다 낫다고 할 수 없음.",
+   "en": "Public mode: the representative output is the N0 baseline. The public rule chosen in development had a mean absolute error of {rule}bp (N0 {n0}bp), difference {diff}bp, 95% interval {ci} → not shown to beat N0."
+  },
+  "a_val_ho_scope": {
+   "ko": "평가 대상 {n}건. 결과를 본 뒤 규칙을 바꾸지 않았고 다시 실행하지 않습니다.",
+   "en": "{n} target deals. The rules were not changed after seeing the results, and the evaluation is not run again."
+  },
+  "a_val_ho_title": {
+   "ko": "홀드아웃 1회 평가",
+   "en": "One-time holdout evaluation"
+  },
+  "a_val_intro": {
+   "ko": "아래 숫자는 모두 별도 감사 보고서의 칸에서 가져왔습니다. 출처 경로와 커밋을 함께 적었습니다.",
+   "en": "Every number below is taken from a cell of a separate audit report, shown with its source path and commit."
+  },
+  "a_val_known": {
+   "ko": "알려진 한계 보기",
+   "en": "Read the known issues"
+  },
+  "a_val_known_note": {
+   "ko": "숫자를 읽기 전에 알려진 한계(표본 크기, 경계선 판정, 포괄률, 일정 규칙 등)를 함께 보십시오.",
+   "en": "Please read the known issues (sample size, borderline verdict, coverage, schedule rules and more) together with the numbers."
+  },
+  "a_val_mtm_body": {
+   "ko": "엔진 코드를 쓰지 않은 별도 손계산과 비교해 {hand} 일치했습니다. 장부 종목 엔진 재계산 차이: {engine}.",
+   "en": "A separate hand calculation that does not use the engine code matched in {hand} comparisons. Engine re-pricing difference on the book positions: {engine}."
+  },
+  "a_val_mtm_title": {
+   "ko": "가상 장부 평가 감사",
+   "en": "Demo-book valuation audit"
+  },
+  "a_val_out_body": {
+   "ko": "공개 견본(기준일 판)의 엑셀 {files}개 모두 실제 Excel 재계산에서 MasterCheck TRUE, MI 대시보드 엑셀 ↔ 엔진 대조 {cells}칸 불일치 {mismatch}, 1쪽 요약 PDF는 {pdf} 모두 1쪽입니다.",
+   "en": "All {files} published sample workbooks (as-of edition) had MasterCheck TRUE after a real Excel recalculation; the MI dashboard workbook ↔ engine comparison of {cells} cells found {mismatch} mismatches; one-page summary PDFs are one page in {pdf}."
+  },
+  "a_val_out_prev": {
+   "ko": "앞선 판에 대한 별도 독립 감사: 다시 만든 엑셀 {files}개 MasterCheck TRUE, 엑셀 ↔ 엔진 대조 {cells}칸 불일치 {mismatch}.",
+   "en": "Earlier independent audit of the previous edition: {files} regenerated workbooks with MasterCheck TRUE, workbook ↔ engine comparison of {cells} cells with {mismatch} mismatches."
+  },
+  "a_val_out_title": {
+   "ko": "출력 감사",
+   "en": "Output audit"
+  },
+  "a_val_samples_none": {
+   "ko": "견본 파일이 없습니다.",
+   "en": "No sample files."
+  },
+  "a_val_samples_note": {
+   "ko": "견본은 공개 자료로 자동 생성한 초안이며 가상 거래·가상 장부를 씁니다.",
+   "en": "Samples are drafts generated automatically from public data and use hypothetical transactions and a demo book."
+  },
+  "a_val_samples_title": {
+   "ko": "견본 내려받기",
+   "en": "Sample downloads"
+  },
+  "a_val_title": {
+   "ko": "④ 검증 결과",
+   "en": "④ Validation"
+  }
+ }
+}

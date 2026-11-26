@@ -1,0 +1,225 @@
+issuer_id,issuer_name_ko,issuer_name_en,tenor_years,point_bp,low_bp,high_bp,level,n_comps,rule,range_n
+kexim,한국수출입은행,The Export-Import Bank of Korea,3,23.48,3.24,32.19,1,15,N0,56
+kexim,한국수출입은행,The Export-Import Bank of Korea,5,23.48,3.24,32.19,1,15,N0,56
+kexim,한국수출입은행,The Export-Import Bank of Korea,7,23.48,3.24,32.19,1,15,N0,56
+kexim,한국수출입은행,The Export-Import Bank of Korea,10,23.48,3.24,32.19,1,15,N0,56
+kdb,한국산업은행,The Korea Development Bank,3,23.48,3.24,32.19,1,15,N0,56
+kdb,한국산업은행,The Korea Development Bank,5,23.48,3.24,32.19,1,15,N0,56
+kdb,한국산업은행,The Korea Development Bank,7,23.48,3.24,32.19,1,15,N0,56
+kdb,한국산업은행,The Korea Development Bank,10,23.48,3.24,32.19,1,15,N0,56
+rok,대한민국,Republic of Korea,3,23.48,3.24,32.19,1,15,N0,56
+rok,대한민국,Republic of Korea,5,23.48,3.24,32.19,1,15,N0,56
+rok,대한민국,Republic of Korea,7,23.48,3.24,32.19,1,15,N0,56
+rok,대한민국,Republic of Korea,10,23.48,3.24,32.19,1,15,N0,56
+kb_bank,국민은행,KB Kookmin Bank,3,42.0,21.76,50.71,2,6,N0,56
+kb_bank,국민은행,KB Kookmin Bank,5,42.0,21.76,50.71,2,6,N0,56
+kb_bank,국민은행,KB Kookmin Bank,7,42.0,21.76,50.71,2,6,N0,56
+kb_bank,국민은행,KB Kookmin Bank,10,42.0,21.76,50.71,2,6,N0,56
+sk_hynix,SK하이닉스,SK hynix,3,80.0,59.76,88.71,1,3,N0,56
+sk_hynix,SK하이닉스,SK hynix,5,80.0,59.76,88.71,1,3,N0,56
+sk_hynix,SK하이닉스,SK hynix,7,80.0,59.76,88.71,1,3,N0,56
+sk_hynix,SK하이닉스,SK hynix,10,80.0,59.76,88.71,1,3,N0,56
+nh_bank,농협은행,NongHyup Bank,3,42.5,22.26,51.21,1,2,N0,56
+nh_bank,농협은행,NongHyup Bank,5,42.5,22.26,51.21,1,2,N0,56
+nh_bank,농협은행,NongHyup Bank,7,42.5,22.26,51.21,1,2,N0,56
+nh_bank,농협은행,NongHyup Bank,10,42.5,22.26,51.21,1,2,N0,56
+woori_bank,우리은행,Woori Bank,3,37.5,17.26,46.21,1,4,N0,56
+woori_bank,우리은행,Woori Bank,5,37.5,17.26,46.21,1,4,N0,56
+woori_bank,우리은행,Woori Bank,7,37.5,17.26,46.21,1,4,N0,56
+woori_bank,우리은행,Woori Bank,10,37.5,17.26,46.21,1,4,N0,56
+x_씨제이프레시웨이,씨제이프레시웨이,CJ Freshway Corporation,3,80.0,59.76,88.71,1,3,N0,56
+x_씨제이프레시웨이,씨제이프레시웨이,CJ Freshway Corporation,5,80.0,59.76,88.71,1,3,N0,56
+x_씨제이프레시웨이,씨제이프레시웨이,CJ Freshway Corporation,7,80.0,59.76,88.71,1,3,N0,56
+x_씨제이프레시웨이,씨제이프레시웨이,CJ Freshway Corporation,10,80.0,59.76,88.71,1,3,N0,56
+ibk,중소기업은행,Industrial Bank of Korea,3,23.48,3.24,32.19,1,15,N0,56
+ibk,중소기업은행,Industrial Bank of Korea,5,23.48,3.24,32.19,1,15,N0,56
+ibk,중소기업은행,Industrial Bank of Korea,7,23.48,3.24,32.19,1,15,N0,56
+ibk,중소기업은행,Industrial Bank of Korea,10,23.48,3.24,32.19,1,15,N0,56
+hana_bank,하나은행,Hana Bank,3,37.5,17.26,46.21,1,4,N0,56
+hana_bank,하나은행,Hana Bank,5,37.5,17.26,46.21,1,4,N0,56
+hana_bank,하나은행,Hana Bank,7,37.5,17.26,46.21,1,4,N0,56
+hana_bank,하나은행,Hana Bank,10,37.5,17.26,46.21,1,4,N0,56
+woori_capital,우리금융캐피탈,"WOORI FINANCIAL CAPITAL CO.,LTD",3,77.5,57.26,86.21,2,6,N0,56
+woori_capital,우리금융캐피탈,"WOORI FINANCIAL CAPITAL CO.,LTD",5,77.5,57.26,86.21,2,6,N0,56
+woori_capital,우리금융캐피탈,"WOORI FINANCIAL CAPITAL CO.,LTD",7,77.5,57.26,86.21,2,6,N0,56
+woori_capital,우리금융캐피탈,"WOORI FINANCIAL CAPITAL CO.,LTD",10,77.5,57.26,86.21,2,6,N0,56
+kogas,한국가스공사,Korea Gas Corp,3,50.0,29.76,58.71,1,15,N0,56
+kogas,한국가스공사,Korea Gas Corp,5,50.0,29.76,58.71,1,15,N0,56
+kogas,한국가스공사,Korea Gas Corp,7,50.0,29.76,58.71,1,15,N0,56
+kogas,한국가스공사,Korea Gas Corp,10,50.0,29.76,58.71,1,15,N0,56
+hana_sec,하나증권,Hana Securities,3,77.5,57.26,86.21,1,6,N0,56
+hana_sec,하나증권,Hana Securities,5,77.5,57.26,86.21,1,6,N0,56
+hana_sec,하나증권,Hana Securities,7,77.5,57.26,86.21,1,6,N0,56
+hana_sec,하나증권,Hana Securities,10,77.5,57.26,86.21,1,6,N0,56
+x_넥센타이어,넥센타이어,NEXEN TIRE CORPORATION,3,80.0,59.76,88.71,1,3,N0,56
+x_넥센타이어,넥센타이어,NEXEN TIRE CORPORATION,5,80.0,59.76,88.71,1,3,N0,56
+x_넥센타이어,넥센타이어,NEXEN TIRE CORPORATION,7,80.0,59.76,88.71,1,3,N0,56
+x_넥센타이어,넥센타이어,NEXEN TIRE CORPORATION,10,80.0,59.76,88.71,1,3,N0,56
+x_두산에너빌리티,두산에너빌리티,"DOOSAN ENERBILITY CO., LTD.",3,40.0,19.76,48.71,1,1,N0,56
+x_두산에너빌리티,두산에너빌리티,"DOOSAN ENERBILITY CO., LTD.",5,40.0,19.76,48.71,1,1,N0,56
+x_두산에너빌리티,두산에너빌리티,"DOOSAN ENERBILITY CO., LTD.",7,40.0,19.76,48.71,1,1,N0,56
+x_두산에너빌리티,두산에너빌리티,"DOOSAN ENERBILITY CO., LTD.",10,40.0,19.76,48.71,1,1,N0,56
+x_세아창원특수강,세아창원특수강,SeAH Changwon Integrated Special Steel,3,80.0,59.76,88.71,1,3,N0,56
+x_세아창원특수강,세아창원특수강,SeAH Changwon Integrated Special Steel,5,80.0,59.76,88.71,1,3,N0,56
+x_세아창원특수강,세아창원특수강,SeAH Changwon Integrated Special Steel,7,80.0,59.76,88.71,1,3,N0,56
+x_세아창원특수강,세아창원특수강,SeAH Changwon Integrated Special Steel,10,80.0,59.76,88.71,1,3,N0,56
+hyundai_capital,현대캐피탈,Hyundai Capital Services,3,77.5,57.26,86.21,2,6,N0,56
+hyundai_capital,현대캐피탈,Hyundai Capital Services,5,77.5,57.26,86.21,2,6,N0,56
+hyundai_capital,현대캐피탈,Hyundai Capital Services,7,77.5,57.26,86.21,2,6,N0,56
+hyundai_capital,현대캐피탈,Hyundai Capital Services,10,77.5,57.26,86.21,2,6,N0,56
+lges,LG에너지솔루션,LG Energy Solution,3,115.0,94.76,123.71,1,5,N0,56
+lges,LG에너지솔루션,LG Energy Solution,5,115.0,94.76,123.71,1,5,N0,56
+lges,LG에너지솔루션,LG Energy Solution,7,115.0,94.76,123.71,1,5,N0,56
+lges,LG에너지솔루션,LG Energy Solution,10,115.0,94.76,123.71,1,5,N0,56
+x_acushnetcompany,Acushnet company,Acushnet Company,3,77.5,57.26,86.21,2,12,N0,56
+x_acushnetcompany,Acushnet company,Acushnet Company,5,77.5,57.26,86.21,2,12,N0,56
+x_acushnetcompany,Acushnet company,Acushnet Company,7,77.5,57.26,86.21,2,12,N0,56
+x_acushnetcompany,Acushnet company,Acushnet Company,10,77.5,57.26,86.21,2,12,N0,56
+x_포스코퓨처엠,포스코퓨처엠,"POSCO FUTURE M CO., LTD.",3,80.0,59.76,88.71,1,3,N0,56
+x_포스코퓨처엠,포스코퓨처엠,"POSCO FUTURE M CO., LTD.",5,80.0,59.76,88.71,1,3,N0,56
+x_포스코퓨처엠,포스코퓨처엠,"POSCO FUTURE M CO., LTD.",7,80.0,59.76,88.71,1,3,N0,56
+x_포스코퓨처엠,포스코퓨처엠,"POSCO FUTURE M CO., LTD.",10,80.0,59.76,88.71,1,3,N0,56
+kis,한국투자증권,Korea Investment & Securities,3,77.5,57.26,86.21,2,6,N0,56
+kis,한국투자증권,Korea Investment & Securities,5,77.5,57.26,86.21,2,6,N0,56
+kis,한국투자증권,Korea Investment & Securities,7,77.5,57.26,86.21,2,6,N0,56
+kis,한국투자증권,Korea Investment & Securities,10,77.5,57.26,86.21,2,6,N0,56
+x_롯데렌탈,롯데렌탈,"LOTTE rental co., ltd.",3,115.0,94.76,123.71,1,5,N0,56
+x_롯데렌탈,롯데렌탈,"LOTTE rental co., ltd.",5,115.0,94.76,123.71,1,5,N0,56
+x_롯데렌탈,롯데렌탈,"LOTTE rental co., ltd.",7,115.0,94.76,123.71,1,5,N0,56
+x_롯데렌탈,롯데렌탈,"LOTTE rental co., ltd.",10,115.0,94.76,123.71,1,5,N0,56
+shinhan_card,신한카드,Shinhan Card,3,77.5,57.26,86.21,2,6,N0,56
+shinhan_card,신한카드,Shinhan Card,5,77.5,57.26,86.21,2,6,N0,56
+shinhan_card,신한카드,Shinhan Card,7,77.5,57.26,86.21,2,6,N0,56
+shinhan_card,신한카드,Shinhan Card,10,77.5,57.26,86.21,2,6,N0,56
+lg_elec,LG전자,LG Electronics,3,115.0,94.76,123.71,1,5,N0,56
+lg_elec,LG전자,LG Electronics,5,115.0,94.76,123.71,1,5,N0,56
+lg_elec,LG전자,LG Electronics,7,115.0,94.76,123.71,1,5,N0,56
+lg_elec,LG전자,LG Electronics,10,115.0,94.76,123.71,1,5,N0,56
+x_롯데쇼핑,롯데쇼핑,"LOTTE SHOPPING CO.,LTD.",3,80.0,59.76,88.71,1,3,N0,56
+x_롯데쇼핑,롯데쇼핑,"LOTTE SHOPPING CO.,LTD.",5,80.0,59.76,88.71,1,3,N0,56
+x_롯데쇼핑,롯데쇼핑,"LOTTE SHOPPING CO.,LTD.",7,80.0,59.76,88.71,1,3,N0,56
+x_롯데쇼핑,롯데쇼핑,"LOTTE SHOPPING CO.,LTD.",10,80.0,59.76,88.71,1,3,N0,56
+x_롯데오토리스,롯데오토리스,Lotte Auto Lease,3,80.0,59.76,88.71,1,3,N0,56
+x_롯데오토리스,롯데오토리스,Lotte Auto Lease,5,80.0,59.76,88.71,1,3,N0,56
+x_롯데오토리스,롯데오토리스,Lotte Auto Lease,7,80.0,59.76,88.71,1,3,N0,56
+x_롯데오토리스,롯데오토리스,Lotte Auto Lease,10,80.0,59.76,88.71,1,3,N0,56
+x_코스맥스비티아이,코스맥스비티아이,"COSMAX BTI, INC.",3,77.5,57.26,86.21,2,6,N0,56
+x_코스맥스비티아이,코스맥스비티아이,"COSMAX BTI, INC.",5,77.5,57.26,86.21,2,6,N0,56
+x_코스맥스비티아이,코스맥스비티아이,"COSMAX BTI, INC.",7,77.5,57.26,86.21,2,6,N0,56
+x_코스맥스비티아이,코스맥스비티아이,"COSMAX BTI, INC.",10,77.5,57.26,86.21,2,6,N0,56
+kt,케이티,KT Corp,3,60.0,39.76,68.71,1,3,N0,56
+kt,케이티,KT Corp,5,60.0,39.76,68.71,1,3,N0,56
+kt,케이티,KT Corp,7,60.0,39.76,68.71,1,3,N0,56
+kt,케이티,KT Corp,10,60.0,39.76,68.71,1,3,N0,56
+x_hanwhaqcellsusainc,"Hanwha Q CELLS USA, Inc.","Hanwha Q CELLS USA, Inc.",3,80.0,59.76,88.71,1,3,N0,56
+x_hanwhaqcellsusainc,"Hanwha Q CELLS USA, Inc.","Hanwha Q CELLS USA, Inc.",5,80.0,59.76,88.71,1,3,N0,56
+x_hanwhaqcellsusainc,"Hanwha Q CELLS USA, Inc.","Hanwha Q CELLS USA, Inc.",7,80.0,59.76,88.71,1,3,N0,56
+x_hanwhaqcellsusainc,"Hanwha Q CELLS USA, Inc.","Hanwha Q CELLS USA, Inc.",10,80.0,59.76,88.71,1,3,N0,56
+x_대우건설,대우건설,"DAEWOO ENGINEERING & CONSTRUCTION CO.,LTD",3,80.0,59.76,88.71,1,3,N0,56
+x_대우건설,대우건설,"DAEWOO ENGINEERING & CONSTRUCTION CO.,LTD",5,80.0,59.76,88.71,1,3,N0,56
+x_대우건설,대우건설,"DAEWOO ENGINEERING & CONSTRUCTION CO.,LTD",7,80.0,59.76,88.71,1,3,N0,56
+x_대우건설,대우건설,"DAEWOO ENGINEERING & CONSTRUCTION CO.,LTD",10,80.0,59.76,88.71,1,3,N0,56
+x_한화솔루션,한화솔루션,HANWHA SOLUTIONS CORPORATION,3,80.0,59.76,88.71,1,3,N0,56
+x_한화솔루션,한화솔루션,HANWHA SOLUTIONS CORPORATION,5,80.0,59.76,88.71,1,3,N0,56
+x_한화솔루션,한화솔루션,HANWHA SOLUTIONS CORPORATION,7,80.0,59.76,88.71,1,3,N0,56
+x_한화솔루션,한화솔루션,HANWHA SOLUTIONS CORPORATION,10,80.0,59.76,88.71,1,3,N0,56
+x_동국제강,동국제강,"DONGKUK STEEL MILL Co., Ltd.",3,80.0,59.76,88.71,1,3,N0,56
+x_동국제강,동국제강,"DONGKUK STEEL MILL Co., Ltd.",5,80.0,59.76,88.71,1,3,N0,56
+x_동국제강,동국제강,"DONGKUK STEEL MILL Co., Ltd.",7,80.0,59.76,88.71,1,3,N0,56
+x_동국제강,동국제강,"DONGKUK STEEL MILL Co., Ltd.",10,80.0,59.76,88.71,1,3,N0,56
+ktng,케이티앤지,KT&G Corp,3,60.0,39.76,68.71,1,3,N0,56
+ktng,케이티앤지,KT&G Corp,5,60.0,39.76,68.71,1,3,N0,56
+ktng,케이티앤지,KT&G Corp,7,60.0,39.76,68.71,1,3,N0,56
+ktng,케이티앤지,KT&G Corp,10,60.0,39.76,68.71,1,3,N0,56
+posco_holdings,포스코홀딩스,POSCO Holdings,3,60.0,39.76,68.71,1,3,N0,56
+posco_holdings,포스코홀딩스,POSCO Holdings,5,60.0,39.76,68.71,1,3,N0,56
+posco_holdings,포스코홀딩스,POSCO Holdings,7,60.0,39.76,68.71,1,3,N0,56
+posco_holdings,포스코홀딩스,POSCO Holdings,10,60.0,39.76,68.71,1,3,N0,56
+hanwha_life,한화생명,Hanwha Life Insurance,3,77.5,57.26,86.21,1,6,N0,56
+hanwha_life,한화생명,Hanwha Life Insurance,5,77.5,57.26,86.21,1,6,N0,56
+hanwha_life,한화생명,Hanwha Life Insurance,7,77.5,57.26,86.21,1,6,N0,56
+hanwha_life,한화생명,Hanwha Life Insurance,10,77.5,57.26,86.21,1,6,N0,56
+nh_sec,엔에이치투자증권,NH Investment & Securities,3,77.5,57.26,86.21,1,6,N0,56
+nh_sec,엔에이치투자증권,NH Investment & Securities,5,77.5,57.26,86.21,1,6,N0,56
+nh_sec,엔에이치투자증권,NH Investment & Securities,7,77.5,57.26,86.21,1,6,N0,56
+nh_sec,엔에이치투자증권,NH Investment & Securities,10,77.5,57.26,86.21,1,6,N0,56
+shinhan_fg,신한금융지주,Shinhan Financial Group,3,77.5,57.26,86.21,1,6,N0,56
+shinhan_fg,신한금융지주,Shinhan Financial Group,5,77.5,57.26,86.21,1,6,N0,56
+shinhan_fg,신한금융지주,Shinhan Financial Group,7,77.5,57.26,86.21,1,6,N0,56
+shinhan_fg,신한금융지주,Shinhan Financial Group,10,77.5,57.26,86.21,1,6,N0,56
+x_대한항공,대한항공,"KOREAN AIR LINES CO.,LTD",3,40.0,19.76,48.71,1,1,N0,56
+x_대한항공,대한항공,"KOREAN AIR LINES CO.,LTD",5,40.0,19.76,48.71,1,1,N0,56
+x_대한항공,대한항공,"KOREAN AIR LINES CO.,LTD",7,40.0,19.76,48.71,1,1,N0,56
+x_대한항공,대한항공,"KOREAN AIR LINES CO.,LTD",10,40.0,19.76,48.71,1,1,N0,56
+naver,네이버,NAVER,3,60.0,39.76,68.71,1,3,N0,56
+naver,네이버,NAVER,5,60.0,39.76,68.71,1,3,N0,56
+naver,네이버,NAVER,7,60.0,39.76,68.71,1,3,N0,56
+naver,네이버,NAVER,10,60.0,39.76,68.71,1,3,N0,56
+x_씨제이이엔엠,씨제이이엔엠,"CJ ENM Co., Ltd.",3,80.0,59.76,88.71,1,3,N0,56
+x_씨제이이엔엠,씨제이이엔엠,"CJ ENM Co., Ltd.",5,80.0,59.76,88.71,1,3,N0,56
+x_씨제이이엔엠,씨제이이엔엠,"CJ ENM Co., Ltd.",7,80.0,59.76,88.71,1,3,N0,56
+x_씨제이이엔엠,씨제이이엔엠,"CJ ENM Co., Ltd.",10,80.0,59.76,88.71,1,3,N0,56
+lh,한국토지주택공사,Korea Land & Housing Corp,3,50.0,29.76,58.71,1,15,N0,56
+lh,한국토지주택공사,Korea Land & Housing Corp,5,50.0,29.76,58.71,1,15,N0,56
+lh,한국토지주택공사,Korea Land & Housing Corp,7,50.0,29.76,58.71,1,15,N0,56
+lh,한국토지주택공사,Korea Land & Housing Corp,10,50.0,29.76,58.71,1,15,N0,56
+tongyang_life,동양생명보험,Tongyang Life Insurance,3,77.5,57.26,86.21,2,6,N0,56
+tongyang_life,동양생명보험,Tongyang Life Insurance,5,77.5,57.26,86.21,2,6,N0,56
+tongyang_life,동양생명보험,Tongyang Life Insurance,7,77.5,57.26,86.21,2,6,N0,56
+tongyang_life,동양생명보험,Tongyang Life Insurance,10,77.5,57.26,86.21,2,6,N0,56
+ewp,한국동서발전,Korea East-West Power (EWP),3,50.0,29.76,58.71,1,15,N0,56
+ewp,한국동서발전,Korea East-West Power (EWP),5,50.0,29.76,58.71,1,15,N0,56
+ewp,한국동서발전,Korea East-West Power (EWP),7,50.0,29.76,58.71,1,15,N0,56
+ewp,한국동서발전,Korea East-West Power (EWP),10,50.0,29.76,58.71,1,15,N0,56
+kepco,한국전력공사,Korea Electric Power Corp,3,50.0,29.76,58.71,1,15,N0,56
+kepco,한국전력공사,Korea Electric Power Corp,5,50.0,29.76,58.71,1,15,N0,56
+kepco,한국전력공사,Korea Electric Power Corp,7,50.0,29.76,58.71,1,15,N0,56
+kepco,한국전력공사,Korea Electric Power Corp,10,50.0,29.76,58.71,1,15,N0,56
+samsung_life,삼성생명,Samsung Life Insurance,3,77.5,57.26,86.21,2,6,N0,56
+samsung_life,삼성생명,Samsung Life Insurance,5,77.5,57.26,86.21,2,6,N0,56
+samsung_life,삼성생명,Samsung Life Insurance,7,77.5,57.26,86.21,2,6,N0,56
+samsung_life,삼성생명,Samsung Life Insurance,10,77.5,57.26,86.21,2,6,N0,56
+shinhan_bank,신한은행,Shinhan Bank,3,42.5,22.26,51.21,1,2,N0,56
+shinhan_bank,신한은행,Shinhan Bank,5,42.5,22.26,51.21,1,2,N0,56
+shinhan_bank,신한은행,Shinhan Bank,7,42.5,22.26,51.21,1,2,N0,56
+shinhan_bank,신한은행,Shinhan Bank,10,42.5,22.26,51.21,1,2,N0,56
+kb_capital,KB캐피탈,KB Capital,3,77.5,57.26,86.21,1,6,N0,56
+kb_capital,KB캐피탈,KB Capital,5,77.5,57.26,86.21,1,6,N0,56
+kb_capital,KB캐피탈,KB Capital,7,77.5,57.26,86.21,1,6,N0,56
+kb_capital,KB캐피탈,KB Capital,10,77.5,57.26,86.21,1,6,N0,56
+posco,포스코,POSCO,3,80.0,59.76,88.71,1,3,N0,56
+posco,포스코,POSCO,5,80.0,59.76,88.71,1,3,N0,56
+posco,포스코,POSCO,7,80.0,59.76,88.71,1,3,N0,56
+posco,포스코,POSCO,10,80.0,59.76,88.71,1,3,N0,56
+posco_intl,포스코인터내셔널,POSCO International,3,115.0,94.76,123.71,1,5,N0,56
+posco_intl,포스코인터내셔널,POSCO International,5,115.0,94.76,123.71,1,5,N0,56
+posco_intl,포스코인터내셔널,POSCO International,7,115.0,94.76,123.71,1,5,N0,56
+posco_intl,포스코인터내셔널,POSCO International,10,115.0,94.76,123.71,1,5,N0,56
+knoc,한국석유공사,Korea National Oil Corp,3,50.0,29.76,58.71,1,15,N0,56
+knoc,한국석유공사,Korea National Oil Corp,5,50.0,29.76,58.71,1,15,N0,56
+knoc,한국석유공사,Korea National Oil Corp,7,50.0,29.76,58.71,1,15,N0,56
+knoc,한국석유공사,Korea National Oil Corp,10,50.0,29.76,58.71,1,15,N0,56
+khnp,한국수력원자력,Korea Hydro & Nuclear Power,3,50.0,29.76,58.71,1,15,N0,56
+khnp,한국수력원자력,Korea Hydro & Nuclear Power,5,50.0,29.76,58.71,1,15,N0,56
+khnp,한국수력원자력,Korea Hydro & Nuclear Power,7,50.0,29.76,58.71,1,15,N0,56
+khnp,한국수력원자력,Korea Hydro & Nuclear Power,10,50.0,29.76,58.71,1,15,N0,56
+komipo,한국중부발전,Korea Midland Power (KOMIPO),3,50.0,29.76,58.71,1,15,N0,56
+komipo,한국중부발전,Korea Midland Power (KOMIPO),5,50.0,29.76,58.71,1,15,N0,56
+komipo,한국중부발전,Korea Midland Power (KOMIPO),7,50.0,29.76,58.71,1,15,N0,56
+komipo,한국중부발전,Korea Midland Power (KOMIPO),10,50.0,29.76,58.71,1,15,N0,56
+kospo,한국남부발전,Korea Southern Power (KOSPO),3,50.0,29.76,58.71,1,15,N0,56
+kospo,한국남부발전,Korea Southern Power (KOSPO),5,50.0,29.76,58.71,1,15,N0,56
+kospo,한국남부발전,Korea Southern Power (KOSPO),7,50.0,29.76,58.71,1,15,N0,56
+kospo,한국남부발전,Korea Southern Power (KOSPO),10,50.0,29.76,58.71,1,15,N0,56
+korail,한국철도공사,Korea Railroad Corp,3,50.0,29.76,58.71,1,15,N0,56
+korail,한국철도공사,Korea Railroad Corp,5,50.0,29.76,58.71,1,15,N0,56
+korail,한국철도공사,Korea Railroad Corp,7,50.0,29.76,58.71,1,15,N0,56
+korail,한국철도공사,Korea Railroad Corp,10,50.0,29.76,58.71,1,15,N0,56
+mirae_sec,미래에셋증권,Mirae Asset Securities,3,77.5,57.26,86.21,2,6,N0,56
+mirae_sec,미래에셋증권,Mirae Asset Securities,5,77.5,57.26,86.21,2,6,N0,56
+mirae_sec,미래에셋증권,Mirae Asset Securities,7,77.5,57.26,86.21,2,6,N0,56
+mirae_sec,미래에셋증권,Mirae Asset Securities,10,77.5,57.26,86.21,2,6,N0,56
+x_인천국제공항공사,인천국제공항공사,Incheon International Airport Corporation,3,40.0,19.76,48.71,1,1,N0,56
+x_인천국제공항공사,인천국제공항공사,Incheon International Airport Corporation,5,40.0,19.76,48.71,1,1,N0,56
+x_인천국제공항공사,인천국제공항공사,Incheon International Airport Corporation,7,40.0,19.76,48.71,1,1,N0,56
+x_인천국제공항공사,인천국제공항공사,Incheon International Airport Corporation,10,40.0,19.76,48.71,1,1,N0,56

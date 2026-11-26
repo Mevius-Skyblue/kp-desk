@@ -1,0 +1,266 @@
+deal_key,issuer_name_ko,issuer_name_en,issuer_type,issue_date,maturity,tenor_years,currency,coupon_pct,reoffer_yield_pct,rep_spread_bp,rep_spread_basis,sample_tier,rating_bucket,source_url
+kexim|USD|2023-01-11|2026-01-11,한국수출입은행,The Export-Import Bank of Korea,policy,2023-01-11,2026-01-11,3.0,USD,4.875,4.98608,87.62,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312523001903/d423862dfwp.htm
+kexim|USD|2023-01-11|2028-01-11,한국수출입은행,The Export-Import Bank of Korea,policy,2023-01-11,2028-01-11,5.0,USD,5.0,5.07992,122.98,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312523001903/d423862dfwp.htm
+kexim|USD|2023-01-11|2033-01-11,한국수출입은행,The Export-Import Bank of Korea,policy,2023-01-11,2033-01-11,10.0,USD,5.125,5.17804,148.8,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312523001903/d423862dfwp.htm
+kdb|USD|2023-02-15|2028-02-15,한국산업은행,The Korea Development Bank,policy,2023-02-15,2028-02-15,5.0,USD,4.375,4.42701,60.69,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312523029081/d454293dfwp.htm
+kdb|USD|2023-02-15|2033-02-15,한국산업은행,The Korea Development Bank,policy,2023-02-15,2033-02-15,10.0,USD,4.375,4.47297,84.29,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312523029081/d454293dfwp.htm
+kexim|USD|2023-09-18|2025-09-18,한국수출입은행,The Export-Import Bank of Korea,policy,2023-09-18,2025-09-18,2.0,USD,5.375,5.43218,46.26,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312523232934/d654494dfwp.htm
+kexim|USD|2023-09-18|2028-09-18,한국수출입은행,The Export-Import Bank of Korea,policy,2023-09-18,2028-09-18,5.0,USD,5.125,5.15804,75.81,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312523232934/d654494dfwp.htm
+kexim|USD|2023-09-18|2033-09-18,한국수출입은행,The Export-Import Bank of Korea,policy,2023-09-18,2033-09-18,10.0,USD,5.125,5.23605,94.6,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312523232934/d654494dfwp.htm
+kdb|USD|2023-10-23|2026-10-23,한국산업은행,The Korea Development Bank,policy,2023-10-23,2026-10-23,3.0,USD,5.375,5.41705,54.71,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312523257216/d537569dfwp.htm
+kdb|USD|2023-10-23|2028-10-23,한국산업은행,The Korea Development Bank,policy,2023-10-23,2028-10-23,5.0,USD,5.375,5.46705,74.7,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312523257216/d537569dfwp.htm
+kdb|USD|2023-10-23|2033-10-23,한국산업은행,The Korea Development Bank,policy,2023-10-23,2033-10-23,10.0,USD,5.625,5.66298,95.29,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312523257216/d537569dfwp.htm
+kexim|USD|2024-01-11|2027-01-11,한국수출입은행,The Export-Import Bank of Korea,policy,2024-01-11,2027-01-11,3.0,USD,4.625,4.68604,54.61,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312524002813/d866433dfwp.htm
+kexim|USD|2024-01-11|2029-01-11,한국수출입은행,The Export-Import Bank of Korea,policy,2024-01-11,2029-01-11,5.0,USD,4.5,4.61289,64.29,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312524002813/d866433dfwp.htm
+kexim|USD|2024-01-11|2034-01-11,한국수출입은행,The Export-Import Bank of Korea,policy,2024-01-11,2034-01-11,10.0,USD,4.625,4.73306,74.3,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312524002813/d866433dfwp.htm
+kdb|USD|2024-02-15|2027-02-15,한국산업은행,The Korea Development Bank,policy,2024-02-15,2027-02-15,3.0,USD,4.625,4.68315,54.32,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312524026132/d749634dfwp.htm
+kdb|USD|2024-02-15|2029-02-15,한국산업은행,The Korea Development Bank,policy,2024-02-15,2029-02-15,5.0,USD,4.5,4.59611,56.61,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312524026132/d749634dfwp.htm
+rok|USD|2024-07-03|2029-07-03,대한민국,Republic of Korea,sovereign,2024-07-03,2029-07-03,5.0,USD,4.5,4.57594,25.59,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873465/000119312524169579/d798597dfwp.htm
+kexim|USD|2024-09-11|2027-09-11,한국수출입은행,The Export-Import Bank of Korea,policy,2024-09-11,2027-09-11,3.0,USD,4.0,4.10014,46.99,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312524213600/d838103dfwp.htm
+kexim|USD|2024-09-11|2029-09-11,한국수출입은행,The Export-Import Bank of Korea,policy,2024-09-11,2029-09-11,5.0,USD,4.0,4.14707,58.7,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312524213600/d838103dfwp.htm
+kdb|USD|2024-10-16|2027-10-16,한국산업은행,The Korea Development Bank,policy,2024-10-16,2027-10-16,3.0,USD,4.125,4.24798,38.77,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312524234755/d872049dfwp.htm
+kexim|USD|2024-10-17|2027-10-17,한국수출입은행,The Export-Import Bank of Korea,policy,2024-10-17,2027-10-17,3.0,USD,4.125,4.26415,37.39,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312524235530/d887422dfwp.htm
+kexim|USD|2025-01-14|2035-01-14,한국수출입은행,The Export-Import Bank of Korea,policy,2025-01-14,2035-01-14,10.0,USD,5.25,5.32098,65.1,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312525003169/d905395dfwp.htm
+kexim|USD|2025-01-14|2028-01-14,한국수출입은행,The Export-Import Bank of Korea,policy,2025-01-14,2028-01-14,3.0,USD,4.625,4.65713,32.72,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312525003169/d905395dfwp.htm
+kexim|USD|2025-01-14|2030-01-14,한국수출입은행,The Export-Import Bank of Korea,policy,2025-01-14,2030-01-14,5.0,USD,4.875,4.95603,49.61,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312525003169/d905395dfwp.htm
+kdb|USD|2025-09-16|2030-09-16,한국산업은행,The Korea Development Bank,policy,2025-09-16,2030-09-16,5.0,USD,3.75,3.89789,28.79,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312525199647/d931888dfwp.htm
+kexim|USD|2025-09-22|2030-09-22,한국수출입은행,The Export-Import Bank of Korea,policy,2025-09-22,2030-09-22,5.0,USD,3.75,3.86404,25.41,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312525204102/d58354dfwp.htm
+rok|USD|2025-10-29|2030-10-29,대한민국,Republic of Korea,sovereign,2025-10-29,2030-10-29,5.0,USD,3.625,3.7411,18.11,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873465/000119312525247587/d828476dfwp.htm
+kexim|USD|2026-01-13|2029-01-13,한국수출입은행,The Export-Import Bank of Korea,policy,2026-01-13,2029-01-13,3.0,USD,3.75,3.7749,23.48,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312526005370/d942004dfwp.htm
+kexim|USD|2026-01-13|2031-01-13,한국수출입은행,The Export-Import Bank of Korea,policy,2026-01-13,2031-01-13,5.0,USD,3.875,3.98897,26.9,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312526005370/d942004dfwp.htm
+kexim|USD|2026-01-13|2036-01-13,한국수출입은행,The Export-Import Bank of Korea,policy,2026-01-13,2036-01-13,10.0,USD,4.375,4.48303,30.31,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312526005370/d942004dfwp.htm
+kdb|USD|2026-01-28|2029-01-28,한국산업은행,The Korea Development Bank,policy,2026-01-28,2029-01-28,3.0,USD,3.75,3.87292,21.29,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312526018590/d111137dfwp.htm
+kdb|USD|2026-01-28|2031-01-28,한국산업은행,The Korea Development Bank,policy,2026-01-28,2031-01-28,5.0,USD,4.0,4.10404,27.41,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312526018590/d111137dfwp.htm
+rok|USD|2026-02-12|2029-02-12,대한민국,Republic of Korea,sovereign,2026-02-12,2029-02-12,3.0,USD,3.625,3.68289,13.28,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873465/000119312526040203/d71096dfwp.htm
+rok|USD|2026-02-12|2031-02-12,대한민국,Republic of Korea,sovereign,2026-02-12,2031-02-12,5.0,USD,3.875,3.91499,17.51,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873465/000119312526040208/d71096dfwp.htm
+kexim|USD|2026-07-20|2029-07-20,한국수출입은행,The Export-Import Bank of Korea,policy,2026-07-20,2029-07-20,3.0,USD,4.375,4.47902,17.9,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312526302512/d106606dfwp.htm
+kexim|USD|2026-07-20|2031-07-20,한국수출입은행,The Export-Import Bank of Korea,policy,2026-07-20,2031-07-20,5.0,USD,4.5,4.57504,20.51,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/873463/000119312526302512/d106606dfwp.htm
+kdb|USD|2026-09-10|2029-09-10,한국산업은행,The Korea Development Bank,policy,2026-09-10,2029-09-10,3.0,USD,4.625,4.63799,18.8,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312526380877/d157553dfwp.htm
+kdb|USD|2026-09-10|2031-09-10,한국산업은행,The Korea Development Bank,policy,2026-09-10,2031-09-10,5.0,USD,4.75,4.7759,23.59,reoffer,A,AA,https://www.sec.gov/Archives/edgar/data/869318/000119312526380877/d157553dfwp.htm
+kb_bank|USD|2023-01-11|2024-01-12,국민은행,KB Kookmin Bank,bank,2023-01-11,2024-01-12,1.0,USD,5.53,,82.07,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+sk_hynix|USD|2023-01-17|2026-01-17,SK하이닉스,SK hynix,nonfin,2023-01-17,2026-01-17,3.0,USD,6.25,,231.01,coupon,C,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240319000684
+sk_hynix|USD|2023-01-17|2028-01-17,SK하이닉스,SK hynix,nonfin,2023-01-17,2028-01-17,5.0,USD,6.38,,265.99,coupon,C,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240319000684
+sk_hynix|USD|2023-01-17|2033-01-17,SK하이닉스,SK hynix,nonfin,2023-01-17,2033-01-17,10.0,USD,6.5,,289.0,coupon,C,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240319000684
+kb_bank|USD|2023-01-17|2024-01-18,국민은행,KB Kookmin Bank,bank,2023-01-17,2024-01-18,1.0,USD,5.47,,73.1,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-01-18|2024-01-19,국민은행,KB Kookmin Bank,bank,2023-01-18,2024-01-19,1.0,USD,5.47,,74.11,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-01-20|2024-01-21,국민은행,KB Kookmin Bank,bank,2023-01-20,2024-01-21,1.0,USD,5.4,,71.1,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-01-25|2024-01-26,국민은행,KB Kookmin Bank,bank,2023-01-25,2024-01-26,1.0,USD,5.3,,67.12,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+nh_bank|USD|2023-01-25|2024-01-26,농협은행,NongHyup Bank,bank,2023-01-25,2024-01-26,1.0,USD,5.42,,79.12,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240329003569
+woori_bank|USD|2023-01-26|2028-01-26,우리은행,Woori Bank,bank,2023-01-26,2028-01-26,5.0,USD,4.875,,139.49,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240326000240
+kb_bank|USD|2023-01-27|2024-01-28,국민은행,KB Kookmin Bank,bank,2023-01-27,2024-01-28,1.0,USD,5.26,,58.11,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-01-30|2024-01-31,국민은행,KB Kookmin Bank,bank,2023-01-30,2024-01-31,1.0,USD,5.19,,49.1,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-01-31|2024-02-01,국민은행,KB Kookmin Bank,bank,2023-01-31,2024-02-01,1.0,USD,5.2,,50.12,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-02-06|2024-02-07,국민은행,KB Kookmin Bank,bank,2023-02-06,2024-02-07,1.0,USD,5.23,,52.09,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-02-07|2024-02-08,국민은행,KB Kookmin Bank,bank,2023-02-07,2024-02-08,1.0,USD,5.25,,57.1,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+x_cj_freshway_corporation|USD|2023-02-10|2026-02-09,씨제이프레시웨이,CJ Freshway Corporation,nonfin,2023-02-10,2026-02-09,3.0,USD,4.62,,65.93,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240320001996
+ibk|USD|2023-04-11|2028-04-11,중소기업은행,Industrial Bank of Korea,policy,2023-04-11,2028-04-11,5.0,USD,4.49,,110.0,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240430000630
+kb_bank|USD|2023-04-21|2028-04-21,국민은행,KB Kookmin Bank,bank,2023-04-21,2028-04-21,5.0,USD,4.63,,103.0,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+nh_bank|USD|2023-04-24|2024-04-25,농협은행,NongHyup Bank,bank,2023-04-24,2024-04-25,1.0,USD,5.35,,55.3,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240329003569
+kb_bank|USD|2023-04-25|2024-04-26,국민은행,KB Kookmin Bank,bank,2023-04-25,2024-04-26,1.0,USD,5.39,,58.3,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+ibk|USD|2023-05-11|2026-05-11,중소기업은행,Industrial Bank of Korea,policy,2023-05-11,2026-05-11,3.0,USD,4.0,,53.01,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240430000630
+nh_bank|USD|2023-05-15|2024-05-15,농협은행,NongHyup Bank,bank,2023-05-15,2024-05-15,1.0,USD,5.14,,35.16,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240329003569
+ibk|USD|2023-05-25|2025-05-25,중소기업은행,Industrial Bank of Korea,policy,2023-05-25,2025-05-25,2.0,USD,4.78,,54.04,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240430000630
+kb_bank|USD|2023-05-25|2024-05-28,국민은행,KB Kookmin Bank,bank,2023-05-25,2024-05-28,1.01,USD,5.4,,38.8,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+hana_bank|USD|2023-05-31|2024-05-31,하나은행,Hana Bank,bank,2023-05-31,2024-05-31,1.0,USD,5.49,,37.17,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240314001547
+woori_capital|USD|2023-06-08|2026-06-08,우리금융캐피탈,"WOORI FINANCIAL CAPITAL CO.,LTD",card_capital,2023-06-08,2026-06-08,3.0,USD,4.41,,43.01,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240314001079
+kb_bank|USD|2023-06-30|2024-07-01,국민은행,KB Kookmin Bank,bank,2023-06-30,2024-07-01,1.0,USD,5.85,,60.26,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+nh_bank|USD|2023-07-03|2028-07-03,농협은행,NongHyup Bank,bank,2023-07-03,2028-07-03,5.0,USD,4.95,,99.01,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240329003569
+kogas|USD|2023-07-05|2028-07-05,한국가스공사,Korea Gas Corp,soe,2023-07-05,2028-07-05,5.0,USD,4.875,,90.51,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240325000966
+hana_sec|USD|2023-07-07|2024-11-03,하나증권,Hana Securities,fin_other,2023-07-07,2024-11-03,1.33,USD,5.7,,47.38,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240314001208
+x_nexen_tire_corporation|USD|2023-07-14|2026-07-14,넥센타이어,NEXEN TIRE CORPORATION,nonfin,2023-07-14,2026-07-14,3.0,USD,5.28,,64.01,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002676
+kb_bank|USD|2023-07-14|2024-07-15,국민은행,KB Kookmin Bank,bank,2023-07-14,2024-07-15,1.0,USD,5.9,,49.23,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+x_doosan_enerbility_co_ltd|USD|2023-07-17|2026-07-17,두산에너빌리티,"DOOSAN ENERBILITY CO., LTD.",nonfin,2023-07-17,2026-07-17,3.0,USD,5.5,,96.01,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240320001953
+x_seah_changwon_integrated_special_steel|USD|2023-07-24|2026-07-24,세아창원특수강,SeAH Changwon Integrated Special Steel,nonfin,2023-07-24,2026-07-24,3.0,USD,4.51,,17.01,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001645
+x_hanwhaqcellsamericasholdingscorporation|USD|2023-07-27|2028-07-27,Hanwha Q CELLS Americas Holdings Corporation,Hanwha Q CELLS Americas Holdings Corporation,guaranteed,2023-07-27,2028-07-27,5.0,USD,5.17,,109.01,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240328000654
+kb_bank|USD|2023-07-28|2043-07-28,국민은행,KB Kookmin Bank,bank,2023-07-28,2043-07-28,20.0,USD,5.21,,111.0,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-07-31|2024-08-01,국민은행,KB Kookmin Bank,bank,2023-07-31,2024-08-01,1.0,USD,5.92,,54.27,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-08-01|2024-08-02,국민은행,KB Kookmin Bank,bank,2023-08-01,2024-08-02,1.0,USD,5.92,,54.25,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-08-08|2024-08-09,국민은행,KB Kookmin Bank,bank,2023-08-08,2024-08-09,1.0,USD,5.7,,32.22,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-08-09|2024-08-12,국민은행,KB Kookmin Bank,bank,2023-08-09,2024-08-12,1.01,USD,5.9,,54.49,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+kb_bank|USD|2023-08-11|2024-08-12,국민은행,KB Kookmin Bank,bank,2023-08-11,2024-08-12,1.0,USD,5.7,,37.26,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240814004195
+hyundai_capital|USD|2023-08-18|2025-08-18,현대캐피탈,Hyundai Capital Services,card_capital,2023-08-18,2025-08-18,2.0,USD,5.16,,27.05,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240516001064
+ibk|USD|2023-08-24|2024-08-26|n1,중소기업은행,Industrial Bank of Korea,policy,2023-08-24,2024-08-26,1.01,USD,5.88,,52.32,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240430000630
+ibk|USD|2023-08-24|2024-08-26|n2,중소기업은행,Industrial Bank of Korea,policy,2023-08-24,2024-08-26,1.01,USD,5.81,,45.32,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240430000630
+woori_bank|USD|2023-09-21|2024-09-22,우리은행,Woori Bank,bank,2023-09-21,2024-09-22,1.0,USD,5.97,,55.2,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240326000240
+lges|USD|2023-09-25|2026-09-25,LG에너지솔루션,LG Energy Solution,nonfin,2023-09-25,2026-09-25,3.0,USD,5.63,,89.01,coupon,C,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240314001110
+lges|USD|2023-09-25|2028-09-25,LG에너지솔루션,LG Energy Solution,nonfin,2023-09-25,2028-09-25,5.0,USD,5.75,,129.01,coupon,C,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240314001110
+x_acushnetcompany|USD|2023-09-26|2028-10-15,Acushnet company,Acushnet Company,nonfin,2023-09-26,2028-10-15,5.05,USD,7.375,,286.61,coupon,C,BB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240320000962
+woori_bank|USD|2023-09-26|2024-09-26,우리은행,Woori Bank,bank,2023-09-26,2024-09-26,1.0,USD,6.0,,55.08,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240326000240
+x_posco_future_m_co_ltd|USD|2023-09-27|2025-09-26,포스코퓨처엠,"POSCO FUTURE M CO., LTD.",nonfin,2023-09-27,2025-09-26,2.0,USD,5.89,,76.95,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240326000383
+ibk|USD|2023-10-04|2028-10-04,중소기업은행,Industrial Bank of Korea,policy,2023-10-04,2028-10-04,5.0,USD,5.46,,79.0,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240430000630
+hana_bank|USD|2023-10-24|2028-10-24,하나은행,Hana Bank,bank,2023-10-24,2028-10-24,5.0,USD,5.75,,89.0,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240314001547
+hyundai_capital|USD|2023-11-03|2028-11-03,현대캐피탈,Hyundai Capital Services,card_capital,2023-11-03,2028-11-03,5.0,USD,6.511,,175.09,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240516001064
+kis|USD|2023-11-06|2026-11-06,한국투자증권,Korea Investment & Securities,guaranteed,2023-11-06,2026-11-06,3.0,USD,7.25,,235.0,news_final,B,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250321000842
+nh_bank|USD|2023-11-16|2024-11-16,농협은행,NongHyup Bank,bank,2023-11-16,2024-11-16,1.0,USD,5.95,,56.07,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240329003569
+hyundai_capital|USD|2023-11-28|2025-11-28,현대캐피탈,Hyundai Capital Services,card_capital,2023-11-28,2025-11-28,2.0,USD,6.5,,164.04,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240516001064
+nh_bank|USD|2023-12-04|2024-12-04,농협은행,NongHyup Bank,bank,2023-12-04,2024-12-04,1.0,USD,5.98,,74.08,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240329003569
+x_lotte_rental_co_ltd|USD|2023-12-08|2025-12-08,롯데렌탈,"LOTTE rental co., ltd.",nonfin,2023-12-08,2025-12-08,2.0,USD,4.44,,-11.97,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20240315000897
+kb_bank|USD|2024-01-11|2025-01-12,국민은행,KB Kookmin Bank,bank,2024-01-11,2025-01-12,1.0,USD,5.4,,55.23,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+kb_bank|USD|2024-01-12|2025-01-13,국민은행,KB Kookmin Bank,bank,2024-01-12,2025-01-13,1.0,USD,5.45,,61.21,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+sk_hynix|USD|2024-01-16|2027-01-16,SK하이닉스,SK hynix,nonfin,2024-01-16,2027-01-16,3.0,USD,5.5,5.539,144.9,reoffer,A,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250319000665
+sk_hynix|USD|2024-01-16|2029-01-16,SK하이닉스,SK hynix,nonfin,2024-01-16,2029-01-16,5.0,USD,5.5,5.605,163.5,reoffer,A,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250319000665
+woori_bank|USD|2024-01-24|2027-01-24,우리은행,Woori Bank,bank,2024-01-24,2027-01-24,3.0,USD,4.75,,75.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250318001159
+woori_bank|USD|2024-01-24|2029-01-24,우리은행,Woori Bank,bank,2024-01-24,2029-01-24,5.0,USD,4.75,,85.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250318001159
+kb_bank|USD|2024-01-25|2044-01-25,국민은행,KB Kookmin Bank,bank,2024-01-25,2044-01-25,20.0,USD,5.48,,100.0,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+kb_bank|USD|2024-01-30|2025-01-31,국민은행,KB Kookmin Bank,bank,2024-01-30,2025-01-31,1.0,USD,5.29,,48.24,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+kb_bank|USD|2024-02-14|2025-02-18,국민은행,KB Kookmin Bank,bank,2024-02-14,2025-02-18,1.01,USD,5.0,,17.55,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+hana_sec|USD|2024-02-28|2025-02-28,하나증권,Hana Securities,fin_other,2024-02-28,2025-02-28,1.0,USD,6.03,,105.07,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250515000733
+kb_bank|USD|2024-03-01|2025-03-02,국민은행,KB Kookmin Bank,bank,2024-03-01,2025-03-02,1.0,USD,5.65,,65.07,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+kb_bank|USD|2024-03-08|2025-03-10,국민은행,KB Kookmin Bank,bank,2024-03-08,2025-03-10,1.0,USD,5.46,,52.19,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+shinhan_card|USD|2024-03-12|2029-03-12,신한카드,Shinhan Card,card_capital,2024-03-12,2029-03-12,5.0,USD,5.5,5.76,162.99,reoffer,A,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250318001133
+lg_elec|USD|2024-04-24|2027-04-24,LG전자,LG Electronics,nonfin,2024-04-24,2027-04-24,3.0,USD,5.625,,95.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250317001029
+lg_elec|USD|2024-04-24|2029-04-24,LG전자,LG Electronics,nonfin,2024-04-24,2029-04-24,5.0,USD,5.625,,110.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250317001029
+woori_bank|USD|2024-04-25|2025-04-26,우리은행,Woori Bank,bank,2024-04-25,2025-04-26,1.0,USD,5.59,,41.04,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250318001159
+kb_bank|USD|2024-05-08|2027-05-08,국민은행,KB Kookmin Bank,bank,2024-05-08,2027-05-08,3.0,USD,5.38,5.409,60.87,reoffer,A,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+kb_bank|USD|2024-05-08|2029-05-08,국민은행,KB Kookmin Bank,bank,2024-05-08,2029-05-08,5.0,USD,5.25,5.298,64.79,reoffer,A,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+x_lotte_shopping_co_ltd|USD|2024-05-17|2027-05-17,롯데쇼핑,"LOTTE SHOPPING CO.,LTD.",nonfin,2024-05-17,2027-05-17,3.0,USD,4.8,,14.95,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001659
+nh_bank|USD|2024-05-28|2025-05-29,농협은행,NongHyup Bank,bank,2024-05-28,2025-05-29,1.0,USD,5.55,,41.07,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250331003837
+lges|USD|2024-07-02|2027-07-02,LG에너지솔루션,LG Energy Solution,nonfin,2024-07-02,2027-07-02,3.0,USD,5.38,,100.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250312000405
+lges|USD|2024-07-02|2029-07-02,LG에너지솔루션,LG Energy Solution,nonfin,2024-07-02,2029-07-02,5.0,USD,5.38,,110.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250312000405
+lges|USD|2024-07-02|2034-07-02,LG에너지솔루션,LG Energy Solution,nonfin,2024-07-02,2034-07-02,10.0,USD,5.5,,135.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250312000405
+kogas|USD|2024-07-08|2029-07-08,한국가스공사,Korea Gas Corp,soe,2024-07-08,2029-07-08,5.0,USD,5.0,,56.0,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250325000742
+x_kratoncorporation|USD|2024-07-15|2027-07-15,Kraton Corporation,Kraton Corporation,guaranteed,2024-07-15,2027-07-15,3.0,USD,5.0,,59.95,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250317000751
+nh_bank|USD|2024-07-22|2029-07-22,농협은행,NongHyup Bank,bank,2024-07-22,2029-07-22,5.0,USD,4.8,4.798,66.8,reoffer,A,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250331003837
+kb_bank|USD|2024-07-26|2025-07-28,국민은행,KB Kookmin Bank,bank,2024-07-26,2025-07-28,1.0,USD,5.22,,35.18,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+kb_bank|USD|2024-07-29|2025-07-30,국민은행,KB Kookmin Bank,bank,2024-07-29,2025-07-30,1.0,USD,5.22,,34.08,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+kb_bank|USD|2024-07-30|2025-07-31,국민은행,KB Kookmin Bank,bank,2024-07-30,2025-07-31,1.0,USD,5.22,,37.09,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+woori_bank|USD|2024-08-23|2025-08-24,우리은행,Woori Bank,bank,2024-08-23,2025-08-24,1.0,USD,4.76,,27.09,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250318001159
+x_lotte_auto_lease|USD|2024-08-23|2027-08-23,롯데오토리스,Lotte Auto Lease,nonfin,2024-08-23,2027-08-23,3.0,USD,4.57,,69.96,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001522
+x_cosmax_bti_inc|USD|2024-09-09|2026-09-09,코스맥스비티아이,"COSMAX BTI, INC.",fin_other,2024-09-09,2026-09-09,2.0,USD,4.41,,49.94,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260317000869
+ibk|USD|2024-09-30|2029-09-30,중소기업은행,Industrial Bank of Korea,policy,2024-09-30,2029-09-30,5.0,USD,4.0,,57.0,news_final,B,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250318001325
+kt|USD|2024-10-02|2028-02-02,케이티,KT Corp,nonfin,2024-10-02,2028-02-02,3.33,USD,4.125,,80.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250321001834
+hana_sec|USD|2024-10-10|2025-10-13,하나증권,Hana Securities,fin_other,2024-10-10,2025-10-13,1.01,USD,5.5,,148.24,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250515000733
+woori_bank|USD|2024-10-29|2025-10-30,우리은행,Woori Bank,bank,2024-10-29,2025-10-30,1.0,USD,4.58,,34.04,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250318001159
+woori_bank|USD|2024-10-30|2025-10-31,우리은행,Woori Bank,bank,2024-10-30,2025-10-31,1.0,USD,4.59,,32.04,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250318001159
+x_hanwhaqcellsusainc|USD|2024-11-15|2027-11-15,"Hanwha Q CELLS USA, Inc.","Hanwha Q CELLS USA, Inc.",nonfin,2024-11-15,2027-11-15,3.0,USD,5.82,,163.98,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250317001024
+x_daewoo_engineering_construction_co_ltd|USD|2024-11-27|2026-11-27,대우건설,"DAEWOO ENGINEERING & CONSTRUCTION CO.,LTD",nonfin,2024-11-27,2026-11-27,2.0,USD,4.6,,28.99,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250813000868
+kb_bank|USD|2024-12-17|2027-12-17,국민은행,KB Kookmin Bank,bank,2024-12-17,2027-12-17,3.0,USD,4.55,,46.99,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20250314001552
+hana_sec|USD|2025-01-10|2026-01-12,하나증권,Hana Securities,fin_other,2025-01-10,2026-01-12,1.0,USD,5.01,,82.95,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260316001131
+kb_bank|USD|2025-01-14|2026-01-15,국민은행,KB Kookmin Bank,bank,2025-01-14,2026-01-15,1.0,USD,4.61,,41.98,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+kb_bank|USD|2025-01-15|2026-01-16,국민은행,KB Kookmin Bank,bank,2025-01-15,2026-01-16,1.0,USD,4.59,,39.98,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+x_hanwha_solutions_corporation|USD|2025-01-16|2028-01-16,한화솔루션,HANWHA SOLUTIONS CORPORATION,nonfin,2025-01-16,2028-01-16,3.0,USD,5.31,,100.01,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331003871
+hyundai_capital|USD|2025-01-22|2028-01-22,현대캐피탈,Hyundai Capital Services,card_capital,2025-01-22,2028-01-22,3.0,USD,5.25,,80.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318001032
+kb_bank|USD|2025-02-10|2026-02-11,국민은행,KB Kookmin Bank,bank,2025-02-10,2026-02-11,1.0,USD,4.62,,41.99,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+kb_bank|USD|2025-02-11|2026-02-12,국민은행,KB Kookmin Bank,bank,2025-02-11,2026-02-12,1.0,USD,4.62,,43.99,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+x_dongkuk_steel_mill_co_ltd|USD|2025-04-01|2028-03-31,동국제강,"DONGKUK STEEL MILL Co., Ltd.",nonfin,2025-04-01,2028-03-31,3.0,USD,5.04,,106.0,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313000519
+lges|USD|2025-04-02|2028-04-02,LG에너지솔루션,LG Energy Solution,nonfin,2025-04-02,2028-04-02,3.0,USD,5.25,,135.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260312000217
+lges|USD|2025-04-02|2030-04-02,LG에너지솔루션,LG Energy Solution,nonfin,2025-04-02,2030-04-02,5.0,USD,5.38,,145.0,news_final,C,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260312000217
+lges|USD|2025-04-02|2035-04-02,LG에너지솔루션,LG Energy Solution,nonfin,2025-04-02,2035-04-02,10.0,USD,5.88,,170.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260312000217
+ktng|USD|2025-05-02|2028-05-02,케이티앤지,KT&G Corp,nonfin,2025-05-02,2028-05-02,3.0,USD,5.0,,118.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318001422
+posco_holdings|USD|2025-05-07|2030-05-07,포스코홀딩스,POSCO Holdings,nonfin,2025-05-07,2030-05-07,5.0,USD,5.125,,137.5,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260311004517
+posco_holdings|USD|2025-05-07|2035-05-07,포스코홀딩스,POSCO Holdings,nonfin,2025-05-07,2035-05-07,10.0,USD,5.75,,157.5,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260311004517
+kb_bank|USD|2025-05-08|2028-05-08,국민은행,KB Kookmin Bank,bank,2025-05-08,2028-05-08,3.0,USD,4.38,4.495,82.5,reoffer,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+kb_bank|USD|2025-05-08|2030-05-08,국민은행,KB Kookmin Bank,bank,2025-05-08,2030-05-08,5.0,USD,4.63,4.677,86.7,reoffer,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+hana_sec|USD|2025-05-16|2026-05-18,하나증권,Hana Securities,fin_other,2025-05-16,2026-05-18,1.0,USD,4.97,,92.08,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260316001131
+hanwha_life|USD|2025-06-24|2055-06-24,한화생명,Hanwha Life Insurance,fin_other,2025-06-24,2055-06-24,30.0,USD,6.3,,142.0,coupon,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331003585
+ibk|USD|2025-06-24|2030-06-24,중소기업은행,Industrial Bank of Korea,policy,2025-06-24,2030-06-24,5.0,USD,4.375,,47.0,news_final,B,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318000761
+kt|USD|2025-07-03|2029-01-03,케이티,KT Corp,nonfin,2025-07-03,2029-01-03,3.5,USD,4.375,,72.0,news_final,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260323001553
+nh_sec|USD|2025-07-10|2028-07-10,엔에이치투자증권,NH Investment & Securities,fin_other,2025-07-10,2028-07-10,3.0,USD,4.68,4.676,83.6,reoffer,A,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313000771
+nh_sec|USD|2025-07-10|2030-07-10,엔에이치투자증권,NH Investment & Securities,fin_other,2025-07-10,2030-07-10,5.0,USD,4.87,4.873,93.3,reoffer,A,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313000771
+kogas|USD|2025-07-10|2030-07-10,한국가스공사,Korea Gas Corp,soe,2025-07-10,2030-07-10,5.0,USD,4.25,,47.0,news_final,B,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260323001058
+shinhan_fg|USD|2025-07-14|2030-07-30,신한금융지주,Shinhan Financial Group,fin_other,2025-07-14,2030-07-30,5.04,USD,4.5,4.597,63.27,reoffer,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261007000218
+kb_bank|USD|2025-07-15|2026-07-16,국민은행,KB Kookmin Bank,bank,2025-07-15,2026-07-16,1.0,USD,4.42,,31.04,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+nh_bank|USD|2025-07-21|2030-07-22,농협은행,NongHyup Bank,bank,2025-07-21,2030-07-22,5.0,USD,4.38,4.501,52.08,reoffer,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331004252
+kb_bank|USD|2025-07-23|2026-07-24,국민은행,KB Kookmin Bank,bank,2025-07-23,2026-07-24,1.0,USD,4.42,,34.04,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+kb_bank|USD|2025-08-19|2026-08-20,국민은행,KB Kookmin Bank,bank,2025-08-19,2026-08-20,1.0,USD,4.24,,34.04,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+kb_bank|USD|2025-08-20|2026-08-21,국민은행,KB Kookmin Bank,bank,2025-08-20,2026-08-21,1.0,USD,4.24,,38.04,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+sk_hynix|USD|2025-09-11|2028-09-11,SK하이닉스,SK hynix,nonfin,2025-09-11,2028-09-11,3.0,USD,4.25,,73.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260317000635
+sk_hynix|USD|2025-09-11|2030-09-11|n1,SK하이닉스,SK hynix,nonfin,2025-09-11,2030-09-11,5.0,USD,4.38,,80.0,news_final,C,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260317000635
+woori_bank|USD|2025-09-23|2026-09-24,우리은행,Woori Bank,bank,2025-09-23,2026-09-24,1.0,USD,4.0,,38.02,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313000815
+x_korean_air_lines_co_ltd|USD|2025-09-30|2030-09-30,대한항공,"KOREAN AIR LINES CO.,LTD",guaranteed,2025-09-30,2030-09-30,5.0,USD,4.0,,32.0,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318001125
+hana_bank|USD|2025-09-30|2026-10-01,하나은행,Hana Bank,bank,2025-09-30,2026-10-01,1.0,USD,4.16,,55.02,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260316000962
+woori_bank|USD|2025-10-02|2026-10-03,우리은행,Woori Bank,bank,2025-10-02,2026-10-03,1.0,USD,4.04,,36.01,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313000815
+x_hanwha_solutions_corporation|USD|2025-10-14|2028-10-13,한화솔루션,HANWHA SOLUTIONS CORPORATION,nonfin,2025-10-14,2028-10-13,3.0,USD,5.0,,144.0,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331003871
+x_hanwha_solutions_corporation|USD|2025-10-17|2028-10-17,한화솔루션,HANWHA SOLUTIONS CORPORATION,nonfin,2025-10-17,2028-10-17,3.0,USD,4.93,,141.0,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260331003871
+woori_bank|USD|2025-10-22|2026-10-23,우리은행,Woori Bank,bank,2025-10-22,2026-10-23,1.0,USD,3.95,,34.02,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313000815
+kb_bank|USD|2025-10-22|2026-10-23,국민은행,KB Kookmin Bank,bank,2025-10-22,2026-10-23,1.0,USD,3.94,,33.02,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+kb_bank|USD|2025-10-22|2026-10-26,국민은행,KB Kookmin Bank,bank,2025-10-22,2026-10-26,1.01,USD,3.78,,17.11,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+woori_bank|USD|2025-10-23|2026-10-24,우리은행,Woori Bank,bank,2025-10-23,2026-10-24,1.0,USD,3.93,,39.03,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260313000815
+kb_bank|USD|2025-11-04|2026-11-05,국민은행,KB Kookmin Bank,bank,2025-11-04,2026-11-05,1.0,USD,3.89,,30.02,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002787
+hana_sec|USD|2025-11-14|2026-11-16,하나증권,Hana Securities,fin_other,2025-11-14,2026-11-16,1.0,USD,4.63,,100.04,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260316001131
+x_acushnetcompany|USD|2025-11-24|2033-12-01,Acushnet company,Acushnet Company,nonfin,2025-11-24,2033-12-01,8.02,USD,5.625,,164.69,coupon,C,BB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318000916
+ibk|USD|2025-12-30|2026-12-31,중소기업은행,Industrial Bank of Korea,policy,2025-12-30,2026-12-31,1.0,USD,3.86,,34.01,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260318000761
+woori_bank|USD|2026-01-27|2031-01-27,우리은행,Woori Bank,bank,2026-01-27,2031-01-27,5.0,USD,4.13,,33.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003574
+hana_bank|USD|2026-01-30|2027-02-01|n1,하나은행,Hana Bank,bank,2026-01-30,2027-02-01,1.0,USD,3.95,,41.97,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003723
+hana_bank|USD|2026-01-30|2027-02-01|n2,하나은행,Hana Bank,bank,2026-01-30,2027-02-01,1.0,USD,4.23,,69.97,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116001207
+kb_bank|USD|2026-02-09|2027-02-10,국민은행,KB Kookmin Bank,bank,2026-02-09,2027-02-10,1.0,USD,3.82,,32.98,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+kb_bank|USD|2026-03-10|2027-03-11,국민은행,KB Kookmin Bank,bank,2026-03-10,2027-03-11,1.0,USD,3.83,,28.01,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+kb_bank|USD|2026-03-18|2027-03-19,국민은행,KB Kookmin Bank,bank,2026-03-18,2027-03-19,1.0,USD,3.93,,32.99,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+kb_bank|USD|2026-03-20|2027-03-22,국민은행,KB Kookmin Bank,bank,2026-03-20,2027-03-22,1.0,USD,3.93,,26.97,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+hana_bank|USD|2026-03-31|2027-04-01|n1,하나은행,Hana Bank,bank,2026-03-31,2027-04-01,1.0,USD,3.97,,15.98,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003723
+hana_bank|USD|2026-03-31|2027-04-01|n2,하나은행,Hana Bank,bank,2026-03-31,2027-04-01,1.0,USD,4.25,,43.98,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116001207
+lges|USD|2026-04-02|2029-04-02,LG에너지솔루션,LG Energy Solution,nonfin,2026-04-02,2029-04-02,3.0,USD,5.0,,115.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260813000255
+lges|USD|2026-04-02|2031-04-02,LG에너지솔루션,LG Energy Solution,nonfin,2026-04-02,2031-04-02,5.0,USD,5.25,,130.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260813000255
+lges|USD|2026-04-02|2036-04-02,LG에너지솔루션,LG Energy Solution,nonfin,2026-04-02,2036-04-02,10.0,USD,5.88,,165.0,news_final,B,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260813000255
+kb_bank|USD|2026-04-20|2027-04-21,국민은행,KB Kookmin Bank,bank,2026-04-20,2027-04-21,1.0,USD,4.15,,44.98,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+naver|USD|2026-04-21|2031-04-21,네이버,NAVER,nonfin,2026-04-21,2031-04-21,5.0,USD,4.375,,60.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001140
+kb_bank|USD|2026-04-21|2027-04-22,국민은행,KB Kookmin Bank,bank,2026-04-21,2027-04-22,1.0,USD,4.12,,40.99,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+woori_bank|USD|2026-05-06|2027-05-07,우리은행,Woori Bank,bank,2026-05-06,2027-05-07,1.0,USD,4.02,,26.97,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003574
+kb_bank|USD|2026-05-07|2031-05-07,국민은행,KB Kookmin Bank,bank,2026-05-07,2031-05-07,5.0,USD,4.25,,33.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+hana_bank|USD|2026-05-13|2027-05-14|n1,하나은행,Hana Bank,bank,2026-05-13,2027-05-14,1.0,USD,3.95,,21.97,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003723
+hana_bank|USD|2026-05-13|2027-05-14|n2,하나은행,Hana Bank,bank,2026-05-13,2027-05-14,1.0,USD,4.23,,49.97,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116001207
+kb_bank|USD|2026-05-14|2028-05-14,국민은행,KB Kookmin Bank,bank,2026-05-14,2028-05-14,2.0,USD,4.19,,27.0,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+shinhan_fg|USD|2026-05-15|2028-11-15,신한금융지주,Shinhan Financial Group,fin_other,2026-05-15,2028-11-15,2.51,USD,4.54,,62.99,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261007000223
+shinhan_fg|USD|2026-05-15|2029-05-15,신한금융지주,Shinhan Financial Group,fin_other,2026-05-15,2029-05-15,3.0,USD,4.56,,64.0,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261007000223
+kb_bank|USD|2026-05-15|2028-05-12,국민은행,KB Kookmin Bank,bank,2026-05-15,2028-05-12,1.99,USD,4.24,,34.1,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+hana_bank|USD|2026-06-12|2027-06-14,하나은행,Hana Bank,bank,2026-06-12,2027-06-14,1.0,USD,4.22,,33.86,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003723
+hana_sec|USD|2026-06-15|2031-06-15,하나증권,Hana Securities,fin_other,2026-06-15,2031-06-15,5.0,USD,5.51,,122.0,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002599
+hana_bank|USD|2026-06-17|2027-06-21|n1,하나은행,Hana Bank,bank,2026-06-17,2027-06-21,1.01,USD,3.97,,6.76,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003723
+hana_bank|USD|2026-06-17|2027-06-21|n2,하나은행,Hana Bank,bank,2026-06-17,2027-06-21,1.01,USD,4.25,,34.76,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116001207
+ibk|USD|2026-06-22|2027-06-23,중소기업은행,Industrial Bank of Korea,policy,2026-06-22,2027-06-23,1.0,USD,4.14,,29.95,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814004009
+hana_bank|USD|2026-06-22|2027-06-24,하나은행,Hana Bank,bank,2026-06-22,2027-06-24,1.0,USD,4.22,,37.89,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003723
+kb_bank|USD|2026-06-24|2027-06-25,국민은행,KB Kookmin Bank,bank,2026-06-24,2027-06-25,1.0,USD,4.27,,28.95,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001567
+woori_bank|USD|2026-06-25|2027-06-28,우리은행,Woori Bank,bank,2026-06-25,2027-06-28,1.01,USD,4.2,,19.86,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814003574
+nh_sec|USD|2026-06-29|2029-06-29,엔에이치투자증권,NH Investment & Securities,fin_other,2026-06-29,2029-06-29,3.0,USD,4.88,4.937,68.7,reoffer,A,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002484
+nh_sec|USD|2026-06-29|2031-06-29,엔에이치투자증권,NH Investment & Securities,fin_other,2026-06-29,2031-06-29,5.0,USD,5.0,5.038,74.8,reoffer,A,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260814002484
+woori_bank|USD|2026-07-01|2027-07-02,우리은행,Woori Bank,bank,2026-07-01,2027-07-02,1.0,USD,4.45,,45.98,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116001281
+x_cj_enm_co_ltd|USD|2026-07-10|2029-07-10,씨제이이엔엠,"CJ ENM Co., Ltd.",nonfin,2026-07-10,2029-07-10,3.0,USD,4.59,,43.0,coupon,C,none,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116001265
+kt|USD|2026-07-13|2030-01-13,케이티,KT Corp,nonfin,2026-07-13,2030-01-13,3.5,USD,4.625,,55.0,news_final,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116001593
+ktng|USD|2026-07-21|2030-01-21,케이티앤지,KT&G Corp,nonfin,2026-07-21,2030-01-21,3.5,USD,4.875,,62.48,coupon,B,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001553
+hana_bank|USD|2026-08-10|2031-08-10,하나은행,Hana Bank,bank,2026-08-10,2031-08-10,5.0,USD,4.58,,18.0,coupon,C,A,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261116001207
+x_korean_air_lines_co_ltd|USD|2026-08-11|2029-08-13,대한항공,"KOREAN AIR LINES CO.,LTD",nonfin,2026-08-11,2029-08-13,3.01,USD,4.75,,49.98,coupon,C,AA,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001034
+hana_sec|USD|2026-09-30|2056-09-30,하나증권,Hana Securities,fin_other,2026-09-30,2056-09-30,30.0,USD,6.5,,110.0,coupon,C,BBB,https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20261113001337
+lh|USD|2024-10-22|na,한국토지주택공사,Korea Land & Housing Corp,soe,2024-10-22,,3.0,USD,4.25,,55.0,news_final,B,AA,https://dealsite.co.kr/articles/129809
+tongyang_life|USD|2025-05-07|2035-05-07,동양생명보험,Tongyang Life Insurance,fin_other,2025-05-07,2035-05-07,10.0,USD,6.25,6.25,206.01,reoffer,A,none,https://kpinews.kr/newsView/1065576827289509
+sk_hynix|USD|2025-09-11|2030-09-11|n2,SK하이닉스,SK hynix,nonfin,2025-09-11,2030-09-11,5.0,USD,4.375,,80.0,news_final,B,none,https://in.tradingview.com/symbols/FINRA-HXSCF6167679/analysis-overview
+kogas|USD|2026-06-23|na,한국가스공사,Korea Gas Corp,soe,2026-06-23,,5.0,USD,,,33.0,news_final,S,AA,http://v.daum.net/v/20260616112802949
+ewp|USD|2026-07-13|na,한국동서발전,Korea East-West Power (EWP),soe,2026-07-13,,5.5,USD,,,58.0,news_final,S,AA,http://v.daum.net/v/20260708093402676
+kepco|USD|2026-07-21|na,한국전력공사,Korea Electric Power Corp,soe,2026-07-21,,5.0,USD,4.75,,50.0,news_final,B,AA,https://v.daum.net/v/20260714084005717
+samsung_life|USD|2026-11-02|2056-11-02,삼성생명,Samsung Life Insurance,fin_other,2026-11-02,2056-11-02,30.0,USD,,6.875,157.5,reoffer,A,none,https://www.smarttoday.co.kr/ko-kr/articles/113164
+kepco|USD|na|na|n1,한국전력공사,Korea Electric Power Corp,soe,,,3.0,USD,,,58.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202502070652504820108220
+kepco|USD|na|na|n2,한국전력공사,Korea Electric Power Corp,soe,,,5.0,USD,,,47.0,news_final,S,AA,https://www.mnimarkets.com/articles/korea-electric-power-new-usd-5y-priced-1762387641462
+shinhan_bank|USD|na|na|n1,신한은행,Shinhan Bank,bank,,,5.0,USD,4.649,4.649,74.9,reoffer,A,none,https://www.smarttoday.co.kr/ko-kr/articles/80321
+kb_capital|USD|na|na,KB캐피탈,KB Capital,card_capital,,,5.0,USD,,,78.0,news_final,S,A,https://www.mnimarkets.com/articles/kb-financial-group-new-usd-deal-priced-1758842872739
+posco|USD|na|na|n1,포스코,POSCO,nonfin,,,5.0,USD,4.5,,75.0,news_final,B,none,https://www.smarttoday.co.kr/ko-kr/articles/101011
+posco|USD|na|na|n2,포스코,POSCO,nonfin,,,10.0,USD,5.0,,90.0,news_final,B,none,https://www.smarttoday.co.kr/ko-kr/articles/101011
+shinhan_bank|USD|na|na|n2,신한은행,Shinhan Bank,bank,,,5.0,USD,,,43.0,news_final,S,none,https://www.smarttoday.co.kr/ko-kr/articles/106127
+hana_sec|USD|na|na,하나증권,Hana Securities,fin_other,,,5.0,USD,,,77.0,news_final,S,A,https://www.heraldk.com/article/2026052623253967580
+posco_intl|USD|na|na,포스코인터내셔널,POSCO International,nonfin,,,5.0,USD,,,90.0,news_final,S,BBB,https://www.heraldk.com/article/2026062218584178955
+nh_bank|USD|na|na,농협은행,NongHyup Bank,bank,,,5.0,USD,4.704,,42.0,news_final,B,none,https://www.fnnews.com/news/202607161828496261
+hana_bank|USD|na|na|n1,하나은행,Hana Bank,bank,,,3.0,USD,5.25,,42.0,news_final,B,A,https://biz.sbs.co.kr/amp/article/20000339889
+hana_bank|USD|na|na|n2,하나은행,Hana Bank,bank,,,5.0,USD,5.5,5.5,50.0,reoffer,A,A,https://biz.sbs.co.kr/amp/article/20000339889
+knoc|USD|na|na|n1,한국석유공사,Korea National Oil Corp,soe,,,3.0,USD,,,80.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202311071029050000102595
+kepco|USD|na|na|n3,한국전력공사,Korea Electric Power Corp,soe,,,3.0,USD,,,80.0,news_final,S,none,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202401251148009160103854
+knoc|USD|na|na|n2,한국석유공사,Korea National Oil Corp,soe,,,3.0,USD,,,65.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202503250805333200101392
+knoc|USD|na|na|n3,한국석유공사,Korea National Oil Corp,soe,,,5.0,USD,,,70.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202503250805333200101392
+knoc|USD|na|na|n4,한국석유공사,Korea National Oil Corp,soe,,,3.0,USD,4.07,,50.0,news_final,B,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202509231350028680107893
+knoc|USD|na|na|n5,한국석유공사,Korea National Oil Corp,soe,,,5.0,USD,4.191,,50.0,news_final,B,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202509231350028680107893
+knoc|USD|na|na|n6,한국석유공사,Korea National Oil Corp,soe,,,3.0,USD,,,65.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202603250842071780103926
+knoc|USD|na|na|n7,한국석유공사,Korea National Oil Corp,soe,,,5.0,USD,,,70.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202603250842071780103926
+khnp|USD|na|na,한국수력원자력,Korea Hydro & Nuclear Power,soe,,,5.0,USD,,,43.0,news_final,S,AA,http://v.daum.net/v/20260610110102613
+komipo|USD|na|na,한국중부발전,Korea Midland Power (KOMIPO),soe,,,3.0,USD,,,55.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202607221317494120106464
+kospo|USD|na|na,한국남부발전,Korea Southern Power (KOSPO),soe,,,3.0,USD,,,50.0,news_final,S,AA,http://v.daum.net/v/20260909091202286
+knoc|USD|na|na|n8,한국석유공사,Korea National Oil Corp,soe,,,3.0,USD,,,47.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202609220841403400103125
+knoc|USD|na|na|n9,한국석유공사,Korea National Oil Corp,soe,,,5.0,USD,,,57.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202609220841403400103125
+kepco|USD|na|na|n4,한국전력공사,Korea Electric Power Corp,soe,,,3.0,USD,,,44.0,news_final,S,AA,http://m.thebell.co.kr/m/newsview.asp?svccode=00&newskey=202610140843400380102010
+korail|USD|na|na,한국철도공사,Korea Railroad Corp,soe,,,3.0,USD,4.38,,63.0,news_final,B,AA,https://creditflowresearch.com/issuer/12542/x?products=ABS%2CHYC%2CIGC&regions=USOA%2CAPAC%2CEMEA%2CLATM
+shinhan_bank|USD|na|na|n3,신한은행,Shinhan Bank,bank,,,10.0,USD,,5.75,139.0,reoffer,A,none,https://www.smarttoday.co.kr/ko-kr/articles/47625
+hyundai_capital|USD|na|na|n1,현대캐피탈,Hyundai Capital Services,card_capital,,,3.0,USD,,,110.0,news_final,S,none,https://biz.newdaily.co.kr/site/data/html/2024/01/30/2024013000251.amp.html
+hyundai_capital|USD|na|na|n2,현대캐피탈,Hyundai Capital Services,card_capital,,,5.0,USD,,,120.0,news_final,S,none,https://biz.newdaily.co.kr/site/data/html/2024/01/30/2024013000251.amp.html
+mirae_sec|USD|na|na,미래에셋증권,Mirae Asset Securities,fin_other,,,3.0,USD,,5.7,146.0,reoffer,A,BBB,https://ceoscoredaily.com/page/view/2024072515250293666
+posco|USD|na|na|n3,포스코,POSCO,nonfin,,,3.0,USD,4.875,4.999,97.9,reoffer,A,A,https://kbmaeil.com/article/202401170382207
+lges|USD|na|na,LG에너지솔루션,LG Energy Solution,nonfin,,,5.0,USD,,,145.0,news_final,S,none,https://www.sidae.com/article/2025032616051427704
+x_incheon_international_airport_corporation|USD|na|na,인천국제공항공사,Incheon International Airport Corporation,nonfin,,,3.0,USD,,,40.0,news_final,S,AA,https://www.thebell.co.kr/front/newsview.asp?key=202604150948540200109574
+x_sk_battery_america_inc|USD|na|na|n1,SK배터리아메리카(SK온 미국 자회사),"SK Battery America, Inc.",guaranteed,,,3.0,USD,,,100.0,news_final,S,AA,https://www.thebell.co.kr/front/newsview.asp?key=202402021230530680101418
+x_sk_battery_america_inc|USD|na|na|n2,SK배터리아메리카(SK온 미국 자회사),"SK Battery America, Inc.",guaranteed,,,3.0,USD,,,72.0,news_final,S,AA,https://www.thebell.co.kr/front/newsview.asp?key=202601130930367520108682
+x_sk_on_co_ltd|USD|na|na,SK온,"SK On Co., Ltd.",guaranteed,,,3.0,USD,,,57.0,news_final,S,AA,http://v.daum.net/v/20260429081901242
