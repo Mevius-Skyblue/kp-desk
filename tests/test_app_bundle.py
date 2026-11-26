@@ -36,7 +36,8 @@ ALLOW = [
     "samples/*.pdf", "samples/*.xlsx",
     "docs/METHODOLOGY_ko.md", "docs/METHODOLOGY_en.md", "docs/VALIDATION_ko.md", "docs/VALIDATION_en.md",
     "docs/KNOWN_ISSUES_ko.md", "docs/KNOWN_ISSUES_en.md", "docs/DATA_NOTICE_ko.md", "docs/DATA_NOTICE_en.md",
-    "docs/screenshot_ko.png", "docs/screenshot_en.png",
+    "docs/screenshot_home_ko.png", "docs/screenshot_home_en.png", "docs/screenshot_comps_ko.png", "docs/screenshot_comps_en.png",
+    "app/static/OFL.txt", "app/static/Pretendard-*.subset.woff",
     "README.md", "README_en.md", "LICENSE", "requirements.txt", ".gitignore", ".gitattributes", ".github/workflows/ci.yml",
     ".streamlit/config.toml",
 ]

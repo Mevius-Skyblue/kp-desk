@@ -6,7 +6,9 @@ A toolkit that compiles foreign-currency bonds issued abroad by Korean issuers (
 
 Built with Claude Code; results independently verified. Korean README: [README.md](README.md) · App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
 
-![③ Fair spread range page (as-of snapshot)](docs/screenshot_en.png)
+![Home: at-a-glance cards (as-of snapshot)](docs/screenshot_home_en.png)
+
+![② Comparable deals: tenor × representative spread chart and table](docs/screenshot_comps_en.png)
 
 ## App (4 pages + home, Korean / English)
 

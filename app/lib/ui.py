@@ -73,3 +73,23 @@ def num(v, nd: int = 2, sep: bool = False) -> str:
     if math.isnan(f):
         return t("a_na")
     return f"{f:,.{nd}f}" if sep else f"{f:.{nd}f}"
+
+
+# display decimals (fixes R3-9): price 4, yield % 3, bp 1 - display only, the data keep their values
+DEC = {"price": 4, "pct": 3, "bp": 1, "years": 2, "dur": 3}
+
+
+def text_col(values, nd: int, sep: bool = True) -> list[str]:
+    """A column of numbers as display text with nd decimals and thousands separators; empty -> '–' (never None / nan)."""
+    return [num(v, nd, sep) for v in values]
+
+
+def date_col(values) -> list[str]:
+    """A column of dates as YYYY-MM-DD text; empty -> '–'."""
+    out = []
+    for v in values:
+        try:
+            out.append(t("a_na") if v is None or v != v or str(v) in ("", "NaT", "nan", "None") else str(v)[:10])
+        except (TypeError, ValueError):
+            out.append(t("a_na"))
+    return out

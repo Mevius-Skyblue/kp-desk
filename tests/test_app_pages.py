@@ -142,7 +142,7 @@ def test_calculator_equals_engine(monkeypatch):
 
     at = run_page("views/calculator.py", "en")
     shown = at.dataframe[0].value
-    assert f"{clean:.6f}" in shown.iloc[:, 1].tolist()
+    assert f"{clean:,.4f}" in shown.iloc[:, 1].tolist()  # price shown with 4 decimals (fixes R3-9)
 
 
 def test_calculator_bad_dates_message(monkeypatch):
@@ -256,3 +256,58 @@ def test_option_labels_follow_language_switch(monkeypatch):
     at.radio(key="lang").set_value("en").run()
     sb = at.selectbox(key="fair_issuer_en")
     assert not any(HANGUL.search(str(o)) for o in sb.options) and not HANGUL.search(str(sb.format_func(sb.value)))
+
+
+# ---------------------------------------------------------------- R3c design (config/public.yaml fixes R3-9)
+
+@pytest.mark.parametrize("lang", ["ko", "en"])
+def test_home_glance_cards(lang, data_env):
+    """Four cards; numbers only from scorecard.json, the deals.csv row count and the as-of date."""
+    from app.i18n import t
+    from app.lib import data as D
+
+    at = run_page(PAGES[0], lang)
+    assert not at.exception
+    sc = D.read_scorecard()
+    vals = [m.value for m in at.metric]
+    assert len(at.metric) == 4
+    assert vals[0] == t("a_card_deals_value", _lang=lang, n=f"{len(D.read_deals()):,}")
+    assert vals[1] == t("a_card_bond_value", _lang=lang, total=D.item(sc, "a1_total")["value"])
+    assert vals[2] == t("a_card_ho_value", _lang=lang, mae=D.item(sc, "ho_n0_mae")["value"])
+    caps = " ".join(c.value for c in at.caption)
+    assert sc["asof"] in caps and D.item(sc, "ho_p_ci")["value"] in caps
+
+
+@pytest.mark.parametrize("lang", ["ko", "en"])
+def test_comps_chart_and_number_formats(lang, data_env):
+    """② has one scatter chart; numbers are display text with fixed decimals and '–' for empty (never None / nan)."""
+    from app.i18n import t
+
+    at = run_page("views/comps.py", lang)
+    assert not at.exception
+    assert len(at.get("vega_lite_chart")) == 1
+    df = at.dataframe[0].value
+    shown = df.drop(columns=[t("a_col_source", _lang=lang)])  # link column: an empty link stays empty
+    cells = shown.map(str).to_numpy().ravel().tolist()
+    assert not any(c in ("None", "nan", "NaN", "<NA>", "NaT") for c in cells)
+    for col, nd in (("a_col_coupon", 3), ("a_col_yield", 3), ("a_col_tenor", 2)):
+        for v in df[t(col, _lang=lang)]:
+            assert v == "–" or re.fullmatch(rf"-?[\d,]+\.\d{{{nd}}}", v), (col, v)
+
+
+def test_comps_empty_value_shown_as_dash(monkeypatch):
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = run_page("views/comps.py", "en")
+    df = at.dataframe[0].value
+    assert "–" in df["Coupon (%)"].tolist() and "–" in df["Reoffer yield (%)"].tolist()
+
+
+def test_calculator_display_decimals(monkeypatch):
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = run_page("views/calculator.py", "en")
+    rows = dict(zip(at.dataframe[0].value.iloc[:, 0], at.dataframe[0].value.iloc[:, 1]))
+    assert re.fullmatch(r"[\d,]+\.\d{4}", rows["Clean price (per 100 face)"])
+    assert re.fullmatch(r"\d+\.\d{3}", rows["Yield (%)"])
+    assert re.fullmatch(r"-?\d+\.\d{1}", rows["G-spread (bp)"]) and re.fullmatch(r"-?\d+\.\d{1}", rows["Z-spread (bp)"])
+    assert re.fullmatch(r"[\d,]+\.\d{2}", rows["Settlement amount (for the face amount)"]) and "," in rows[
+        "Settlement amount (for the face amount)"]

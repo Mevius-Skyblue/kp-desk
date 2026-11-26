@@ -77,24 +77,41 @@ if view.empty:
     st.info(t("a_comps_empty"))
 else:
     name_col = "issuer_name_ko" if current_lang() == "ko" else "issuer_name_en"
+    type_lbl = view["issuer_type"].map(lambda v: t_or(f"a_type_{v}", str(v)))
+    # ---------------- chart (fixes R3-9): tenor x representative spread, colour = issuer type, current filters
+    st.subheader(t("a_chart_title"))
+    chart = pd.DataFrame({t("a_col_tenor"): view["tenor_years"].astype(float), t("a_col_spread"): view["rep_spread_bp"].astype(float),
+                          t("a_col_type"): type_lbl}).dropna(subset=[t("a_col_tenor"), t("a_col_spread")])
+    st.scatter_chart(chart, x=t("a_col_tenor"), y=t("a_col_spread"), color=t("a_col_type"),
+                     x_label=t("a_col_tenor"), y_label=t("a_col_spread"), height=360)
+    st.caption(t("a_chart_note"))
+    # ---------------- table: important columns first; numbers as display text with fixed decimals, empty = '–'
+    st.subheader(t("a_comps_table"))
     out = pd.DataFrame({
-        t("a_col_issuer"): view[name_col],
-        t("a_col_type"): view["issuer_type"].map(lambda v: t_or(f"a_type_{v}", str(v))),
-        t("a_col_nature"): view["bond_nature"].map(lambda v: t_or(f"a_nature_{v}", "" if pd.isna(v) else str(v))),
-        t("a_col_issue_date"): view["issue_date"],
-        t("a_col_maturity"): view["maturity"],
-        t("a_col_tenor"): view["tenor_years"].round(2),
-        t("a_col_ccy"): view["currency"],
-        t("a_col_coupon"): view["coupon_pct"],
-        t("a_col_yield"): view["reoffer_yield_pct"],
-        t("a_col_spread"): view["rep_spread_bp"].round(1),
-        t("a_col_basis"): view["rep_spread_basis"].map(lambda v: t_or(f"a_basis_{v}", "" if pd.isna(v) else str(v))),
-        t("a_col_tier"): view["sample_tier"],
-        t("a_col_rating"): view["rating_bucket"].map(rating_label),
-        t("a_col_source"): view["source_url"],
-        t("a_col_key"): view["deal_key"],
+        t("a_col_issuer"): view[name_col].tolist(),
+        t("a_col_nature"): view["bond_nature"].map(lambda v: t_or(f"a_nature_{v}", "" if pd.isna(v) else str(v))).tolist(),
+        t("a_col_type"): type_lbl.tolist(),
+        t("a_col_issue_date"): ui.date_col(view["issue_date"]),
+        t("a_col_tenor"): ui.text_col(view["tenor_years"], ui.DEC["years"]),
+        t("a_col_spread"): view["rep_spread_bp"].astype(float).round(ui.DEC["bp"]).tolist(),
+        t("a_col_basis"): view["rep_spread_basis"].map(lambda v: t_or(f"a_basis_{v}", "" if pd.isna(v) else str(v))).tolist(),
+        t("a_col_ccy"): view["currency"].fillna(t("a_na")).tolist(),
+        t("a_col_coupon"): ui.text_col(view["coupon_pct"], ui.DEC["pct"]),
+        t("a_col_yield"): ui.text_col(view["reoffer_yield_pct"], ui.DEC["pct"]),
+        t("a_col_maturity"): ui.date_col(view["maturity"]),
+        t("a_col_tier"): view["sample_tier"].tolist(),
+        t("a_col_rating"): view["rating_bucket"].map(rating_label).tolist(),
+        t("a_col_source"): view["source_url"].tolist(),
+        t("a_col_key"): view["deal_key"].tolist(),
     })
-    st.dataframe(out, hide_index=True, width="stretch",
-                 column_config={t("a_col_source"): st.column_config.LinkColumn(t("a_col_source"),
-                                                                              display_text=t("a_source_link"))})
+    shown = [c for c in out.columns if c != t("a_col_key")]  # the stable key stays in the CSV, not on screen
+    num_right = {t(k): st.column_config.TextColumn(alignment="right") for k in ("a_col_tenor", "a_col_coupon", "a_col_yield")}
+    st.dataframe(out, hide_index=True, width="stretch", column_order=shown, column_config={
+        **num_right,
+        t("a_col_issuer"): st.column_config.TextColumn(width="medium", pinned=True),
+        t("a_col_spread"): st.column_config.NumberColumn(format="%.1f"),
+        t("a_col_ccy"): st.column_config.TextColumn(width="small"),
+        t("a_col_tier"): st.column_config.TextColumn(width="small"),
+        t("a_col_source"): st.column_config.LinkColumn(t("a_col_source"), display_text=t("a_source_link"), width="small"),
+    })
 st.caption(t("a_comps_coupon_note"))

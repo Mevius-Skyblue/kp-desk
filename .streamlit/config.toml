@@ -1,0 +1,46 @@
+# KP Desk public app theme (config/public.yaml fixes R3-9). Copied to .streamlit/config.toml of the public bundle by
+# scripts/build_public_bundle_r3.py. Structure follows KVI .streamlit/config.toml (docs/provenance.md); colours are KPD's.
+[theme]
+base = "light"
+primaryColor = "#1F4E79"
+backgroundColor = "#F6F7F9"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#14181F"
+linkColor = "#1F4E79"
+borderColor = "#D9DEE5"
+showWidgetBorder = true
+baseRadius = "0.5rem"
+font = "Pretendard"
+headingFont = "Pretendard"
+baseFontSize = 15
+metricValueFontSize = "1.7rem"
+dataframeHeaderBackgroundColor = "#EEF2F7"
+paddingTop = "2.5rem"
+chartCategoricalColors = ["#1F4E79", "#E07B39", "#2E8B57", "#8E5EA2", "#C9A227", "#4A9BD1", "#B5475B", "#6B7280"]
+
+# Pretendard 1.309 (SIL OFL 1.1, app/static/OFL.txt): subset served from app/static
+[[theme.fontFaces]]
+family = "Pretendard"
+url = "app/static/Pretendard-Regular.subset.woff"
+weight = 400
+
+[[theme.fontFaces]]
+family = "Pretendard"
+url = "app/static/Pretendard-Medium.subset.woff"
+weight = 500
+
+[[theme.fontFaces]]
+family = "Pretendard"
+url = "app/static/Pretendard-SemiBold.subset.woff"
+weight = 600
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = "none"
+
+[browser]
+gatherUsageStats = false
+
+[server]
+headless = true
+enableStaticServing = true

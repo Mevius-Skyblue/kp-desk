@@ -58,16 +58,19 @@ except (ValueError, ZeroDivisionError, OverflowError):
     st.error(t("a_calc_err_generic"))
     st.stop()
 
+# display decimals (fixes R3-9): price 4, yield % 3, bp 1, durations 3, money with thousands separators (values unchanged)
+P, Y, B, Q = ui.DEC["price"], ui.DEC["pct"], ui.DEC["bp"], ui.DEC["dur"]
 rows = [
-    ("a_res_clean", ui.num(r["clean"], 6)), ("a_res_dirty", ui.num(r["dirty"], 6)), ("a_res_yield", ui.num(r["yield_pct"], 6)),
-    ("a_res_accrued", ui.num(r["accrued"], 6)), ("a_res_settle_amt", ui.num(r["settle_amount"], 2, sep=True)),
-    ("a_res_mac", ui.num(r["mac_duration"], 4)), ("a_res_mod", ui.num(r["mod_duration"], 4)),
-    ("a_res_convexity", ui.num(r["convexity"], 4)), ("a_res_dv01", ui.num(r["dv01"], 2, sep=True)),
-    ("a_res_tenor", ui.num(r["tenor_years"], 4)),
+    ("a_res_clean", ui.num(r["clean"], P, sep=True)), ("a_res_dirty", ui.num(r["dirty"], P, sep=True)),
+    ("a_res_yield", ui.num(r["yield_pct"], Y)), ("a_res_accrued", ui.num(r["accrued"], P, sep=True)),
+    ("a_res_settle_amt", ui.num(r["settle_amount"], 2, sep=True)),
+    ("a_res_mac", ui.num(r["mac_duration"], Q)), ("a_res_mod", ui.num(r["mod_duration"], Q)),
+    ("a_res_convexity", ui.num(r["convexity"], Q)), ("a_res_dv01", ui.num(r["dv01"], 2, sep=True)),
+    ("a_res_tenor", ui.num(r["tenor_years"], ui.DEC["years"])),
 ]
 if r["g_spread_bp"] is not None:
-    rows += [("a_res_ust_par", ui.num(r["ust_par_pct"], 4)), ("a_res_g", ui.num(r["g_spread_bp"], 2)),
-             ("a_res_z", ui.num(r["z_spread_bp"], 2))]
+    rows += [("a_res_ust_par", ui.num(r["ust_par_pct"], Y)), ("a_res_g", ui.num(r["g_spread_bp"], B)),
+             ("a_res_z", ui.num(r["z_spread_bp"], B))]
 
 st.subheader(t("a_calc_results"))
 st.dataframe(pd.DataFrame({t("a_col_item"): [t(k) for k, _ in rows], t("a_col_value"): [v for _, v in rows]}),
@@ -80,5 +83,6 @@ st.caption(t("a_calc_curve_note"))
 st.caption(t("a_calc_engine_note"))
 if curve_df is not None:
     with st.expander(t("a_calc_curve_show")):
-        st.dataframe(curve_df.rename(columns={"tenor": t("a_curve_tenor"), "tenor_years": t("a_curve_years"),
-                                              "yield_pct": t("a_curve_yield")}), hide_index=True)
+        st.dataframe(pd.DataFrame({t("a_curve_tenor"): curve_df["tenor"].fillna(t("a_na")).tolist(),
+                                   t("a_curve_years"): ui.text_col(curve_df["tenor_years"], ui.DEC["years"]),
+                                   t("a_curve_yield"): ui.text_col(curve_df["yield_pct"], ui.DEC["pct"])}), hide_index=True)

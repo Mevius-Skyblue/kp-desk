@@ -3,6 +3,7 @@
 *.xlsx binary
 *.docx binary
 *.png binary
+*.woff binary
 # Text files keep LF in the repository
 *.py text eol=lf
 *.md text eol=lf

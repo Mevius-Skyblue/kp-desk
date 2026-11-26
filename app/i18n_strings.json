@@ -125,6 +125,66 @@
    "ko": "수익률 (%)",
    "en": "Yield (%)"
   },
+  "a_card_bond_note": {
+   "ko": "QuantLib 재계산 · 관문 {gate} + 참고 {ref} · 불일치 {mismatch}",
+   "en": "QuantLib recalculation · {gate} gate + {ref} reference · {mismatch} mismatches"
+  },
+  "a_card_bond_title": {
+   "ko": "채권 엔진 독립 대조",
+   "en": "Bond engine independent check"
+  },
+  "a_card_bond_value": {
+   "ko": "{total}건 일치",
+   "en": "{total} matched"
+  },
+  "a_card_deals_note": {
+   "ko": "기준일 {asof} 스냅샷 · 1행 = 1 트랜치",
+   "en": "Snapshot as of {asof} · one row = one tranche"
+  },
+  "a_card_deals_title": {
+   "ko": "공개 발행 사례",
+   "en": "Published deals"
+  },
+  "a_card_deals_value": {
+   "ko": "{n}건",
+   "en": "{n} deals"
+  },
+  "a_card_ho_note": {
+   "ko": "대표 출력 = 기준선 N0. 개발 기간에 고른 공개 규칙은 N0 대비 {diff}bp, 95% 구간 {ci} → 낫다고 할 수 없음",
+   "en": "MAE = mean absolute error (one run). Representative output = the N0 baseline. The public rule chosen in development: {diff}bp vs N0, 95% interval {ci} → not shown to be better"
+  },
+  "a_card_ho_title": {
+   "ko": "홀드아웃 1회 · N0 평균 절대 오차",
+   "en": "Holdout · N0 MAE"
+  },
+  "a_card_ho_value": {
+   "ko": "{mae}bp",
+   "en": "{mae}bp"
+  },
+  "a_card_samples_link": {
+   "ko": "④ 검증 결과에서 받기",
+   "en": "Get them on ④ Validation"
+  },
+  "a_card_samples_note": {
+   "ko": "여신 품의서·1쪽 요약·피치북·가상 장부 평가·MI 대시보드, 한/영 (가상 거래, 자동 생성 초안)",
+   "en": "Credit memo, one-page summary, pitch book, demo-book valuation, MI dashboard in Korean and English (hypothetical transactions, auto-generated drafts)"
+  },
+  "a_card_samples_title": {
+   "ko": "견본 내려받기",
+   "en": "Sample downloads"
+  },
+  "a_card_samples_value": {
+   "ko": "PDF · 엑셀",
+   "en": "PDF · Excel"
+  },
+  "a_chart_note": {
+   "ko": "현재 필터가 반영된 사례만 그립니다(만기 정보가 없는 사례 제외). 점 하나 = 트랜치 하나.",
+   "en": "Only the deals selected by the current filters (deals without a tenor are left out). One dot = one tranche."
+  },
+  "a_chart_title": {
+   "ko": "만기 × 대표 스프레드",
+   "en": "Tenor × representative spread"
+  },
   "a_col_basis": {
    "ko": "스프레드 기준",
    "en": "Spread basis"
@@ -212,6 +272,10 @@
   "a_comps_nature_note": {
    "ko": "기본 화면은 선순위 무보증 채권만 보여 줍니다. 후순위·신종자본, 보증, 커버드본드는 '채권 성격' 필터에서 켤 수 있습니다(분류: 공시·보도의 채권 조건).",
    "en": "By default only senior unsecured bonds are shown. Subordinated / hybrid, guaranteed and covered bonds can be switched on in the 'Bond type' filter (classified from the bond terms in filings and press reports)."
+  },
+  "a_comps_table": {
+   "ko": "발행 사례 표",
+   "en": "Deal table"
   },
   "a_comps_title": {
    "ko": "② 발행 사례 비교표",
@@ -360,6 +424,10 @@
   "a_home_fair": {
    "ko": "③ 적정 스프레드 범위: 발행사와 만기를 고르면 공개 모드 모델의 점 추정과 범위를, 같은 화면에서 그 모델의 성적표와 함께 보여 줍니다.",
    "en": "③ Fair spread range: pick an issuer and a tenor to see the public-mode model's point estimate and range, next to that model's scorecard."
+  },
+  "a_home_glance": {
+   "ko": "한눈에 보기",
+   "en": "At a glance"
   },
   "a_home_intro": {
    "ko": "한국 발행사가 해외에서 발행한 외화 채권(KP)의 발행 조건과 미국채 대비 스프레드를 공개 자료(DART, SEC EDGAR, 미국 재무부, 보도 숫자와 출처 URL)로 정리했습니다.",

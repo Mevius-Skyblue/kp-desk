@@ -10,7 +10,9 @@ Built with Claude Code; results independently verified. English README: [README_
 
 > 공개 자료로 만든 모델 결과이며 가격 제시·투자 권유가 아닙니다. 견본의 장부는 가상 장부(실제 보유 아님)입니다.
 
-![③ 적정 스프레드 범위 화면 (기준일 스냅샷)](docs/screenshot_ko.png)
+![처음 화면: 한눈에 보기 카드 (기준일 스냅샷)](docs/screenshot_home_ko.png)
+
+![② 발행 사례 비교표: 만기 × 대표 스프레드 산점도와 표](docs/screenshot_comps_ko.png)
 
 ## 앱 (4쪽 + 처음 화면, 한/영 전환)
 
