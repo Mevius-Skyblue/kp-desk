@@ -1,6 +1,6 @@
 **KP Desk** — a public-data toolkit for foreign-currency bonds issued abroad by Korean issuers (KP): bond calculator, comparable deals, a model fair-spread range and its validation results, in Korean and English.
 Every number is a one-date snapshot built only from public sources (DART, SEC EDGAR, US Treasury, press-reported numbers with URLs); it is not a price indication and not investment advice.
-Built with Claude Code; results independently verified. English README: [README_en.md](README_en.md) · App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
+Built with Claude Code; results independently verified. English README: [README_en.md](README_en.md) · App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app/?lang=ko)
 
 ---
 
@@ -16,7 +16,7 @@ Built with Claude Code; results independently verified. English README: [README_
 
 ## 앱 (4쪽 + 처음 화면, 한/영 전환)
 
-앱 주소: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
+앱 주소: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app/?lang=ko)
 
 | 화면 | 내용 |
 |---|---|

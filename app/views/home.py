@@ -6,7 +6,7 @@ cells for the bar lengths. The collected-deal count is not in the public documen
 
 import streamlit as st
 
-from app.i18n import t
+from app.i18n import current_lang, t
 from app.lib import data as D
 from app.lib import look
 
@@ -24,7 +24,7 @@ for col, (page, title_key, desc_key, ico, prev) in zip(st.columns(4), TILES):
     with col.container(key=f"kpd_card_tile_{ico}"):
         st.markdown(look.head(look.icon(ico), t(title_key), strong=True) + look.preview(prev)
                     + look.note(t(desc_key), cls="kpd-text"), unsafe_allow_html=True)
-        st.page_link(page, label=t("a_open"))
+        st.page_link(page, label=t("a_open"), query_params={"lang": current_lang()})  # same language in a new tab (U2-2 D5)
 
 # ---------------- evidence cards; a missing snapshot file hides the number cards instead of stopping the page
 st.subheader(t("a_home_glance"))

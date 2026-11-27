@@ -100,33 +100,47 @@ elif not points:
 st.caption(t("a_calc_curve_note"))
 st.caption(t("a_calc_engine_note"))
 
-# ---------------- cash flows after settlement (fixes U2-1 A): engine cash_flows / schedule / coupon_amount, per 100 face.
-# Stacked bars per payment date (coupon below, principal above in another colour); the hover shows date, coupon, principal,
-# total as text. Dates are text for the hover and UTC dates for the axis, so no browser time zone shifts a day.
+# ---------------- cash flows after settlement (fixes U2-1 A, U2-2 A): engine cash_flows / schedule / coupon_amount, per 100 face.
+# Default view: coupon bars only (the y axis fits the coupons) and the principal at maturity as one line above the chart;
+# the 'Include principal' switch stacks the principal on top as before. The hover shows date, coupon, principal, total in
+# both views. The hover date is its own text field ('dt'): the axis field 'd' is temporal, and Vega-Lite parses a temporal
+# field to a date for the whole data set, so a tooltip on 'd' showed the parsed time in milliseconds (U2-2 A1).
 flows = cash_flow_rows(conv, coupon, issue, maturity, settle)
 lab_c, lab_p = t("a_cf_coupon"), t("a_cf_principal")
-cf = pd.DataFrame({"d": [f["date"].isoformat() for f in flows],
+cf = pd.DataFrame({"d": [f["date"].isoformat() for f in flows], "dt": [f["date"].isoformat() for f in flows],
                    "c": [ui.num(f["coupon"], P) for f in flows], "p": [ui.num(f["principal"], P) for f in flows],
                    "s": [ui.num(f["total"], P) for f in flows], "cv": [f["coupon"] for f in flows],
                    "pv": [f["principal"] for f in flows]})
-bars = pd.concat([cf.assign(part=lab_c, v=cf["cv"], o=0), cf.assign(part=lab_p, v=cf["pv"], o=1)], ignore_index=True)
-bars = bars[bars["v"] > 0]
 st.subheader(t("a_cf_title"))
+with_principal = st.toggle(t("a_cf_with_principal"), key="calc_cf_principal")
+redeem = next(f for f in flows if f["principal"] > 0)  # the engine adds the principal once, on the maturity date
+st.container(key="kpd_cf_principal_line").markdown(
+    t("a_cf_principal_line", v=ui.num(redeem["principal"], P), d=redeem["date"].isoformat()))
+parts = [cf.assign(part=lab_c, v=cf["cv"], o=0)] + ([cf.assign(part=lab_p, v=cf["pv"], o=1)] if with_principal else [])
+bars = pd.concat(parts, ignore_index=True)
+bars = bars[bars["v"] > 0]
+# x-axis margins (U2-2 A3): half a coupon period + 3% of the span on each side, so the first and last bars are not cut
+freq = flows[0]["freq"]
+t0 = pd.Timestamp(flows[0]["date"], tz="UTC")
+t1 = pd.Timestamp(flows[-1]["date"], tz="UTC")
+pad = pd.Timedelta(days=365.25 / freq / 2) + (t1 - t0) * 0.03
+x_domain = [alt.DateTime(year=d.year, month=d.month, date=d.day, utc=True) for d in (t0 - pad, t1 + pad)]
 fig = (
     alt.Chart(bars)
     .mark_bar(size=max(2, min(20, int(260 / max(len(flows), 1)))))  # 30y semi-annual: 4px, fits a 390px phone (A12-R3)
     .encode(
-        x=alt.X("d:T", title=t("a_cf_date"), scale=alt.Scale(type="utc"), axis=alt.Axis(format="%Y-%m")),
+        x=alt.X("d:T", title=t("a_cf_date"), scale=alt.Scale(type="utc", domain=x_domain), axis=alt.Axis(format="%Y-%m")),
         y=alt.Y("v:Q", title=t("a_cf_amount"), stack="zero"),
         color=alt.Color("part:N", legend=None, scale=alt.Scale(domain=[lab_c, lab_p], range=[look.ACCENT, look.PRINCIPAL])),
         order=alt.Order("o:Q"),
-        tooltip=[alt.Tooltip("d:N", title=t("a_cf_date")), alt.Tooltip("c:N", title=lab_c),
+        tooltip=[alt.Tooltip("dt:N", title=t("a_cf_date")), alt.Tooltip("c:N", title=lab_c),
                  alt.Tooltip("p:N", title=lab_p), alt.Tooltip("s:N", title=t("a_cf_total"))],
     )
     .properties(height=260)
 )
 st.altair_chart(fig, width="stretch")
-st.markdown(look.legend(t("a_cf_legend"), [(lab_c, look.ACCENT), (lab_p, look.PRINCIPAL)]), unsafe_allow_html=True)
+shown = [(lab_c, look.ACCENT)] + ([(lab_p, look.PRINCIPAL)] if with_principal else [])
+st.markdown(look.legend(t("a_cf_legend"), shown), unsafe_allow_html=True)
 st.caption(t("a_cf_note"))
 if curve_df is not None:
     with st.expander(t("a_calc_curve_show")):

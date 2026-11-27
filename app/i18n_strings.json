@@ -217,6 +217,10 @@
    "ko": "원금",
    "en": "Principal"
   },
+  "a_cf_principal_line": {
+   "ko": "만기 원금 {v} (액면 100당, {d} 지급)",
+   "en": "Principal at maturity: {v} (per 100 face, paid {d})"
+  },
   "a_cf_title": {
    "ko": "현금흐름 (결제일 이후, 액면 100당)",
    "en": "Cash flows (after settlement, per 100 face)"
@@ -224,6 +228,10 @@
   "a_cf_total": {
    "ko": "합계",
    "en": "Total"
+  },
+  "a_cf_with_principal": {
+   "ko": "원금 포함",
+   "en": "Include principal"
   },
   "a_chart_note": {
    "ko": "현재 필터가 반영된 사례만 그립니다(만기 정보가 없는 사례 제외). 점 하나 = 트랜치 하나.",

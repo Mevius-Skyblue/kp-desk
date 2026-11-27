@@ -67,8 +67,25 @@ def init_lang() -> None:
         st.session_state[URL_READ_KEY] = True
         if URL_PARAM in st.query_params:
             st.session_state[STATE_KEY] = lang_from_url(st.query_params.get_all(URL_PARAM)) or DEFAULT_LANG
+    handed = st.session_state.pop(HANDOVER_KEY, None)
+    if handed in LANGS:  # language carried over a st.switch_page (see switch_keep_lang)
+        st.session_state[STATE_KEY] = handed
     if st.session_state.get(STATE_KEY) not in LANGS:
         st.session_state[STATE_KEY] = DEFAULT_LANG
+
+
+HANDOVER_KEY = "lang_handover"  # plain session key (not a widget) holding the language across one st.switch_page
+
+
+def switch_keep_lang(page) -> None:
+    """st.switch_page to `page` in the current language (fixes U2-2a D5). Browser check: after a switch_page from the
+    script the language switch widget came back with its default (Korean), so the language is also handed over in a plain
+    session key that init_lang reads on the next run, and the address keeps ?lang=."""
+    import streamlit as st
+
+    lang = current_lang()
+    st.session_state[HANDOVER_KEY] = lang
+    st.switch_page(page, query_params={URL_PARAM: lang})
 
 
 def sync_lang_url() -> None:

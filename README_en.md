@@ -4,7 +4,7 @@ A toolkit that compiles foreign-currency bonds issued abroad by Korean issuers (
 
 > Model results built from public data; not a price indication and not investment advice. The book in the samples is a demo book - not actual holdings.
 
-Built with Claude Code; results independently verified. Korean README: [README.md](README.md) · App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
+Built with Claude Code; results independently verified. Korean README: [README.md](README.md) · App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app/?lang=en)
 
 ![Home: at-a-glance cards (as-of snapshot)](docs/screenshot_home_en.png)
 
@@ -12,7 +12,7 @@ Built with Claude Code; results independently verified. Korean README: [README.m
 
 ## App (4 pages + home, Korean / English)
 
-App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app)
+App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app/?lang=en)
 
 | Page | Content |
 |---|---|

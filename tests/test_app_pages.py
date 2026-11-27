@@ -286,7 +286,7 @@ def test_home_glance_cards(lang, data_env):
     assert t("a_g_ho_title", _lang=lang, n=it("ho_n")) in html
     for k in ("ho_n0_mae", "ho_p_mae"):
         assert ">" + t("a_bp", _lang=lang, v=it(k)) + "<" in html
-    assert len(at.get("page_link")) == 4
+    assert len(at.main.get("page_link")) == 4  # the four tiles (the sidebar menu has its own page links, U2-2 D5)
 
 
 @pytest.mark.parametrize("lang", ["ko", "en"])
@@ -741,3 +741,95 @@ def test_fair_intro_says_priced():
 
     assert "가격이 정해진" in t("a_fair_intro", _lang="ko") and "발행된" not in t("a_fair_intro", _lang="ko")
     assert "priced in the 18 months" in t("a_fair_intro", _lang="en")
+
+
+def _cf_spec(at) -> dict:
+    import json
+
+    return json.loads(at.get("vega_lite_chart")[0].proto.spec)
+
+
+def _cf_rows(at) -> list[dict]:
+    """Rows the ① chart sends to the browser (the named Arrow data set of the Vega-Lite element)."""
+    import pyarrow as pa
+
+    ds = at.get("vega_lite_chart")[0].proto.datasets[0]
+    return pa.ipc.open_stream(ds.data.data).read_all().to_pandas().to_dict("records")
+
+
+@pytest.mark.parametrize("lang", ["ko", "en"])
+def test_cash_flow_chart_views_and_hover_date(lang, monkeypatch):
+    """① chart (fixes U2-2 A): the hover date is its own text field, not the temporal axis field (Vega-Lite parses a temporal
+    field to a date for the whole data set, which showed milliseconds); default view = coupon bars only with the principal
+    line above; 'Include principal' stacks it again; the x domain leaves room before the first and after the last date."""
+    import pandas as pd
+
+    from app.i18n import t
+    from app.lib.calc import cash_flow_rows, defaults
+
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = run_page("views/calculator.py", lang)
+    assert not at.exception
+    spec = _cf_spec(at)
+    enc = spec["encoding"]
+    assert enc["x"]["field"] == "d" and enc["x"]["type"] == "temporal"
+    assert enc["tooltip"][0]["field"] == "dt" and enc["tooltip"][0]["type"] == "nominal"
+    assert [x["title"] for x in enc["tooltip"]] == [t(k, _lang=lang) for k in ("a_cf_date", "a_cf_coupon", "a_cf_principal",
+                                                                               "a_cf_total")]
+    rows = _cf_rows(at)
+    assert all(re.fullmatch(r"\d{4}-\d{2}-\d{2}", r["dt"]) for r in rows) and all(r["dt"] == r["d"] for r in rows)
+    assert {r["part"] for r in rows} == {t("a_cf_coupon", _lang=lang)}  # default: coupons only
+    from app.lib import data as D
+
+    asof = date.fromisoformat(D.asof())
+    d = defaults(asof)
+    flows = cash_flow_rows(d["conv"], d["coupon"], d["issue"], d["maturity"], d["settle"])
+    assert len(rows) == len(flows)
+    line = t("a_cf_principal_line", _lang=lang, v="100.0000", d=d["maturity"].isoformat())
+    assert line in [m.value for m in at.markdown]
+    lo, hi = (pd.Timestamp(year=x["year"], month=x["month"], day=x["date"]).date() for x in enc["x"]["scale"]["domain"])
+    assert lo < flows[0]["date"] and hi > flows[-1]["date"]
+    at.toggle(key="calc_cf_principal").set_value(True).run()
+    rows2 = _cf_rows(at)
+    parts = [r["part"] for r in rows2]
+    assert parts.count(t("a_cf_principal", _lang=lang)) == 1 and parts.count(t("a_cf_coupon", _lang=lang)) == len(flows)
+    assert line in [m.value for m in at.markdown]
+
+
+@pytest.mark.parametrize("lang", ["ko", "en"])
+def test_menu_and_open_links_carry_lang(lang, monkeypatch):
+    """U2-2 D5: the sidebar menu (Home through the hidden /home page) and the home 'Open' links pass ?lang=<current>.
+    AppTest cannot open a function page, so '/home -> home page in the address language' is checked in the real browser
+    (scripts/u2b_browser_checks.py: new tab from the menu on ①)."""
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = run_page(PAGES[0], lang)
+    side = at.sidebar.get("page_link")
+    main = at.main.get("page_link")
+    assert [p.proto.page for p in side] == ["home", "calculator", "comps", "fair-spread", "validation"]
+    assert all(p.proto.query_string == f"lang={lang}" for p in side + main) and len(main) == 4
+
+
+def test_readme_app_links_have_lang():
+    """U2-2 D1: the Korean README links the app with ?lang=ko, the English one with ?lang=en."""
+    ko = (ROOT / "docs" / "public" / "README.md") if (ROOT / "docs" / "public").exists() else ROOT / "README.md"
+    en = ko.with_name("README_en.md")
+    links = lambda p: re.findall(r"\]\((https://kp-desk\.streamlit\.app[^)]*)\)", p.read_text(encoding="utf-8"))  # noqa: E731
+    assert links(ko) and all(u.endswith("/?lang=ko") for u in links(ko))
+    assert links(en) and all(u.endswith("/?lang=en") for u in links(en))
+
+
+def test_language_handover_across_switch_page(monkeypatch):
+    """U2-2a: a st.switch_page from the script (the hidden /home page) reset the language toggle to Korean in the browser;
+    switch_keep_lang hands the language over in a plain session key that init_lang reads once on the next run."""
+    from streamlit.testing.v1 import AppTest
+
+    from app.i18n import HANDOVER_KEY
+
+    monkeypatch.setenv("KPD_APP_DATA", str(FIX / "data"))
+    at = AppTest.from_file(str(ROOT / "app" / "Home.py"), default_timeout=120)
+    at.session_state[HANDOVER_KEY] = "en"
+    at.run()
+    assert not at.exception and at.session_state["lang"] == "en" and at.query_params.get("lang") == "en"
+    assert HANDOVER_KEY not in at.session_state  # read once
+    src = (ROOT / "app" / "Home.py").read_text(encoding="utf-8")
+    assert "switch_keep_lang(pages[0])" in src and "st.switch_page(" not in src
