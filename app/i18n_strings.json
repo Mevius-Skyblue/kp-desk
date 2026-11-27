@@ -65,6 +65,10 @@
    "ko": "{v} bp",
    "en": "{v} bp"
   },
+  "a_brand": {
+   "ko": "KP Desk",
+   "en": "KP Desk"
+  },
   "a_built_with": {
    "ko": "Claude Code로 만들었고, 결과는 별도 감사로 독립 검증했습니다.",
    "en": "Built with Claude Code; results independently verified."

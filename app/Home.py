@@ -18,7 +18,7 @@ from app.i18n import current_lang, init_lang, switch_keep_lang, t  # noqa: E402
 from app.lib import look, ui  # noqa: E402
 
 init_lang()
-st.set_page_config(page_title=t("a_app_title"), layout="wide")
+st.set_page_config(page_title=t("a_app_title"), page_icon=look.logo(64), layout="wide")  # tab icon = small logo (U3-1 A)
 st.html(look.css())  # U1 style sheet (config/public.yaml fixes U1-1), once per run for every page
 ui.top_bar()  # as-of date + language switch, top right
 
@@ -44,6 +44,7 @@ def _home_alias() -> None:
 home_alias = st.Page(_home_alias, title=t("a_nav_home"), url_path="home", visibility="hidden")
 nav = st.navigation(pages + [home_alias], position="hidden")
 with st.sidebar:
+    st.markdown(look.brand(t("a_brand")), unsafe_allow_html=True)  # small logo + app name (fixes U3-1 A)
     for pg in [home_alias] + pages[1:]:
         st.page_link(pg, query_params={"lang": current_lang()})
 nav.run()

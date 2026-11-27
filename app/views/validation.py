@@ -138,4 +138,5 @@ else:
 
 st.subheader(t("a_doc_known"))
 st.markdown(t("a_val_known_note"))
-st.markdown(f"[{t('a_val_known')}]({ui.doc_url('a_doc_known')})")
+with st.container(key="kpd_solo_known"):  # key only for the phone tap-target rule (look.PHONE_CSS, fixes U3-1 C)
+    st.markdown(f"[{t('a_val_known')}]({ui.doc_url('a_doc_known')})")

@@ -136,8 +136,34 @@ CSS = {
     ".kpd-stat-u": ["font-size:12.5px", "font-weight:500", "color:#5B6472", "margin-top:-4px"],  # unit on its own line
     # ② filter box head: count on the left, reset on the right (fixes U2-1 B)
     ".kpd-count": ["font-size:15px", "font-weight:700", "color:#14181F"],
+    # small logo + app name at the top of the sidebar (fixes U3-1 A)
+    ".kpd-brand": ["display:flex", "align-items:center", "gap:8px", "font-size:16px", "font-weight:700", "color:#14181F",
+                   "margin:0 0 6px"],
+    ".kpd-brand>svg": ["flex:none"],
     ".kpd-gtitle": ["display:flex", "align-items:center", "gap:8px", "font-weight:700", "font-size:15px",
                     "margin:0 0 4px"],
+}
+
+# phone screens only (fixes U3-1 C): tap targets at least 40px. Streamlit 1.66 draws its fields, buttons, radio / switch
+# rows, the expander head and the sidebar-open button 20-38px high; on a phone they are given a 40px minimum (no other
+# change, wider screens keep the U2b look). The tag 'x' of a multiselect sits inside a 26px tag: it gets the tag height
+# only (24px, WCAG 2.5.8 minimum); a 40px 'x' would need taller tags (decision pending U3-D1).
+PHONE_MEDIA = "@media(max-width:767px)"
+PHONE_CSS = {
+    "[data-testid=stExpandSidebarButton]": ["min-width:40px", "min-height:40px"],
+    "[data-testid=stRadioOption],[data-testid=stCheckbox]>label": ["display:flex", "min-height:40px", "align-items:center"],
+    # language switch in the top bar: the 40px box reaches 9.5px above and below without moving the row (it stays in line
+    # with the as-of date, as in U2b)
+    ".st-key-lang [data-testid=stRadioOption]": ["margin-top:-9.5px", "margin-bottom:-9.5px"],
+    "[data-testid=stNumberInputContainer],[data-testid=stDateInputField],.react-aria-ComboBox>div": ["min-height:40px"],
+    "[data-testid=stNumberInputStepUp],[data-testid=stNumberInputStepDown],[data-testid=stDateInputCalendarButton]":
+        ["min-width:40px", "min-height:40px"],
+    ".react-aria-ComboBox>div>button": ["min-width:40px", "min-height:40px"],  # multiselect 'Clear all' / 'Open'
+    "[data-tag]>button": ["min-width:24px", "min-height:24px"],
+    "button[data-testid^=stBaseButton],[data-testid=stPopoverButton]": ["min-height:40px"],
+    "[data-testid=stExpander] summary": ["min-height:40px"],
+    "[data-testid=stPageLink] a": ["min-height:40px", "min-width:44px"],
+    "[class*=st-key-kpd_solo] a": ["display:inline-flex", "align-items:center", "min-height:40px"],  # a link on its own line
 }
 
 # line icons, 24 x 24 view box: (tag, attributes)
@@ -162,6 +188,13 @@ ICONS = {
     "gap": [("path", {"d": "M4 19h16M4 5h16"}), ("path", {"d": "M12 8v8M9.5 10.5L12 8l2.5 2.5M9.5 13.5L12 16l2.5-2.5"})],
     "curve": [("path", {"d": "M4 20C9 17 14 12 20 9"}), ("path", {"d": "M4 13C9 10 14 6 20 3", "stroke-dasharray": "2 3"})],
 }
+
+# small logo (fixes U3-1 A): a rounded accent square with a white 'KP' drawn as lines (no font), 32 x 32 view box.
+# Used in two places only: next to the app name at the top of the sidebar (24px) and as the browser tab icon.
+LOGO = [("rect", {"width": 32, "height": 32, "rx": 7, "fill": ACCENT}),
+        ("path", {"d": "M7.5 9v14M7.5 16.2L14 9M9.9 13.8L14.4 23M17.5 23V9h3.5a3.7 3.7 0 0 1 0 7.4h-3.5", "fill": "none",
+                  "stroke": "#FFFFFF", "stroke-width": 2.6, "stroke-linecap": "round", "stroke-linejoin": "round"})]
+SVG_NS = "http://www.w3.org/2000/svg"
 
 # static previews of the four home tiles, 200 x 72, no numbers and no words (fixes U1-1 spec.home)
 PREVIEWS = {
@@ -200,7 +233,9 @@ def txt(s) -> str:
 
 def css() -> str:
     """The whole style sheet as one <style> element."""
-    return el("style", None, "".join(sel + "{" + ";".join(decls) + "}" for sel, decls in CSS.items()))
+    rules = "".join(sel + "{" + ";".join(decls) + "}" for sel, decls in CSS.items())
+    phone = "".join(sel + "{" + ";".join(decls) + "}" for sel, decls in PHONE_CSS.items())
+    return el("style", None, rules + PHONE_MEDIA + "{" + phone + "}")
 
 
 def svg(shapes, w: int, h: int, view: str, stroke: str | None = None, width: float = 1.8, label: str | None = None) -> str:
@@ -218,6 +253,17 @@ def icon(name: str, color: str = ACCENT, size: int = 22, box: str | None = "kpd-
     """A line icon, by default inside the light accent square (40px)."""
     s = svg(ICONS[name], size, size, "0 0 24 24", stroke=color, width=width, label=label)
     return el("span", {"class": box}, s) if box else s
+
+
+def logo(size: int = 24) -> str:
+    """The small logo as one standalone SVG (with its namespace, so it also works as the tab icon's data address)."""
+    a = {"xmlns": SVG_NS, "width": size, "height": size, "viewBox": "0 0 32 32", "aria-hidden": "true"}
+    return el("svg", a, *(el(t, s) for t, s in LOGO))
+
+
+def brand(name: str) -> str:
+    """Sidebar head: logo (24px) + app name."""
+    return el("div", {"class": "kpd-brand"}, logo(24), el("span", None, txt(name)))
 
 
 def preview(name: str) -> str:

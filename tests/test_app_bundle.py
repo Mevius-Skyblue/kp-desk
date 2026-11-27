@@ -38,6 +38,7 @@ ALLOW = [
     "docs/METHODOLOGY_ko.md", "docs/METHODOLOGY_en.md", "docs/VALIDATION_ko.md", "docs/VALIDATION_en.md",
     "docs/KNOWN_ISSUES_ko.md", "docs/KNOWN_ISSUES_en.md", "docs/DATA_NOTICE_ko.md", "docs/DATA_NOTICE_en.md",
     "docs/screenshot_home_ko.png", "docs/screenshot_home_en.png", "docs/screenshot_comps_ko.png", "docs/screenshot_comps_en.png",
+    "docs/usage_ko.gif", "docs/usage_en.gif",  # README usage scenes (config/public.yaml fixes U3-1 D), checked by gif_problems
     "app/static/OFL.txt", "app/static/Pretendard-*.subset.woff",
     "README.md", "README_en.md", "LICENSE", "requirements.txt", ".gitignore", ".gitattributes", ".github/workflows/ci.yml",
     ".streamlit/config.toml",
@@ -45,7 +46,9 @@ ALLOW = [
 DENY = ["data/*", "logs/*", "*.duckdb", "*.db", "*.sqlite", "*.parquet", "*.gz", "*.pyc", ".env", ".env.*", "*/.env",
         "*/.env.*", "*__pycache__*", "outputs/*", "venv/*", ".venv/*", "config/*", "reports/*", "CLAUDE.md"]
 MAX_BYTES = 1_048_576
-SIZE_ALLOW: list[str] = []  # bundle paths allowed above MAX_BYTES (none so far)
+SIZE_ALLOW: list[str] = ["docs/usage_*.gif"]  # bundle paths allowed above MAX_BYTES: the two usage GIFs, which have
+#                                            their own limit GIF_MAX_BYTES (fixes U3-1 D)
+GIF_MAX_BYTES = 5_000_000
 LITERAL_ALLOW: list[str] = []  # exact app string constants that may hold a phrase (none so far)
 PAIRED_DOCS = ["docs/METHODOLOGY", "docs/VALIDATION", "docs/KNOWN_ISSUES", "docs/DATA_NOTICE"]
 
@@ -81,6 +84,65 @@ def size_problems(root: Path, max_bytes: int = MAX_BYTES, allow: list[str] | Non
     """Check 5b: files above the size limit that are not listed in SIZE_ALLOW."""
     allow = SIZE_ALLOW if allow is None else allow
     return [r for r in bundle_files(root) if (root / r).stat().st_size > max_bytes and not _m(r, allow)]
+
+
+def gif_blocks(data: bytes) -> list[tuple[str, bytes]]:
+    """Extension blocks of a GIF file as (kind, payload): 'comment' / 'text' (plain-text) / 'app:<identifier>' / 'gce';
+    raises ValueError when the file is not a well-formed GIF. Image data is skipped."""
+    if data[:6] not in (b"GIF87a", b"GIF89a"):
+        raise ValueError("not a GIF")
+    i = 13
+    if data[10] & 0x80:  # global colour table
+        i += 3 * (2 ** ((data[10] & 7) + 1))
+
+    def sub_blocks(j: int) -> tuple[bytes, int]:
+        out = b""
+        while data[j] != 0:
+            out += data[j + 1:j + 1 + data[j]]
+            j += 1 + data[j]
+        return out, j + 1
+
+    blocks = []
+    while i < len(data):
+        b = data[i]
+        if b == 0x3B:  # trailer
+            return blocks
+        if b == 0x21:
+            label = data[i + 1]
+            if label == 0xFF:  # application: fixed 11-byte identifier block, then data sub-blocks
+                ident = data[i + 3:i + 3 + data[i + 2]]
+                payload, i = sub_blocks(i + 3 + data[i + 2])
+                blocks.append(("app:" + ident.decode("latin-1"), payload))
+                continue
+            payload, i = sub_blocks(i + 2)
+            blocks.append(({0xFE: "comment", 0x01: "text", 0xF9: "gce"}.get(label, f"ext:{label:#x}"), payload))
+        elif b == 0x2C:  # image descriptor (+ local colour table), LZW code size, image data
+            flags = data[i + 9]
+            i += 10 + (3 * (2 ** ((flags & 7) + 1)) if flags & 0x80 else 0)
+            _, i = sub_blocks(i + 1)
+        else:
+            raise ValueError(f"bad block {b:#x} at {i}")
+    raise ValueError("no trailer")
+
+
+def gif_problems(root: Path, max_bytes: int = GIF_MAX_BYTES) -> list[str]:
+    """Check 5d (fixes U3-1 D): every GIF of the bundle is at most max_bytes and carries no text metadata - no comment or
+    plain-text block, and no application block other than the NETSCAPE2.0 loop block (e.g. no XMP)."""
+    out = []
+    for r in bundle_files(root):
+        if not r.lower().endswith(".gif"):
+            continue
+        data = (root / r).read_bytes()
+        if len(data) > max_bytes:
+            out.append(f"{r}: {len(data)} bytes > {max_bytes}")
+        try:
+            kinds = [k for k, _ in gif_blocks(data)]
+        except (ValueError, IndexError) as e:
+            out.append(f"{r}: unreadable ({e})")
+            continue
+        out += [f"{r}: {k} block" for k in dict.fromkeys(kinds) if k in ("comment", "text")
+                or (k.startswith("app:") and k != "app:NETSCAPE2.0")]
+    return out
 
 
 def tracked_ignored(root: Path) -> list[str] | None:
@@ -134,6 +196,10 @@ def test_files_allowed():
 
 def test_sizes():
     assert size_problems(ROOT) == []
+
+
+def test_gif_files():
+    assert gif_problems(ROOT) == []
 
 
 def test_no_tracked_ignored_files():

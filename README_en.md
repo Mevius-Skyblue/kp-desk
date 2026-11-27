@@ -6,6 +6,8 @@ A toolkit that compiles foreign-currency bonds issued abroad by Korean issuers (
 
 Built with Claude Code; results independently verified. Korean README: [README.md](README.md) · App: [https://kp-desk.streamlit.app](https://kp-desk.streamlit.app/?lang=en)
 
+![Usage: home → ① change the yield → ② change a filter, point details → ③ pick another issuer → ④ validation results](docs/usage_en.gif)
+
 ![Home: at-a-glance cards (as-of snapshot)](docs/screenshot_home_en.png)
 
 ![② Comparable deals: tenor × representative spread chart and table](docs/screenshot_comps_en.png)

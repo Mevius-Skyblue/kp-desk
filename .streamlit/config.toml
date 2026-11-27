@@ -16,6 +16,9 @@ headingFont = "Pretendard"
 baseFontSize = 15
 metricValueFontSize = "1.7rem"
 dataframeHeaderBackgroundColor = "#EEF2F7"
+# U3 (fixes U3-1 B): table header text. Streamlit's default (text colour at 60%, drawn #6B6F75) was 4.49:1 on the header
+# background; same hue / saturation, lightness lowered to the first colour above 4.5 + 0.1 -> 4.68:1
+dataframeHeaderTextColor = "#696C72"
 paddingTop = "2.5rem"
 chartCategoricalColors = ["#1F4E79", "#E07B39", "#2E8B57", "#8E5EA2", "#C9A227", "#4A9BD1", "#B5475B", "#6B7280"]
 

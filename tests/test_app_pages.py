@@ -833,3 +833,41 @@ def test_language_handover_across_switch_page(monkeypatch):
     assert HANDOVER_KEY not in at.session_state  # read once
     src = (ROOT / "app" / "Home.py").read_text(encoding="utf-8")
     assert "switch_keep_lang(pages[0])" in src and "st.switch_page(" not in src
+
+
+def test_readme_usage_gif():
+    """U3-1 D: each README shows the usage GIF of its language, and the GIF exists (private repo: docs/public/,
+    bundle: docs/)."""
+    pub = ROOT / "docs" / "public"
+    ko = (pub / "README.md") if pub.exists() else ROOT / "README.md"
+    for lang, readme in (("ko", ko), ("en", ko.with_name("README_en.md"))):
+        assert f"](docs/usage_{lang}.gif)" in readme.read_text(encoding="utf-8")
+        assert (pub / f"usage_{lang}.gif").is_file() or (ROOT / "docs" / f"usage_{lang}.gif").is_file()
+
+
+def test_logo_svg():
+    """U3-1 A: the small logo is one standalone SVG (namespace, accent square, lines only - no font text), used as the tab
+    icon (Streamlit turns an SVG string into a data address) and 24px next to the app name in the sidebar."""
+    from app.lib import look
+
+    s = look.logo(64)
+    assert s.startswith("<svg") and look.SVG_NS in s and look.ACCENT in s and "<text" not in s
+    assert 'width="24"' in look.brand("x") and "kpd-brand" in look.brand("x")
+
+
+@pytest.mark.parametrize("lang", ["ko", "en"])
+def test_sidebar_brand(lang):
+    """U3-1 A: the sidebar starts with the logo + app name (same text in both languages, from the glossary key)."""
+    at = run_page(PAGES[0], lang)
+    md = [m.value for m in at.sidebar.markdown]
+    assert md and "kpd-brand" in md[0] and "<svg" in md[0] and "KP Desk" in md[0]
+
+
+def test_phone_tap_target_css():
+    """U3-1 C: the 40px tap-target rules apply on phone widths only (one media block at the end of the style sheet)."""
+    from app.lib import look
+
+    css = look.css()
+    head, _, phone = css.partition(look.PHONE_MEDIA + "{")
+    assert phone and "min-height:40px" in phone and "min-height:40px" not in head
+    assert "[data-testid=stExpandSidebarButton]{min-width:40px;min-height:40px}" in phone
